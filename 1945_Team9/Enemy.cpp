@@ -6,17 +6,6 @@
 #include "CollisionManager.h"
 #include "Collider.h"
 
-/*
-	STL (Standard Template Library) : Vector
-	동적 배열을 제공하는 표준 템플릿 라이브러리 컨테이너
-	배열과 흡사하지만 크기가 자동ㅇ로 조절된다
-
-	장점 : 임의접근 
-	-> 인덱스를 사용해서 O(1)의 시간복잡도로 빠르게 원소에 접근이 가능하다
-
-	단점 : 중간에 원소를 삽입/삭제 할 때 O(N)의 시간복잡도로 느리다
-*/
-
 void Enemy::Init(float posX, float posY)
 {
 	pos = { posX, posY };
@@ -89,7 +78,6 @@ void Enemy::Update()
 		if (collider)
 			collider->Update();
 	}
-	
 }
 
 void Enemy::Render(HDC hdc)

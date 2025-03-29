@@ -12,10 +12,9 @@ LaserMissile::~LaserMissile()
 void LaserMissile::Init()
 {
 	Super::Init();
-	isActived = true;
 	moveSpeed = 50.0f;
-	angle = 90.0f;
 	size = { 20, pos.y };
+	isActived = true;
 	isLaunch = false;
 	elapsedlaunchTime = 3.0f;
 	launchTime = 3.0f;

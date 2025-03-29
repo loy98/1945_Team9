@@ -16,8 +16,8 @@ private:
 	// 포신
 	FPOINT barrelEnd;
 	int barrelSize;
-	float fireAngle;	// 단위 : 도(degree)	0 ~ 180		~	360
-						//	    : 라디안(radian)0f ~ 3.14f	~	6.28f
+	float fireAngle;	
+
 	// 미사일
 	float missileSpeed;
 	bool LaserLaunched = false;

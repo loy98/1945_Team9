@@ -35,8 +35,6 @@ void MainGame::Init()
 
 	rocket = new Tank();
 	rocket->Init();
-	
-
 }
 
 void MainGame::Release()
