@@ -8,7 +8,9 @@
 *.obj
 .vs/
 
-1945_Team9/*x64/
+1945_Team9/x64/Debug/
+Debug/
+1945_Team9/x64/
 x64/
 # Precompiled Headers
 *.gch
