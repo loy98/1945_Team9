@@ -4,6 +4,8 @@
 
 void NormalMissile::Init()
 {
+	Super::Init();
+
 	pos = { 0, 0 };
 	isActived = false;
 	color = RGB(255, 255, 255);
@@ -21,6 +23,8 @@ void NormalMissile::Release()
 
 void NormalMissile::Update()
 {
+	Super::Update();
+
 	if (!isActived) 
 		return;
 	Move();
@@ -32,10 +36,12 @@ void NormalMissile::Update()
 
 void NormalMissile::Render(HDC hdc)
 {
-	if (isActived)
+	Super::Render(hdc);
+	
+	/*if (isActived)
 	{
 		RenderEllipseAtCenter(hdc, pos.x, pos.y, size, size);
-	}
+	}*/
 }
 
 void NormalMissile::ReLoad(FPOINT pos)

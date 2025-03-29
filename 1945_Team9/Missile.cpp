@@ -1,8 +1,13 @@
 #include "Missile.h"
 #include "CommonFunction.h"
+#include "Collider.h"
 
 void Missile::Init()
 {
+	Collider* collider = new Collider();
+	collider->SetOwner(this);
+	collider->SetPos(pos);
+	colliderList.push_back(collider);
 
 }
 
@@ -12,12 +17,24 @@ void Missile::Release()
 
 void Missile::Update()
 {
-	
+	// collider 확인용
+	if (!isActived) return;
+	for (auto& collider : colliderList)
+	{
+		if (collider)
+			collider->Update();
+	}
 }
 
 void Missile::Render(HDC hdc)
 {
-	
+	// collider 확인용
+	if (!isActived) return;
+	for (auto& collider : colliderList)
+	{
+		if (collider)
+			collider->Render(hdc);
+	}
 }
 
 void Missile::Move()

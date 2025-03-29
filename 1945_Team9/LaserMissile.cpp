@@ -4,6 +4,7 @@
 #include "Tank.h"
 void LaserMissile::Init()
 {
+	Super::Init();
 	pos = { 0, 0 };
 	isActived = true;
 	color = RGB(255, 255, 255);
@@ -23,6 +24,7 @@ void LaserMissile::Release()
 
 void LaserMissile::Update()
 {
+	Super::Update();
 	pos = owner->GetPos();
 	elapsedlaunchTime += TimeManager::GetInstance()->GetDeltaTime();
 	if (elapsedlaunchTime > launchTime)
@@ -34,6 +36,7 @@ void LaserMissile::Update()
 
 void LaserMissile::Render(HDC hdc)
 {
+	Super::Render(hdc);
 	//width, height ³ª´²¾ßÇÔ
 	if (isLaunch)
 		RenderRectAtCenter(hdc, pos.x, pos.y, 20, WINSIZE_Y* 2);

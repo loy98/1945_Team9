@@ -4,6 +4,8 @@
 class LaserMissile : public Missile
 {
 public:
+	using Super = Missile;
+
 	void Init() override;
 	void Release() override;
 	void Update() override;

@@ -4,7 +4,7 @@
 #include "Image.h"
 #include "KeyManager.h"
 #include "MissileManager.h"
-
+#include "Collider.h"
 void Tank::Init()
 {
 	pos.x = WINSIZE_X / 2;
@@ -29,6 +29,11 @@ void Tank::Init()
 
 	missileManager = new MissileManager();
 	missileManager->Init();
+
+	Collider* collider = new Collider();
+	collider->SetOwner(this);
+	collider->SetPos(pos);
+	colliderList.push_back(collider);
 }
 
 void Tank::Release()
@@ -63,7 +68,11 @@ void Tank::Update()
 		dir.x = 1;
 		Move();
 	}
-		
+	for (auto& collider : colliderList)
+	{
+		if (collider)
+			collider->Update();
+	}
 }
 
 void Tank::Render(HDC hdc)
@@ -72,7 +81,11 @@ void Tank::Render(HDC hdc)
 	//RenderEllipseAtCenter(hdc, pos.x, pos.y, size, size);
 	if (image) image->Render(hdc, pos.x, pos.y);
 	if (missileManager) missileManager->Render(hdc);
-
+	for (auto& collider : colliderList)
+	{
+		if (collider)
+			collider->Render(hdc);
+	}
 }
 
 void Tank::Move()

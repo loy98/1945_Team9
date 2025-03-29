@@ -7,7 +7,7 @@ class MissileManager;
 class Tank : public GameObject
 {
 private:
-	FPOINT pos;
+	
 	FPOINT dir{ 1, 0 };
 	int size;
 	float damage;
@@ -40,7 +40,7 @@ public:
 	void RotateBarrel(float angle);
 	void Dead();
 
-	inline FPOINT GetPos() { return pos; }
+	
 	inline int GetMissileCount() { return missileCount; }
 	//inline Missile* GetMissiles() { return missiles; }
 	inline void SetBarrelAngle(float angle) { this->barrelAngle = angle; }

@@ -20,7 +20,6 @@ public:
 	bool IsOutofScreen();
 
 	inline bool GetIsActived() { return isActived; }
-	inline FPOINT GetPos() { return pos; }
 	inline int GetSize() { return size; }
 	float GetMoveSpeed() { return moveSpeed; }
 	float GetAngle() { return angle; }
@@ -33,7 +32,6 @@ public:
 
 
 protected:
-	FPOINT pos;
 	bool isActived;
 	COLORREF color;
 	float moveSpeed;

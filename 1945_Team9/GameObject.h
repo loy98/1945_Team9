@@ -1,6 +1,7 @@
 #pragma once
 #include "config.h"
 
+class Collider;
 class GameObject
 {
 public:
@@ -9,6 +10,14 @@ public:
 	void Update();		// 프레임 단위로 게임 로직 실행(데이터 계산)
 	void Render(HDC hdc);	// 프레임 단위로 출력(이미지, 텍스트 등)
 
+	inline FPOINT GetPos() { return pos; }
+	void AddCollider(Collider* collider);
+	void SetIsCollision(bool isCollision) { this->isCollision = isCollision; }
+
 	GameObject();
 	~GameObject();
+protected:
+	FPOINT pos;
+	vector<Collider*> colliderList;
+	bool isCollision;
 };

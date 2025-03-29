@@ -77,9 +77,6 @@
     <ClInclude Include="LaserMissile.h">
       <Filter>MainGame\Missile</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>MainGame\Missile</Filter>
-    </ClInclude>
     <ClInclude Include="MainGame.h">
       <Filter>MainGame</Filter>
     </ClInclude>
@@ -87,6 +84,9 @@
       <Filter>MainGame</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
+      <Filter>MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
       <Filter>MainGame</Filter>
     </ClInclude>
   </ItemGroup>
