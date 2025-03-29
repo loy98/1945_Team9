@@ -145,8 +145,8 @@ void Image::Render(HDC hdc, int destX, int destY, int frameIndex, bool isFlip)
         StretchBlt(imageInfo->hTempDC, 0, 0,
             imageInfo->frameWidth, imageInfo->frameHeight,
             imageInfo->hMemDC,
-            (imageInfo->frameWidth * imageInfo->currFrameX) + (imageInfo->frameWidth - 1),
-            imageInfo->frameHeight * imageInfo->currFrameY,
+            imageInfo->frameWidth * imageInfo->currFrameX,
+            (imageInfo->frameHeight * imageInfo->currFrameY) + (imageInfo->frameHeight - 1),
             -imageInfo->frameWidth, imageInfo->frameHeight,
             SRCCOPY
         );
@@ -199,9 +199,9 @@ void Image::FrameRender(HDC hdc, int destX, int destY, int frameX, int frameY, b
         StretchBlt(imageInfo->hTempDC, 0, 0,
             imageInfo->frameWidth, imageInfo->frameHeight,
             imageInfo->hMemDC,
-            (imageInfo->frameWidth * imageInfo->currFrameX) + (imageInfo->frameWidth - 1),
-            imageInfo->frameHeight * imageInfo->currFrameY,
-            -imageInfo->frameWidth, imageInfo->frameHeight,
+            imageInfo->frameWidth * imageInfo->currFrameX,
+            (imageInfo->frameHeight * imageInfo->currFrameY) + (imageInfo->frameHeight - 1),
+            imageInfo->frameWidth, -imageInfo->frameHeight,
             SRCCOPY
         );
 

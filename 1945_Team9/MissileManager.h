@@ -12,7 +12,7 @@ public:
 	void Init();
 	void Release();
 	void Update();
-	void Render(HDC hdc);
+	void Render(HDC hdc, bool isFlip);
 
 	void Launch(FPOINT pos);
 

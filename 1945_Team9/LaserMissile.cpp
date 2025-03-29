@@ -32,7 +32,7 @@ void LaserMissile::Update()
 	}
 }
 
-void LaserMissile::Render(HDC hdc)
+void LaserMissile::Render(HDC hdc, bool isFlip)
 {
 	//width, height ³ª´²¾ßÇÔ
 	if (isLaunch)

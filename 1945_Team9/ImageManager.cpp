@@ -41,7 +41,7 @@ Image* ImageManager::AddImage(wstring key, const wchar_t* filePath, int width, i
 	return image;
 }
 
-Image* ImageManager::AddImage(wstring key, const wchar_t* filePath, int width, int height, int maxFrameX, int maxFrameY, bool isTransparent, COLORREF transColor)
+Image* ImageManager::AddImage(wstring key, const wchar_t* filePath, int width, int height, int maxFrameX, int maxFrameY, bool isFlip, bool isTransparent, COLORREF transColor)
 {
 	Image* image = nullptr;
 	image = FindImage(key);
@@ -61,6 +61,27 @@ Image* ImageManager::AddImage(wstring key, const wchar_t* filePath, int width, i
 
 	return image;
 }
+
+//Image* ImageManager::AddImage(wstring key, const wchar_t* filePath, int width, int height, int maxFrameX, int maxFrameY, bool isFlip, bool isTransparent, bool isFlip, COLORREF transColor)
+//{
+//	Image* image = nullptr;
+//	image = FindImage(key);
+//	if (image)
+//		return image;
+//
+//	image = new Image();
+//	if (FAILED(image->Init(filePath, width, height, maxFrameX, maxFrameY, isTransparent, transColor)))
+//	{
+//		image->Release();
+//		delete image;
+//
+//		return nullptr;
+//	}
+//
+//	mapImages.insert(make_pair(key, image));
+//
+//	return image;
+//}
 
 void ImageManager::DeleteImage(wstring key)
 {

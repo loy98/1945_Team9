@@ -15,7 +15,7 @@ void Missile::Update()
 	
 }
 
-void Missile::Render(HDC hdc)
+void Missile::Render(HDC hdc, bool isFlip)
 {
 	
 }

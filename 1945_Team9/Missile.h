@@ -12,7 +12,7 @@ public:
 	virtual void Init();		
 	virtual void Release();
 	virtual void Update();		
-	virtual void Render(HDC hdc);
+	virtual void Render(HDC hdc, bool isFlip);
 
 	virtual void Move();
 	virtual void LaserMissileMove() {};

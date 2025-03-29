@@ -71,7 +71,7 @@ void Tank::Render(HDC hdc)
 	// ¸öÅë
 	//RenderEllipseAtCenter(hdc, pos.x, pos.y, size, size);
 	if (image) image->Render(hdc, pos.x, pos.y);
-	if (missileManager) missileManager->Render(hdc);
+	if (missileManager) missileManager->Render(hdc, false);
 
 }
 
