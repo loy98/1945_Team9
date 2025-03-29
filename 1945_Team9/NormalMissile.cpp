@@ -8,10 +8,11 @@ void NormalMissile::Init()
 
 	pos = { 0, 0 };
 	isActived = false;
-	color = RGB(255, 255, 255);
 	moveSpeed = 50.0f;
 	angle = 90.0f;
-	size = 20;
+	size = { 20,20 };
+
+	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
 
 	controller = new NormalController();
 }
@@ -23,31 +24,27 @@ void NormalMissile::Release()
 
 void NormalMissile::Update()
 {
-	Super::Update();
-
 	if (!isActived) 
 		return;
 	Move();
+	UpdateRectAtCenter(rc, pos);
 	if (IsOutofScreen())
 	{
 		isActived = false;
 	}
+	Super::Update();
 }
 
 void NormalMissile::Render(HDC hdc)
 {
 	Super::Render(hdc);
-	
-	/*if (isActived)
-	{
-		RenderEllipseAtCenter(hdc, pos.x, pos.y, size, size);
-	}*/
 }
 
 void NormalMissile::ReLoad(FPOINT pos)
 {
 	this->pos = pos;
 	isActived = true;
+	isCollision = false;
 	angle = 90.0f;
 }
 

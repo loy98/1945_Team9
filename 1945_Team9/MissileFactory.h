@@ -10,8 +10,6 @@ public:
 	virtual ~MissileFactory();
 	virtual Missile* CreateMissile(FPOINT pos, float angle, float speed) = 0;
 	virtual Missile* CreateMissile();
-
-
 };
 
 class NormalMissileFactory : public MissileFactory
@@ -19,7 +17,6 @@ class NormalMissileFactory : public MissileFactory
 public:
 	NormalMissileFactory() {}
 	virtual ~NormalMissileFactory();
-
 
 	virtual Missile* CreateMissile(FPOINT pos, float angle, float speed) override;
 
@@ -31,9 +28,7 @@ public:
 	SinMissileFactory() {}
 	virtual ~SinMissileFactory();
 
-
 	virtual Missile* CreateMissile(FPOINT pos, float angle, float speed) override;
-
 };
 
 class LaserMissileFactory : public MissileFactory

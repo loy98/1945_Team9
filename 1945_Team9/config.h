@@ -1,5 +1,3 @@
-// config.h
-
 #pragma once
 #pragma comment(lib, "Winmm.lib")
 
@@ -40,4 +38,22 @@ enum class MissileType
 	Sin,
 	Laser,
 	MissileTypeLength
+};
+enum class CollisionGroup
+{
+	Player,
+	Enemy,
+	GroupLength
+};
+enum class ObjectType
+{
+	Player,
+	Enemy,
+	Missile,
+	TypeLength
+};
+struct Size
+{
+	float x;
+	float y;
 };

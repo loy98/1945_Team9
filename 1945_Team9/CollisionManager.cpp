@@ -3,8 +3,8 @@
 #include "GameObject.h"
 void CollisionManager::Update()
 {
-	vector<Collider*>& playerColliders = colliderList[(int)CollisionLayer::Player];
-	vector<Collider*>& enemyColliders = colliderList[(int)CollisionLayer::Enemy];
+	const vector<Collider*>& playerColliders = colliderList[(int)CollisionGroup::Player];
+	const vector<Collider*>& enemyColliders = colliderList[(int)CollisionGroup::Enemy];
 
 	for (int i = 0; i < playerColliders.size(); ++i)
 	{
@@ -15,25 +15,24 @@ void CollisionManager::Update()
 
 			if (src->CheckCollision(dest))
 			{
+				if (src->GetOwner()->GetObjectType() == dest->GetOwner()->GetObjectType())
+					continue;
 				src->GetOwner()->SetIsCollision(true);
 				dest->GetOwner()->SetIsCollision(true);
 			}
-
-
 		}
 	}
-
 }
 
-void CollisionManager::AddCollider(Collider* collider, CollisionLayer layer)
+void CollisionManager::AddCollider(Collider* collider, CollisionGroup group)
 {
-	switch ((int)layer)
+	switch (group)
 	{
-	case (int)CollisionLayer::Player:
-		colliderList[(int)CollisionLayer::Player].push_back(collider);
+	case CollisionGroup::Player:
+		colliderList[(int)CollisionGroup::Player].push_back(collider);
 		break;
-	case (int)CollisionLayer::Enemy:
-		colliderList[(int)CollisionLayer::Enemy].push_back(collider);
+	case CollisionGroup::Enemy:
+		colliderList[(int)CollisionGroup::Enemy].push_back(collider);
 		break;
 	}
 }

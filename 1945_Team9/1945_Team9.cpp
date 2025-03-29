@@ -24,7 +24,7 @@ void RenderEllipseAtCenter(HDC hdc, int centerX, int centerY, int width, int hei
 bool PointInRect(FPOINT ptMouse, RECT rc);	// ptInRect
 bool RectInRect(RECT rc1, RECT rc2);
 // Update
-void UpdateRect(RECT& rc, FPOINT pt);
+void UpdateRectAtCenter(RECT& rc, FPOINT pt);
 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);

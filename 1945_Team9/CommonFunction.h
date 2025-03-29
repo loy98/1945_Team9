@@ -1,20 +1,7 @@
-// CommonFunction.h
-/*
-	inline: 컴파일러에게 함수 호출을 최적화 하도록 요청하는 키워드
-	일반적인 함수들은 함수 호출 시에 매개변수를 스택메모리 저장, 
-	함수 시작주소를 호출, 반환주소로 이동
-	// main.cpp
-	int result = 3 + 6;
-
-	inline int Add(int a, int b)
-	{
-		return a + b;
-	}
-*/
 #pragma once
 #include "config.h"
 
-inline RECT GetRect(int left, int top, int width, int height)
+inline RECT GetNormalRect(int left, int top, int width, int height)
 {
 	RECT rc{ left, top, left + width, top + height };
 	return rc;
@@ -83,7 +70,7 @@ inline bool RectInRect(RECT rc1, RECT rc2)
 	return true;
 }
 
-inline void UpdateRect(RECT& rc, FPOINT pt)
+inline void UpdateRectAtCenter(RECT& rc, FPOINT pt)
 {
 	int width = rc.right - rc.left;
 	int height = rc.bottom - rc.top;
@@ -91,6 +78,17 @@ inline void UpdateRect(RECT& rc, FPOINT pt)
 	rc.left = pt.x - (width / 2);
 	rc.right = rc.left + width;
 	rc.top = pt.y - (height / 2);
+	rc.bottom = rc.top + height;
+}
+
+inline void UpdateNormalRect(RECT& rc, FPOINT pt)
+{
+	float width = rc.right - rc.left;
+	float height = rc.bottom - rc.top;
+
+	rc.left = pt.x - (width / 2);
+	rc.right = rc.left + width;
+	rc.top = pt.y - (height);
 	rc.bottom = rc.top + height;
 }
 

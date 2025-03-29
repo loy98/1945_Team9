@@ -5,6 +5,8 @@ class LaserMissile : public Missile
 {
 public:
 	using Super = Missile;
+	LaserMissile(FPOINT pos);
+	~LaserMissile();
 
 	void Init() override;
 	void Release() override;

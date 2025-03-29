@@ -26,7 +26,6 @@ public:
 
 	inline void SetTarget(Tank* target) { this->target = target; }
 	inline FPOINT GetPos() { return pos; }
-	inline int GetSize() { return size; }
 	float GetAngle() { return angle; }
 	float GetMoveSpeed() { return moveSpeed; }
 	float GetRushSpeed() { return rushSpeed; }
@@ -39,7 +38,6 @@ private:
 	float rushSpeed;
 	float angle;
 	bool isAlive;
-	int size;
 	int animationFrame;
 	int elapsedFrame;
 	float elapsedTime;

@@ -9,26 +9,21 @@ class Tank : public GameObject
 private:
 	
 	FPOINT dir{ 1, 0 };
-	int size;
 	float damage;
 	float moveSpeed;
-	string name;
-	RECT rcCollision;
 	Image* image;
 
 	// 포신
 	FPOINT barrelEnd;
 	int barrelSize;
-	float barrelAngle;	// 단위 : 도(degree)	0 ~ 180		~	360
+	float fireAngle;	// 단위 : 도(degree)	0 ~ 180		~	360
 						//	    : 라디안(radian)0f ~ 3.14f	~	6.28f
 	// 미사일
-	int missileCount;
 	float missileSpeed;
 	bool LaserLaunched = false;
-	//Missile* missile[10];
 
 	MissileManager* missileManager;
-
+	CollisionGroup group;
 public:
 	void Init();	
 	void Release();	
@@ -37,13 +32,8 @@ public:
 
 	void Move();
 	void Fire(MissileType type);
-	void RotateBarrel(float angle);
+	void AddMissile(GameObject* owner, MissileType type, FPOINT pos, float angle, float speed);
 	void Dead();
-
-	
-	inline int GetMissileCount() { return missileCount; }
-	//inline Missile* GetMissiles() { return missiles; }
-	inline void SetBarrelAngle(float angle) { this->barrelAngle = angle; }
 
 	Tank();
 	~Tank();

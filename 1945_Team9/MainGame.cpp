@@ -4,6 +4,7 @@
 #include "EnemyManager.h"
 #include "Tank.h"
 #include "MissileManager.h"
+#include "CollisionManager.h"
 #include "Timer.h"
 /*
 	실습1. 이오리 집에 보내기
@@ -79,7 +80,7 @@ void MainGame::Update()
 	//InvalidateRect(g_hWnd, NULL, false);
 	if (enemyManager) enemyManager->Update();
 	if (rocket) rocket->Update();
-
+	CollisionManager::GetInstance()->Update();
 }
 
 void MainGame::Render()

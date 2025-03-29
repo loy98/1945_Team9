@@ -51,7 +51,7 @@ Missile* LaserMissileFactory::CreateMissile()
 
 Missile* LaserMissileFactory::CreateMissile(FPOINT pos, float angle, float speed)
 {
-	Missile* missile = new LaserMissile();
+	Missile* missile = new LaserMissile(pos);
 	missile->Init();
 	missile->SetPos(pos);
 	return missile;

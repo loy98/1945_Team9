@@ -1,14 +1,11 @@
 #include "Missile.h"
 #include "CommonFunction.h"
 #include "Collider.h"
+#include "CollisionManager.h"
 
 void Missile::Init()
 {
-	Collider* collider = new Collider();
-	collider->SetOwner(this);
-	collider->SetPos(pos);
-	colliderList.push_back(collider);
-
+	type = ObjectType::Missile;
 }
 
 void Missile::Release()
@@ -37,6 +34,13 @@ void Missile::Render(HDC hdc)
 	}
 }
 
+void Missile::AddCollider(CollisionGroup group)
+{
+	Collider* collider = new Collider(this, pos);
+	colliderList.push_back(collider);
+	CollisionManager::GetInstance()->AddCollider(collider, group);
+}
+
 void Missile::Move()
 {
 	
@@ -48,10 +52,10 @@ void Missile::ReLoad(FPOINT pos)
 
 bool Missile::IsOutofScreen()
 {
-	float right = pos.x + size / 2;
-	float left = pos.x - size / 2;
-	float top = pos.y - size / 2;
-	float bottom = pos.y + size / 2;
+	float right = pos.x + size.x / 2;
+	float left = pos.x - size.x / 2;
+	float top = pos.y - size.y / 2;
+	float bottom = pos.y + size.y / 2;
 
 	if (right < 0 || left > WINSIZE_X 
 		|| bottom < 0 || top > WINSIZE_Y)

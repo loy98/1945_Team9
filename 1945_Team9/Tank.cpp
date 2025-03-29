@@ -5,35 +5,34 @@
 #include "KeyManager.h"
 #include "MissileManager.h"
 #include "Collider.h"
+#include "CollisionManager.h"
+
 void Tank::Init()
 {
 	pos.x = WINSIZE_X / 2;
 	pos.y = WINSIZE_Y - 200;
-	size = 70;
+	size = {40, 40};
 	damage = 10;
 	moveSpeed = 0.1f;
-	name = "ÅÊÅ©";
-	rcCollision = GetRectAtCenter(pos.x, pos.y, size, size);
-
+	group = CollisionGroup::Player;
+	type = ObjectType::Player;
 	// Æ÷½Å
 	barrelSize = 30;
 	barrelEnd.x = pos.x;
 	barrelEnd.y = pos.y - barrelSize;
-	barrelAngle = 90.0f;
+	fireAngle = 90.0f;
+	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
 
 	image = ImageManager::GetInstance()->AddImage(L"rocket", TEXT("Image/rocket.bmp"), 52, 64, true, RGB(255, 0, 255));
-	//image->Init(TEXT("Image/rocket.bmp"), 52, 64, true, RGB(255, 0, 255));
 	// ¹Ì»çÀÏ
-	missileCount = 10;
 	missileSpeed = 150.0f;
 
 	missileManager = new MissileManager();
 	missileManager->Init();
 
-	Collider* collider = new Collider();
-	collider->SetOwner(this);
-	collider->SetPos(pos);
+	Collider* collider = new Collider(this, pos);
 	colliderList.push_back(collider);
+	CollisionManager::GetInstance()->AddCollider(collider, CollisionGroup::Player);
 }
 
 void Tank::Release()
@@ -48,8 +47,8 @@ void Tank::Release()
 
 void Tank::Update()
 {
-	barrelEnd.x = pos.x + barrelSize * cosf(DEG_TO_RAD(barrelAngle));
-	barrelEnd.y = pos.y - barrelSize * sinf(DEG_TO_RAD(barrelAngle));
+	barrelEnd.x = pos.x + barrelSize * cosf(DEG_TO_RAD(fireAngle));
+	barrelEnd.y = pos.y - barrelSize * sinf(DEG_TO_RAD(fireAngle));
 
 	if (missileManager) missileManager->Update();
 
@@ -68,6 +67,7 @@ void Tank::Update()
 		dir.x = 1;
 		Move();
 	}
+	UpdateRectAtCenter(rc, pos);
 	for (auto& collider : colliderList)
 	{
 		if (collider)
@@ -77,8 +77,6 @@ void Tank::Update()
 
 void Tank::Render(HDC hdc)
 {
-	// ¸öÅë
-	//RenderEllipseAtCenter(hdc, pos.x, pos.y, size, size);
 	if (image) image->Render(hdc, pos.x, pos.y);
 	if (missileManager) missileManager->Render(hdc);
 	for (auto& collider : colliderList)
@@ -91,42 +89,37 @@ void Tank::Render(HDC hdc)
 void Tank::Move()
 {
 	pos.x += moveSpeed * dir.x;
-	pos.x = clamp(pos.x, (float)size / 2, (float)WINSIZE_X - size / 2);
+	pos.x = clamp(pos.x, (float)size.x / 2, (float)WINSIZE_X - size.x / 2);
 }
 
 void Tank::Fire(MissileType type)
 {
-	Missile* missile = nullptr;
 	int size = missileManager->GetMissileListSize();
 	switch ((int)type)
 	{
 	case (int)MissileType::Normal:
 		if (size < 8)
-		{
-			missile = missileManager->CreateMissile(MissileType::Normal, barrelEnd, barrelAngle, missileSpeed);
-			missileManager->AddMissile(missile);
-		}
+			AddMissile(this, MissileType::Normal, barrelEnd, fireAngle, missileSpeed);
 		else
-    			missileManager->Launch(barrelEnd);
+    		missileManager->Launch(barrelEnd);
 		break;
 	case (int)MissileType::Sin:
-		missile = missileManager->CreateMissile(MissileType::Sin, barrelEnd, barrelAngle, missileSpeed);
-		missileManager->AddMissile(missile);
+		AddMissile(this, MissileType::Sin, barrelEnd, fireAngle, missileSpeed);
 		break;
 	case (int)MissileType::Laser:
 		if (LaserLaunched)	return;
-		missile = missileManager->CreateMissile(MissileType::Laser, barrelEnd, barrelAngle, missileSpeed);
-		missile->SetOwner(this);
-		missileManager->AddMissile(missile);
+		AddMissile(this, MissileType::Laser, barrelEnd, fireAngle, missileSpeed);
 		LaserLaunched = true;
 		break;
 	}
-	
 }
 
-void Tank::RotateBarrel(float angle)
+void Tank::AddMissile(GameObject* owner, MissileType type, FPOINT pos, float angle, float speed)
 {
-	barrelAngle += angle;
+	Missile* missile = missileManager->CreateMissile(type, barrelEnd, fireAngle, missileSpeed);
+	missile->AddCollider(group);
+	missile->SetOwner(this);
+	missileManager->AddMissile(missile);
 }
 
 void Tank::Dead()

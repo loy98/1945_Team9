@@ -3,6 +3,8 @@
 #include "Tank.h"
 #include "Image.h"
 #include "MissileManager.h"
+#include "CollisionManager.h"
+#include "Collider.h"
 
 /*
 	STL (Standard Template Library) : Vector
@@ -22,18 +24,24 @@ void Enemy::Init(float posX, float posY)
 	rushSpeed = 50.0f;
 	angle = -90.0f;
 	isAlive = true;
-	size = 40;
+	size = { 40,40 };
 	animationFrame = 0;
 	elapsedFrame = 0;
 	elapsedTime = 0.0f;
 	elapsedMoveTime = 0.0f;
 	maxMoveTime = 3.0f; 
 	isRush = false;
+	type = ObjectType::Enemy;
+	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
 
 	image = ImageManager::GetInstance()->AddImage(L"ufo", TEXT("Image\\ufo.bmp"), 540, 32, 10, 1, true, RGB(255, 0, 255));
 
 	missileManager = new MissileManager();
 	missileManager->Init();
+
+	Collider* collider = new Collider(this, pos);
+	colliderList.push_back(collider);
+	CollisionManager::GetInstance()->AddCollider(collider, CollisionGroup::Enemy);
 }
 
 void Enemy::Release()
@@ -74,6 +82,13 @@ void Enemy::Update()
 		elapsedMoveTime = 0;
 		dir.x *= -1.0f;
 	}
+	UpdateRectAtCenter(rc, pos);
+
+	for (auto& collider : colliderList)
+	{
+		if (collider)
+			collider->Update();
+	}
 	
 }
 
@@ -82,11 +97,15 @@ void Enemy::Render(HDC hdc)
 	if (isAlive)
 	{
 		image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0);
-		//RenderEllipseAtCenter(hdc, pos.x, pos.y, size, size);
 	}
 	if (missileManager)
 	{
 		missileManager->Render(hdc);
+	}
+	for (auto& collider : colliderList)
+	{
+		if (collider)
+			collider->Render(hdc);
 	}
 }
 
@@ -102,10 +121,10 @@ void Enemy::Rush()
 
 bool Enemy::IsOutofScreen()
 {
-	float right = pos.x + size / 2;
-	float left = pos.x - size / 2;
-	float top = pos.y - size / 2;
-	float bottom = pos.y + size / 2;
+	float right = pos.x + size.x / 2;
+	float left = pos.x - size.x / 2;
+	float top = pos.y - size.y / 2;
+	float bottom = pos.y + size.y / 2;
 
 	if (right < 0 || left > WINSIZE_X
 		|| bottom < 0 || top > WINSIZE_Y)

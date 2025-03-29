@@ -14,13 +14,13 @@ public:
 	virtual void Update();		
 	virtual void Render(HDC hdc);
 
+	virtual void AddCollider(CollisionGroup group);
 	virtual void Move();
 	virtual void LaserMissileMove() {};
 	virtual void ReLoad(FPOINT pos);
 	bool IsOutofScreen();
 
 	inline bool GetIsActived() { return isActived; }
-	inline int GetSize() { return size; }
 	float GetMoveSpeed() { return moveSpeed; }
 	float GetAngle() { return angle; }
 
@@ -28,18 +28,16 @@ public:
 	inline void SetPos(FPOINT pos) { this->pos = pos; }
 	inline void SetAngle(float angle) { this->angle = angle; }
 	void SetMoveSpeed(float speed) { this->moveSpeed = speed; }
-	void SetOwner(Tank* tank) { owner = tank; }
+	void SetOwner(GameObject* tank) { owner = tank; }
 
 
 protected:
 	bool isActived;
-	COLORREF color;
 	float moveSpeed;
 	float angle;
 	FPOINT destination;
-	int size;
 
-	Tank* owner;
+	GameObject* owner;
 	MissileController* controller;
 };
 

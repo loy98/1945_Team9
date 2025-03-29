@@ -2,19 +2,25 @@
 #include "CommonFunction.h"
 #include "MissileController.h"
 #include "Tank.h"
+LaserMissile::LaserMissile(FPOINT pos)
+{
+	this->pos = pos;
+}
+LaserMissile::~LaserMissile()
+{
+}
 void LaserMissile::Init()
 {
 	Super::Init();
-	pos = { 0, 0 };
 	isActived = true;
-	color = RGB(255, 255, 255);
 	moveSpeed = 50.0f;
 	angle = 90.0f;
-	size = 20;
+	size = { 20, pos.y };
 	isLaunch = false;
 	elapsedlaunchTime = 3.0f;
 	launchTime = 3.0f;
 
+	rc = GetNormalRect(pos.x - size.x / 2, 0, size.x, size.y);
 	controller = new LaserController();
 }
 
@@ -24,8 +30,9 @@ void LaserMissile::Release()
 
 void LaserMissile::Update()
 {
-	Super::Update();
 	pos = owner->GetPos();
+	UpdateNormalRect(rc, pos);
+	Super::Update();
 	elapsedlaunchTime += TimeManager::GetInstance()->GetDeltaTime();
 	if (elapsedlaunchTime > launchTime)
 	{
@@ -36,10 +43,8 @@ void LaserMissile::Update()
 
 void LaserMissile::Render(HDC hdc)
 {
-	Super::Render(hdc);
-	//width, height ³ª´²¾ßÇÔ
 	if (isLaunch)
-		RenderRectAtCenter(hdc, pos.x, pos.y, 20, WINSIZE_Y* 2);
+		Super::Render(hdc);
 }
 
 void LaserMissile::Move()

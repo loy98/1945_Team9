@@ -1,6 +1,7 @@
 #include "EnemyManager.h"
 #include "MissileManager.h"
 #include "Enemy.h"
+#include "Missile.h"
 
 void EnemyManager::Init()
 {
@@ -37,9 +38,6 @@ void EnemyManager::Update()
 			if (vecEnemys[i]->IsOutofScreen())
 			{
 				vecEnemys[i]->SetIsAlive(false);
-				//vecEnemys[i]->Release();
-				//delete vecEnemys[i];
-				//vecEnemys[i] = nullptr;
 			}
 		}
 	}
@@ -52,8 +50,11 @@ void EnemyManager::Update()
 		{
 			randEnemy->SetIsRush(true);
 			MissileManager* m = randEnemy->GetMissileManager();
+
 			Missile* missile = m->CreateMissile(MissileType::Normal, randEnemy->GetPos(),
 				randEnemy->GetAngle(), randEnemy->GetRushSpeed() + 50);
+
+			missile->AddCollider(CollisionGroup::Enemy);
 			m->AddMissile(missile);
 		}
 		elapsedTime = 0.0f;
