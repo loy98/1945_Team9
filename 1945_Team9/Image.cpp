@@ -271,7 +271,7 @@ void Image::TestRender(HDC hdc, int destX, int destY, float frameY, bool isFlip)
             310, 600,
 
             imageInfo->hMemDC,
-            0, frameY,
+            0, 6114 - (600 * (frameY + 1)),
             310, 600,
             transColor);
     }
