@@ -1,1 +1,94 @@
-﻿  1945_Team9.vcxproj -> C:\Users\user\Desktop\1945_Team9\x64\Debug\1945_Team9.exe
+﻿  1945_Team9.cpp
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\1945_Team9.cpp(49,41): warning C4302: '형식 캐스트': 'LPWSTR'에서 'WORD'(으)로 잘립니다.
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\1945_Team9.cpp(107,16): warning C4244: 'return': 'WPARAM'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Collider.cpp
+  CollisionManager.cpp
+  Enemy.cpp
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\CommonFunction.h(91,17): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'Enemy.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\CommonFunction.h(93,16): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'Enemy.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\MissileManager.h(21,58): warning C4267: 'return': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'Enemy.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\Enemy.cpp(84,37): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\Enemy.cpp(84,30): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  EnemyManager.cpp
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\MissileManager.h(21,58): warning C4267: 'return': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'EnemyManager.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\EnemyManager.cpp(65,11): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  GameObject.cpp
+  Image.cpp
+  ImageManager.cpp
+  KeyManager.cpp
+  LaserMissile.cpp
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\CommonFunction.h(91,17): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'LaserMissile.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\CommonFunction.h(93,16): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'LaserMissile.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\LaserMissile.cpp(39,37): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\LaserMissile.cpp(39,30): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  MainGame.cpp
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\CommonFunction.h(91,17): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'MainGame.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\CommonFunction.h(93,16): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'MainGame.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\MissileManager.h(21,58): warning C4267: 'return': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'MainGame.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\MainGame.cpp(96,47): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Missile.cpp
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\CommonFunction.h(91,17): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'Missile.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\CommonFunction.h(93,16): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'Missile.cpp'을(를) 컴파일하는 중)
+  
+  MissileController.cpp
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\MissileController.cpp(32,35): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\MissileController.cpp(33,35): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  MissileFactory.cpp
+  MissileManager.cpp
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\MissileManager.h(21,58): warning C4267: 'return': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'MissileManager.cpp'을(를) 컴파일하는 중)
+  
+  NormalMissile.cpp
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\CommonFunction.h(91,17): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'NormalMissile.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\CommonFunction.h(93,16): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'NormalMissile.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\NormalMissile.cpp(37,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\NormalMissile.cpp(37,33): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ShowUpEnemy.cpp
+  Tank.cpp
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\CommonFunction.h(91,17): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'Tank.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\CommonFunction.h(93,16): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'Tank.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\MissileManager.h(21,58): warning C4267: 'return': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'Tank.cpp'을(를) 컴파일하는 중)
+  
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\Tank.cpp(16,42): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\Tank.cpp(16,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\Tank.cpp(46,42): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\Tank.cpp(47,42): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\Tank.cpp(73,42): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\Tank.cpp(73,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  TimeManager.cpp
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\TimeManager.cpp(31,51): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Timer.cpp
+  코드를 생성하고 있습니다...
+C:\Users\user\Desktop\1945_Team\1945_Team9\1945_Team9\MissileManager.cpp(88,1): warning C4715: 'MissileManager::CreateMissile': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  LINK : C:\Users\user\Desktop\1945_Team\1945_Team9\x64\Debug\1945_Team9.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
+  1945_Team9.vcxproj -> C:\Users\user\Desktop\1945_Team\1945_Team9\x64\Debug\1945_Team9.exe
