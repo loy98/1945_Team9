@@ -39,6 +39,7 @@ void LaserMissile::Update()
 		elapsedlaunchTime = 0;
 		isLaunch = isLaunch ? false : true;
 	}
+	isCollision = isLaunch ? false : true;
 }
 
 void LaserMissile::Render(HDC hdc)

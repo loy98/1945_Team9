@@ -16,6 +16,7 @@ public:
 	void SetPos(FPOINT pos) { this->pos = pos; }
 	FPOINT GetPos() { return pos; }
 	RECT GetRect() { return rc; }
+	bool GetIsCollision() { return isCollision; }
 
 private:
 	GameObject* owner;

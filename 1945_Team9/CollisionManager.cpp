@@ -13,6 +13,9 @@ void CollisionManager::Update()
 			Collider* src = playerColliders[i];
 			Collider* dest = enemyColliders[j];
 
+			if (src->GetOwner()->GetIsCollision() || dest->GetOwner()->GetIsCollision())
+				continue;
+
 			if (src->CheckCollision(dest))
 			{
 				if (src->GetOwner()->GetObjectType() == dest->GetOwner()->GetObjectType())

@@ -14,6 +14,7 @@ void Collider::Update()
 	//if (isCollision) return;
 	pos = owner->GetPos();
 	rc = owner->GetRect();
+	isCollision = owner->GetIsCollision();
 }
 
 void Collider::Render(HDC hdc)
