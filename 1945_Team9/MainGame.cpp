@@ -39,13 +39,13 @@ void MainGame::Init()
 	
 	// Test
 	ground = ImageManager::GetInstance()->AddImage(
-		L"ground", TEXT("Image\\1945BackGround1.bmp"), 320, 6114, 1, 1, true, RGB(255, 0, 255));
+		L"ground", TEXT("Image\\1945BackGround1.bmp"), 320, 6114, 1, 1, false, true, RGB(255, 0, 255));
 
 	tempImage = ImageManager::GetInstance()->AddImage(
-		L"groundFlip", TEXT("Image\\1945BackGround1Filp.bmp"), 320, 6114, 1, 1, true, RGB(255, 0, 255));
+		L"groundFlip", TEXT("Image\\1945BackGround1Filp.bmp"), 320, 6114, 1, 1, false, true, RGB(255, 0, 255));
 
 	underGround = ImageManager::GetInstance()->AddImage(
-		L"underGround", TEXT("Image\\1945BackGround2.bmp"), 320, 6114, 1, 1, true, RGB(255, 0, 255));
+		L"underGround", TEXT("Image\\1945BackGround2.bmp"), 320, 6114, 1, 1, false, true, RGB(255, 0, 255));
 
 	groundMoveSpeed = 1.0f;
 	underGroundMoveSpeed = 0.8f;
@@ -123,12 +123,12 @@ void MainGame::Render()
 	HDC hBackBufferDC = backBuffer->GetMemDC();
 
 	//backGround->Render(hBackBufferDC);
-	if (enemyManager) enemyManager->Render(hBackBufferDC);
-	if (rocket) rocket->Render(hBackBufferDC);
 
 	// Test
 	underGround->TestRender(hBackBufferDC, 0, 0, underGroundFrameY, false);
 	ground->TestRender(hBackBufferDC, 0, 0, groundFrameY, false);
+	if (enemyManager) enemyManager->Render(hBackBufferDC);
+	if (rocket) rocket->Render(hBackBufferDC);
 
 	wsprintf(szText, TEXT("Mouse X : %d, Y : %d"), mousePosX, mousePosY);
 	TextOut(hBackBufferDC, 20, 60, szText, wcslen(szText));
