@@ -14,6 +14,7 @@ void NormalMissile::Init()
 	size = { 20,20 };
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
 	animationFrame = 0;
+	missileType = MissileType::Normal;
 
 	image = ImageManager::GetInstance()->AddImage(L"1945bullet", TEXT("Image\\1945bulletTest.bmp"), 33, 33, 1, 1, false,true, RGB(248, 0, 248));
 	controller = new NormalController();
@@ -26,7 +27,7 @@ void NormalMissile::Release()
 
 void NormalMissile::Update()
 {
-	if (!isActived || isCollision)
+	if (!isActived)
 		return;
 
 	Move();

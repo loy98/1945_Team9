@@ -18,6 +18,7 @@ void LaserMissile::Init()
 	isLaunch = false;
 	elapsedlaunchTime = 3.0f;
 	launchTime = 3.0f;
+	missileType = MissileType::Laser;
 
 	rc = GetNormalRect(pos.x - size.x / 2, 0, size.x, size.y);
 	controller = new LaserController();

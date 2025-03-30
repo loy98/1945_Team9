@@ -19,7 +19,6 @@ void Missile::Release()
 			collider = nullptr;
 		}
 	}
-		
 }
 
 void Missile::Update()

@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "config.h"
 
 class MissileController;
 class Tank;
@@ -39,6 +40,6 @@ protected:
 
 	GameObject* owner;
 	MissileController* controller;
-	MissileType type;
+	MissileType missileType;
 };
 
