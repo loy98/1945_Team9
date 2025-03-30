@@ -23,7 +23,7 @@ void Missile::Update()
 	}
 }
 
-void Missile::Render(HDC hdc)
+void Missile::Render(HDC hdc, bool isFlip)
 {
 	// collider È®ÀÎ¿ë
 	if (!isActived) return;

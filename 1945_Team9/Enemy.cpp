@@ -23,7 +23,7 @@ void Enemy::Init(float posX, float posY)
 	type = ObjectType::Enemy;
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
 
-	image = ImageManager::GetInstance()->AddImage(L"ufo", TEXT("Image\\ufo.bmp"), 540, 32, 10, 1, true, RGB(255, 0, 255));
+	image = ImageManager::GetInstance()->AddImage(L"ufo", TEXT("Image\\ufo.bmp"), 540, 32, 10, 1, true, true, RGB(255, 0, 255));
 
 	missileManager = new MissileManager();
 	missileManager->Init();
@@ -88,7 +88,7 @@ void Enemy::Render(HDC hdc)
 	}
 	if (missileManager)
 	{
-		missileManager->Render(hdc);
+		missileManager->Render(hdc,true);
 	}
 	for (auto& collider : colliderList)
 	{

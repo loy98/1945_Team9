@@ -48,12 +48,12 @@ void MissileManager::Update()
 	}
 }
 
-void MissileManager::Render(HDC hdc)
+void MissileManager::Render(HDC hdc, bool isFlip)
 {
 	for (auto missile : MissileList)
 	{
 		if (missile)
-			missile->Render(hdc);
+			missile->Render(hdc, isFlip);
 	}
 }
 

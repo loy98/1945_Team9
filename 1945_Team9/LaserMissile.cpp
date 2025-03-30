@@ -41,7 +41,7 @@ void LaserMissile::Update()
 	isCollision = isLaunch ? false : true;
 }
 
-void LaserMissile::Render(HDC hdc)
+void LaserMissile::Render(HDC hdc, bool isFlip)
 {
 	if (isLaunch)
 		Super::Render(hdc);

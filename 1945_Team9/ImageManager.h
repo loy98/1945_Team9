@@ -12,8 +12,7 @@ public:
 		bool isTransparent = FALSE, COLORREF transColor = FALSE);
 
 	Image* AddImage(wstring key, const wchar_t* filePath, int width, int height,
-		int maxFrameX, int maxFrameY,
-		bool isTransparent = FALSE, COLORREF transColor = FALSE);
+		int maxFrameX, int maxFrameY, bool isFlip = FALSE, bool isTransparent = FALSE, COLORREF transColor = FALSE);
 
 	void DeleteImage(wstring key);
 	Image* FindImage(wstring key);

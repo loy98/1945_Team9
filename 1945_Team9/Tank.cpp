@@ -78,12 +78,13 @@ void Tank::Update()
 void Tank::Render(HDC hdc)
 {
 	if (image) image->Render(hdc, pos.x, pos.y);
-	if (missileManager) missileManager->Render(hdc);
+	//if (missileManager) missileManager->Render(hdc);
 	for (auto& collider : colliderList)
 	{
 		if (collider)
 			collider->Render(hdc);
 	}
+	if (missileManager) missileManager->Render(hdc, false);
 }
 
 void Tank::Move()
