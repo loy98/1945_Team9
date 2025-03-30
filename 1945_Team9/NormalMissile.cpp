@@ -41,7 +41,7 @@ void NormalMissile::Update()
 void NormalMissile::Render(HDC hdc, bool isFlip)
 {
 
-	Super::Render(hdc);
+	Super::Render(hdc, isFlip);
 
 	if (isActived)
 	{

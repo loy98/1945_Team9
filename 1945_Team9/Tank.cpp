@@ -96,18 +96,18 @@ void Tank::Move()
 void Tank::Fire(MissileType type)
 {
 	int size = missileManager->GetMissileListSize();
-	switch ((int)type)
+	switch (type)
 	{
-	case (int)MissileType::Normal:
+	case MissileType::Normal:
 		if (size < 8)
 			AddMissile(this, MissileType::Normal, barrelEnd, fireAngle, missileSpeed);
 		else
     		missileManager->Launch(barrelEnd);
 		break;
-	case (int)MissileType::Sin:
+	case MissileType::Sin:
 		AddMissile(this, MissileType::Sin, barrelEnd, fireAngle, missileSpeed);
 		break;
-	case (int)MissileType::Laser:
+	case MissileType::Laser:
 		if (LaserLaunched)	return;
 		AddMissile(this, MissileType::Laser, barrelEnd, fireAngle, missileSpeed);
 		LaserLaunched = true;

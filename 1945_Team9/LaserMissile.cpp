@@ -44,7 +44,7 @@ void LaserMissile::Update()
 void LaserMissile::Render(HDC hdc, bool isFlip)
 {
 	if (isLaunch)
-		Super::Render(hdc);
+		Super::Render(hdc, isFlip);
 }
 
 void LaserMissile::Move()
