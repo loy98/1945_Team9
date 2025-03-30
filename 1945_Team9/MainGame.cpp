@@ -47,8 +47,8 @@ void MainGame::Init()
 	underGround = ImageManager::GetInstance()->AddImage(
 		L"underGround", TEXT("Image\\1945BackGround2.bmp"), 320, 6114, 1, 1, false, true, RGB(255, 0, 255));
 
-	groundMoveSpeed = 1.0f;
-	underGroundMoveSpeed = 0.8f;
+	groundMoveSpeed = 0.4f;
+	underGroundMoveSpeed = 0.2f;
 
 	groundFrameY = 0.0f;
 	underGroundFrameY = 0.0f;
