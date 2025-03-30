@@ -89,6 +89,9 @@
     <ClInclude Include="GameObject.h">
       <Filter>MainGame</Filter>
     </ClInclude>
+    <ClInclude Include="HomingMissile.h">
+      <Filter>MainGame\Missile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionManager.cpp">
@@ -150,6 +153,9 @@
     </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="HomingMissile.cpp">
+      <Filter>MainGame\Missile</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

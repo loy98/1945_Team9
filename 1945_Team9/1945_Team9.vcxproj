@@ -135,6 +135,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="HomingMissile.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="KeyManager.h" />
@@ -158,6 +159,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="HomingMissile.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />

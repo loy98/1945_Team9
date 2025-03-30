@@ -47,8 +47,8 @@ void MainGame::Init()
 	underGround = ImageManager::GetInstance()->AddImage(
 		L"underGround", TEXT("Image\\1945BackGround2.bmp"), 320, 6114, 1, 1, false, true, RGB(255, 0, 255));
 
-	groundMoveSpeed = 1.0f;
-	underGroundMoveSpeed = 0.8f;
+	groundMoveSpeed = 0.4f;
+	underGroundMoveSpeed = 0.2f;
 
 	groundFrameY = 0.0f;
 	underGroundFrameY = 0.0f;
@@ -104,7 +104,7 @@ void MainGame::Update()
 	groundFrameY += groundMoveSpeed * TimeManager::GetInstance()->GetDeltaTime();
 	underGroundFrameY += underGroundMoveSpeed * TimeManager::GetInstance()->GetDeltaTime();
 
-	if (((groundFrameY + 1) * 600 >= 6114))
+	if (((groundFrameY + 1) * WINSIZE_Y >= 6114))
 	{
 		// 그라운드 이미지 교체
 		tempImage = ImageManager::GetInstance()->FindImage(L"ground");
