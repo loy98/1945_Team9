@@ -91,7 +91,8 @@ HRESULT Image::Init(const wchar_t* filePath, int width, int height, int maxFrame
     imageInfo->currFrameX = imageInfo->currFrameY = 0;
 
     imageInfo->hTempDC = CreateCompatibleDC(hdc);
-    imageInfo->hTempBit = CreateCompatibleBitmap(hdc, width, height);
+    //imageInfo->hTempBit = CreateCompatibleBitmap(hdc, width, height);
+    imageInfo->hTempBit = CreateCompatibleBitmap(hdc, WINSIZE_X, WINSIZE_Y);        // 배경 출력을 위해 수정
     imageInfo->hOldTemp = (HBITMAP)SelectObject(imageInfo->hTempDC, imageInfo->hTempBit);
 
     ReleaseDC(g_hWnd, hdc);
@@ -244,68 +245,24 @@ void Image::FrameRender(HDC hdc, int destX, int destY, int frameX, int frameY, b
 // Test
 void Image::TestRender(HDC hdc, int destX, int destY, float frameY, bool isFlip)
 {
-    if (isFlip && isTransparent)
+    if (isTransparent)
     {
         StretchBlt(imageInfo->hTempDC, 0, 0,
-            imageInfo->frameWidth, imageInfo->frameHeight,
+            WINSIZE_X, WINSIZE_Y * (WINSIZE_X / 310.f),
             imageInfo->hMemDC,
-            (imageInfo->frameWidth * imageInfo->currFrameX) + (imageInfo->frameWidth - 1),
-            imageInfo->frameHeight * imageInfo->currFrameY,
-            -imageInfo->frameWidth, imageInfo->frameHeight,
+            0, 6114 - (WINSIZE_Y * (frameY + 1)),
+            310, WINSIZE_Y,
             SRCCOPY
         );
 
         GdiTransparentBlt(hdc,
             destX, destY,
-            imageInfo->frameWidth, imageInfo->frameHeight,
+            WINSIZE_X, WINSIZE_Y,
 
             imageInfo->hTempDC,
             0, 0,
-            imageInfo->frameWidth, imageInfo->frameHeight,
+            WINSIZE_X, WINSIZE_Y,
             transColor);
-    }
-    else if (isTransparent)
-    {
-        /* ------------Test------------------*/
-        //StretchBlt(
-        //    imageInfo->hTempDC,
-        //    destX, destY,
-        //    WINSIZE_X, WINSIZE_Y,
-        //    imageInfo->hMemDC,
-        //    0, imageInfo->height - (WINSIZE_Y * (frameY + 1)),
-        //    imageInfo->frameWidth, WINSIZE_Y,
-        //    SRCCOPY
-        //);
-        //GdiTransparentBlt(hdc,
-        //    destX, destY,
-        //    WINSIZE_X, WINSIZE_Y,
-
-        //    imageInfo->hTempDC,
-        //    0, 0,
-        //    imageInfo->frameWidth, WINSIZE_Y,
-        //    transColor);
-        /* ------------Test------------------*/
-
-        GdiTransparentBlt(hdc,
-            destX, destY,
-            310, 600,
-
-            imageInfo->hMemDC,
-            0, 6114 - (600 * (frameY + 1)),
-            310, 600,
-            transColor);
-    }
-    else
-    {
-        BitBlt(
-            hdc,
-            destX, destY,
-            imageInfo->width / 9,
-            imageInfo->height,
-            imageInfo->hMemDC,
-            imageInfo->width / 9 * 1, 0,
-            SRCCOPY
-        );
     }
 }
 
