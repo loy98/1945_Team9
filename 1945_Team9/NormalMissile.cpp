@@ -26,7 +26,7 @@ void NormalMissile::Release()
 
 void NormalMissile::Update()
 {
-	if (!isActived)
+	if (!isActived || isCollision)
 		return;
 
 	Move();
@@ -40,11 +40,9 @@ void NormalMissile::Update()
 
 void NormalMissile::Render(HDC hdc, bool isFlip)
 {
-
-	Super::Render(hdc, isFlip);
-
-	if (isActived)
+	if (isActived && !isCollision)
 	{
+		Super::Render(hdc, isFlip);
 		image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0, isFlip);
 		//RenderEllipseAtCenter(hdc, pos.x, pos.y, size, size);
 	}

@@ -39,5 +39,6 @@ protected:
 
 	GameObject* owner;
 	MissileController* controller;
+	MissileType type;
 };
 

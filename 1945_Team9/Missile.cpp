@@ -10,6 +10,16 @@ void Missile::Init()
 
 void Missile::Release()
 {
+	for (auto& collider : colliderList)
+	{
+		if (collider)
+		{
+			collider->Release();
+			delete collider;
+			collider = nullptr;
+		}
+	}
+		
 }
 
 void Missile::Update()

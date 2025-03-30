@@ -1,5 +1,6 @@
 #pragma once
 #pragma comment(lib, "Winmm.lib")
+#pragma comment(lib, "Msimg32.lib")
 
 #include <Windows.h>
 #include <string>
@@ -8,6 +9,7 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include <cmath>
 using namespace std;
 
 #include "KeyManager.h"
@@ -15,7 +17,7 @@ using namespace std;
 #include "TimeManager.h"
 
 #define WINSIZE_X	600
-#define WINSIZE_Y	800
+#define WINSIZE_Y	1200
 #define DEG_TO_RAD(degree) ((3.14 / 180.0) * degree)
 #define RAD_TO_DEG(radian) ((180.0 / 3.14) * radian)
 
@@ -23,6 +25,14 @@ typedef struct tagFPOINT
 {
 	float x;
 	float y;
+
+	void Normalize() {
+		float length = sqrt(x * x + y * y);
+		if (length != 0) {
+			x /= length;
+			y /= length;
+		}
+	}
 } FPOINT;
 
 /*

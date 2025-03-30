@@ -30,7 +30,7 @@ void LaserMissile::Release()
 void LaserMissile::Update()
 {
 	pos = owner->GetPos();
-	UpdateNormalRect(rc, pos);
+	UpdateLaserRect(rc, pos);
 	Super::Update();
 	elapsedlaunchTime += TimeManager::GetInstance()->GetDeltaTime();
 	if (elapsedlaunchTime > launchTime)
