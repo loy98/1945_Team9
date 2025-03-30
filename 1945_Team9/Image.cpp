@@ -126,13 +126,13 @@ void Image::Render(HDC hdc, int destX, int destY)
     else
     {
         BitBlt(
-            hdc,                // ���� ������ DC
-            destX, destY,       // ���� ������ ��ġ
-            imageInfo->width,   // �������� ����� ����ũ��
-            imageInfo->height,  // �������� ����� ����ũ��
-            imageInfo->hMemDC,  // ���� DC
-            0, 0,               // ���� ���� ���� ��ġ
-            SRCCOPY             // ���� �ɼ�
+            hdc,                
+            destX, destY,       
+            imageInfo->width,   
+            imageInfo->height,  
+            imageInfo->hMemDC,  
+            0, 0,               
+            SRCCOPY             
         );
     }
 }
@@ -239,6 +239,24 @@ void Image::FrameRender(HDC hdc, int destX, int destY, int frameX, int frameY, b
             imageInfo->frameHeight * imageInfo->currFrameY,
             SRCCOPY
         );
+    }
+}
+
+void Image::TestFrameRender(HDC hdc, float startX, float startY, float destX, float destY, int frameX, int frameY, bool isFlip)
+{
+    imageInfo->currFrameX = frameX;
+    imageInfo->currFrameY = frameY;
+
+    if (isTransparent)
+    {
+        GdiTransparentBlt(hdc,
+            startX, startY,
+            destX - startX, destY,
+            imageInfo->hMemDC,
+            imageInfo->frameWidth * imageInfo->currFrameX,
+            imageInfo->frameHeight * imageInfo->currFrameY,
+            imageInfo->frameWidth, imageInfo->frameHeight,
+            transColor);
     }
 }
 

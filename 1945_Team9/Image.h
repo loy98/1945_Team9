@@ -75,6 +75,7 @@ public:
 	void Render(HDC hdc, int destX, int destY, int frameIndex, bool isFlip = false);
 	void FrameRender(HDC hdc, int destX, int destY, int frameX, int frameY, bool isFlip = false);
 	// Test
+	void TestFrameRender(HDC hdc, float startX, float startY, float destX, float destY, int frameX, int frameY, bool isFlip);
 	void TestRender(HDC hdc, int destX, int destY, float frameY, bool isFlip = false);
 
 	// 메모리 해제

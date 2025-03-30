@@ -14,7 +14,7 @@ void Tank::Init()
 	pos.y = WINSIZE_Y - 200;
 	size = {40, 40};
 	damage = 10;
-	moveSpeed = 0.1f;
+	moveSpeed = 1.0f;
 	group = CollisionGroup::Player;
 	type = ObjectType::Player;
 	// Æ÷½Å
