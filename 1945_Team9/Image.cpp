@@ -264,43 +264,6 @@ void Image::TestRender(HDC hdc, int destX, int destY, float frameY, bool isFlip)
             WINSIZE_X, WINSIZE_Y,
             transColor);
     }
-
-    else if (isTransparent)
-    {
-        /* ------------Test------------------*/
-        //TransparentBlt(
-        //    hdc,                 
-        //    destX, destY,          
-        //    WINSIZE_X, WINSIZE_Y,  
-        //    imageInfo->hMemDC,      
-        //    0, imageInfo->height - (600 * (frameY + 1)), 
-        //    imageInfo->frameWidth, 600, 
-        //    transColor            
-        //);
-        /* ------------Test------------------*/
-
-        GdiTransparentBlt(hdc,
-            destX, destY,
-            310, 600,
-
-            imageInfo->hMemDC,
-            0, 6114 - (600 * (frameY + 1)),
-            310, 600,
-            transColor);
-    }
-    else
-    {
-        BitBlt(
-            hdc,
-            destX, destY,
-            imageInfo->width / 9,
-            imageInfo->height,
-            imageInfo->hMemDC,
-            imageInfo->width / 9 * 1, 0,
-            SRCCOPY
-        );
-    }
-
 }
 
 void Image::Release()
