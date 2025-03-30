@@ -241,6 +241,54 @@ void Image::FrameRender(HDC hdc, int destX, int destY, int frameX, int frameY, b
     }
 }
 
+// Test
+void Image::TestRender(HDC hdc, int destX, int destY, float frameY, bool isFlip)
+{
+    if (isFlip && isTransparent)
+    {
+        StretchBlt(imageInfo->hTempDC, 0, 0,
+            imageInfo->frameWidth, imageInfo->frameHeight,
+            imageInfo->hMemDC,
+            (imageInfo->frameWidth * imageInfo->currFrameX) + (imageInfo->frameWidth - 1),
+            imageInfo->frameHeight * imageInfo->currFrameY,
+            -imageInfo->frameWidth, imageInfo->frameHeight,
+            SRCCOPY
+        );
+
+        GdiTransparentBlt(hdc,
+            destX, destY,
+            imageInfo->frameWidth, imageInfo->frameHeight,
+
+            imageInfo->hTempDC,
+            0, 0,
+            imageInfo->frameWidth, imageInfo->frameHeight,
+            transColor);
+    }
+    else if (isTransparent)
+    {
+        GdiTransparentBlt(hdc,
+            destX, destY,
+            310, 600,
+
+            imageInfo->hMemDC,
+            0, 6114 - (600 * (frameY + 1)),
+            310, 600,
+            transColor);
+    }
+    else
+    {
+        BitBlt(
+            hdc,
+            destX, destY,
+            imageInfo->width / 9,
+            imageInfo->height,
+            imageInfo->hMemDC,
+            imageInfo->width / 9 * 1, 0,
+            SRCCOPY
+        );
+    }
+}
+
 void Image::Release()
 {
     if (imageInfo)
