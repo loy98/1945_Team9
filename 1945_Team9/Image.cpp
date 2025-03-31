@@ -1,6 +1,6 @@
 #include "Image.h"
 
-HRESULT Image::Init(int width, int height)
+HRESULT Image::Init(int width, int height, COLORREF transColor)
 {
     HDC hdc = GetDC(g_hWnd);
 
@@ -25,6 +25,8 @@ HRESULT Image::Init(int width, int height)
         Release();
         return E_FAIL;
     }
+
+    this->transColor = transColor;
 
     return S_OK;   // S_OK, E_FAIL
 }
@@ -91,8 +93,7 @@ HRESULT Image::Init(const wchar_t* filePath, int width, int height, int maxFrame
     imageInfo->currFrameX = imageInfo->currFrameY = 0;
 
     imageInfo->hTempDC = CreateCompatibleDC(hdc);
-    //imageInfo->hTempBit = CreateCompatibleBitmap(hdc, width, height);
-    imageInfo->hTempBit = CreateCompatibleBitmap(hdc, WINSIZE_X, WINSIZE_Y);        // 배경 출력을 위해 수정
+    imageInfo->hTempBit = CreateCompatibleBitmap(hdc, width, height);
     imageInfo->hOldTemp = (HBITMAP)SelectObject(imageInfo->hTempDC, imageInfo->hTempBit);
 
     ReleaseDC(g_hWnd, hdc);
@@ -242,28 +243,42 @@ void Image::FrameRender(HDC hdc, int destX, int destY, int frameX, int frameY, b
     }
 }
 
-// Test
-void Image::TestRender(HDC hdc, int destX, int destY, float frameY, bool isFlip)
+void Image::CameraRender(HDC hdc, Image* current, Image* next, float cameraY)
 {
-    if (isTransparent)
+    StretchBlt(imageInfo->hTempDC,
+        0.0f, 0.0f,
+        WINSIZE_X, WINSIZE_Y * (WINSIZE_X / 310.f),
+
+        current->imageInfo->hMemDC,
+        0, 6114.0f - (WINSIZE_Y * (cameraY)),
+        310.0f, WINSIZE_Y,
+        SRCCOPY
+    );
+    //nextImage
+    if (cameraY > 6114.0f / WINSIZE_Y)   // 윈도우가 currentImage를 벗어남 첫번째 이미지를 출력하고 있을 때만 동작.
     {
-        StretchBlt(imageInfo->hTempDC, 0, 0,
-            WINSIZE_X, WINSIZE_Y * (WINSIZE_X / 310.f),
-            imageInfo->hMemDC,
-            0, 6114 - (WINSIZE_Y * (frameY + 1)),
-            310, WINSIZE_Y,
+        cameraY -= 6114.0f / WINSIZE_Y;
+        StretchBlt(imageInfo->hTempDC,
+            0.0f, 0.0f,
+            WINSIZE_X, WINSIZE_Y * cameraY * (WINSIZE_X / 310.f),
+
+            next->imageInfo->hMemDC,
+            0, 6114.0f - (WINSIZE_Y * cameraY),
+            310.0f, WINSIZE_Y * cameraY,
             SRCCOPY
         );
-
-        GdiTransparentBlt(hdc,
-            destX, destY,
-            WINSIZE_X, WINSIZE_Y,
-
-            imageInfo->hTempDC,
-            0, 0,
-            WINSIZE_X, WINSIZE_Y,
-            transColor);
     }
+
+    //BitBlt(hdc, 0, 0, WINSIZE_X, WINSIZE_Y, imageInfo->hTempDC, 0, 0, SRCCOPY);
+
+    GdiTransparentBlt(hdc,
+        0, 0,
+        WINSIZE_X, WINSIZE_Y,
+
+        imageInfo->hTempDC,
+        0, 0,
+        WINSIZE_X, WINSIZE_Y,
+        transColor);
 }
 
 void Image::Release()
