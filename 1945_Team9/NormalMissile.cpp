@@ -9,7 +9,7 @@ void NormalMissile::Init()
 
 	pos = { 0, 0 };
 	isActived = false;
-	moveSpeed = 50.0f;
+	moveSpeed = 500.0f;
 	angle = 90.0f;
 	size = { 20,20 };
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);

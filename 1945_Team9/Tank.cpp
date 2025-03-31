@@ -58,20 +58,10 @@ void Tank::Update()
 		Fire(MissileType::Normal);
 	if (KeyManager::GetInstance()->IsOnceKeyDown('E'))
 		Fire(MissileType::Laser);
+	if (KeyManager::GetInstance()->IsOnceKeyDown('Q'))
+		Fire(MissileType::Straight);
 	Move();
 
-	if (km->IsStayKeyDown('A'))
-	{
-		dir.x = -1;
-		Move();
-	}
-	if (km->IsStayKeyDown('D'))
-	{
-		dir.x = 1;
-		Move();
-	}
-	if (km->IsOnceKeyDown('Q'))
-		Fire(MissileType::Straight);
 
 	UpdateRectAtCenter(rc, pos);
 
@@ -128,10 +118,10 @@ void Tank::Fire(MissileType type)
 	switch (type)
 	{
 	case MissileType::Normal:
-		if (size < 8)
+		//if (size < 8)
 			AddMissile(this, MissileType::Normal, barrelEnd, fireAngle, missileSpeed);
-		else
-        	missileManager->Launch(barrelEnd);
+		//else
+        	//missileManager->Launch(barrelEnd);
 		break;
 	case MissileType::Sin:
 		AddMissile(this, MissileType::Sin, barrelEnd, fireAngle, missileSpeed);
