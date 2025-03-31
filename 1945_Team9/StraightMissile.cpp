@@ -18,7 +18,8 @@ void StraightMissile::Init()
 
 	pos = { 0, 0 };
 	isActived = false;
-	moveSpeed = 50.0f;
+	moveSpeed = 80.0f;
+	addSpeed = 10.0f;
 	angle = 90.0f;
 	size = { 20,40 };
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
@@ -35,7 +36,7 @@ void StraightMissile::Init()
 		vecMissiles[i]->Init();
 	}
 
-	image = ImageManager::GetInstance()->AddImage(L"Bomb_Bullet1", TEXT("Image\\Bomb_Bullet1.bmp"), 120, 35, 8, 1, false, true, RGB(0, 248, 0));
+	image = ImageManager::GetInstance()->AddImage(L"Bomb_Bullet1", TEXT("Image\\Bomb_Bullet1.bmp"), 240, 64, 8, 1, false, true, RGB(0, 248, 0));
 	controller = new StraightController();
 }
 
@@ -58,6 +59,7 @@ void StraightMissile::Update()
 
 	for (int i = 0; i < vecMissiles.size(); i++)
 	{
+		vecMissiles[i]->Update();
 		if (vecMissiles[i]->IsOutofScreen())
 		{
 			vecMissiles[i]->SetIsActived(false);
@@ -65,6 +67,11 @@ void StraightMissile::Update()
 	}
 	
 	Super::Update();
+
+	if (true == IsOutofScreen())
+	{
+		isActived = false;
+	}
 
 	/*for (int i = 0; i < vecMissiles.size(); i++)
 	{
@@ -86,6 +93,11 @@ void StraightMissile::Update()
 void StraightMissile::Render(HDC hdc, bool isFlip)
 {
 	Super::Render(hdc, isFlip);
+
+	for (int i = 0; i < vecMissiles.size(); i++)
+	{
+		vecMissiles[i]->Render(hdc,isFlip);
+	}
 
 	if (isActived)
 	{

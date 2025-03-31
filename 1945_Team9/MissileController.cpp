@@ -54,13 +54,26 @@ void StraightController::Move(Missile* missile)
 	float time = TimeManager::GetInstance()->GetDeltaTime();
 	FPOINT pos = missile->GetPos();
 	float moveSpeed = missile->GetMoveSpeed();
+	float addSpeed = missile->GetAddSpeed();
 	float angle = missile->GetAngle();
-	//float slowSpeed = moveSpeed / 2.0f;
-	//float addSpeed = 0.01f;
+	float maxSpeed = 1000.f;
 
-	//moveSpeed += addSpeed * 0.01f;
+	if (moveSpeed < maxSpeed)
+	{
+		moveSpeed += 60 * addSpeed * time;
+		missile->SetAddSpeed(addSpeed + 10 * time * addSpeed);
+	}
+
+	else if (moveSpeed >= maxSpeed)
+	{
+		moveSpeed = maxSpeed;
+	}
+
 	pos.x += moveSpeed * time * cosf(DEG_TO_RAD(angle));
 	pos.y -= moveSpeed * time * sinf(DEG_TO_RAD(angle));
 
+	missile->SetMoveSpeed(moveSpeed);
+	
+	//missile->SetAddSpeed(1.01f * addSpeed);
 	missile->SetPos(pos);
 }

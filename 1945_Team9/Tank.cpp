@@ -104,7 +104,7 @@ void Tank::Fire(MissileType type)
 		if (size < 8)
 			AddMissile(this, MissileType::Normal, barrelEnd, fireAngle, missileSpeed);
 		else
-    		missileManager->Launch(barrelEnd);
+			missileManager->Launch(barrelEnd);
 		break;
 	case MissileType::Sin:
 		AddMissile(this, MissileType::Sin, barrelEnd, fireAngle, missileSpeed);
@@ -115,17 +115,15 @@ void Tank::Fire(MissileType type)
 		LaserLaunched = true;
 		break;
 	case MissileType::Straight:
-		if (size < 2)
-			AddMissile(this, MissileType::Straight, barrelEnd, fireAngle, missileSpeed);
-		else
-			missileManager->Launch(barrelEnd);
+		AddMissile(this, MissileType::Straight, {barrelEnd.x - 25, barrelEnd.y}, fireAngle, missileSpeed);
+		AddMissile(this, MissileType::Straight, { barrelEnd.x + 25, barrelEnd.y}, fireAngle, missileSpeed);
 		break;
 	}
 }
 
 void Tank::AddMissile(GameObject* owner, MissileType type, FPOINT pos, float angle, float speed)
 {
-	Missile* missile = missileManager->CreateMissile(type, barrelEnd, fireAngle, missileSpeed);
+	Missile* missile = missileManager->CreateMissile(type, pos, fireAngle, missileSpeed);
 	missile->AddCollider(group);
 	missile->SetOwner(this);
 	missileManager->AddMissile(missile);
