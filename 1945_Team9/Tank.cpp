@@ -17,7 +17,7 @@ void Tank::Init()
 	moveSpeed = 1.0f;
 	group = CollisionGroup::Player;
 	type = ObjectType::Player;
-	// Æ÷½Å
+	// ï¿½ï¿½ï¿½ï¿½
 	barrelSize = 30;
 	barrelEnd.x = pos.x;
 	barrelEnd.y = pos.y - barrelSize;
@@ -26,7 +26,7 @@ void Tank::Init()
 
 	image = ImageManager::GetInstance()->AddImage(
 		L"player", TEXT("Image/player.bmp"), 64, 32, 2, 1, false, true, RGB(255, 0, 255));
-	// ¹Ì»çÀÏ
+	// ï¿½Ì»ï¿½ï¿½ï¿½
 	missileSpeed = 150.0f;
 
 	missileManager = new MissileManager();
@@ -58,8 +58,21 @@ void Tank::Update()
 		Fire(MissileType::Normal);
 	if (KeyManager::GetInstance()->IsOnceKeyDown('E'))
 		Fire(MissileType::Laser);
-
 	Move();
+
+	if (km->IsStayKeyDown('A'))
+	{
+		dir.x = -1;
+		Move();
+	}
+	if (km->IsStayKeyDown('D'))
+	{
+		dir.x = 1;
+		Move();
+	}
+	if (km->IsOnceKeyDown('Q'))
+		Fire(MissileType::Straight);
+
 	UpdateRectAtCenter(rc, pos);
 
 	for (auto& collider : colliderList)
@@ -83,10 +96,10 @@ void Tank::Render(HDC hdc)
 
 void Tank::Move()
 {
-	// ¹æÇâ º¤ÅÍ ÃÊ±âÈ­
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 	dir = { 0, 0 };
 
-	// ÀÔ·ÂÀ» ¹ÞÀº ¹æÇâ¿¡ µû¶ó dir º¤ÅÍ ¼³Á¤
+	// ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ dir ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	if (KeyManager::GetInstance()->IsStayKeyDown('A'))	
 		dir.x = -1.0f;
 	if (KeyManager::GetInstance()->IsStayKeyDown('D'))
@@ -96,15 +109,15 @@ void Tank::Move()
 	if (KeyManager::GetInstance()->IsStayKeyDown('S'))
 		dir.y = 1.0f;
 
-	// ¹æÇâ º¤ÅÍ Á¤±ÔÈ­
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­
 	if (dir.x != 0 || dir.y != 0)
 		dir.Normalize();
 
-	// °è»êµÈ ¹æÇâÀ¸·Î ÀÌµ¿
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	pos.x += moveSpeed * dir.x;
 	pos.y += moveSpeed * dir.y;
 
-	// È­¸é ¹üÀ§ Ã¼Å©
+	// È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 	pos.x = clamp(pos.x, (float)size.x / 2, (float)WINSIZE_X - size.x / 2);
 	pos.y = clamp(pos.y, (float)size.y / 2, (float)WINSIZE_Y - size.y / 2);
 }
@@ -118,7 +131,7 @@ void Tank::Fire(MissileType type)
 		if (size < 8)
 			AddMissile(this, MissileType::Normal, barrelEnd, fireAngle, missileSpeed);
 		else
-        		missileManager->Launch(barrelEnd);
+        	missileManager->Launch(barrelEnd);
 		break;
 	case MissileType::Sin:
 		AddMissile(this, MissileType::Sin, barrelEnd, fireAngle, missileSpeed);
@@ -128,12 +141,16 @@ void Tank::Fire(MissileType type)
 		AddMissile(this, MissileType::Laser, barrelEnd, fireAngle, missileSpeed);
 		LaserLaunched = true;
 		break;
+	case MissileType::Straight:
+		AddMissile(this, MissileType::Straight, {barrelEnd.x - 25, barrelEnd.y}, fireAngle, missileSpeed);
+		AddMissile(this, MissileType::Straight, { barrelEnd.x + 25, barrelEnd.y}, fireAngle, missileSpeed);
+		break;
 	}
 }
 
 void Tank::AddMissile(GameObject* owner, MissileType type, FPOINT pos, float angle, float speed)
 {
-	Missile* missile = missileManager->CreateMissile(type, barrelEnd, fireAngle, missileSpeed);
+	Missile* missile = missileManager->CreateMissile(type, pos, fireAngle, missileSpeed);
 	missile->AddCollider(group);
 	missile->SetOwner(this);
 	missileManager->AddMissile(missile);

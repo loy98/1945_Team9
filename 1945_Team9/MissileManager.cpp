@@ -16,6 +16,7 @@ void MissileManager::Init()
 	MissileList.reserve(8);
 	factoryList[(int)(MissileType::Normal)] = new NormalMissileFactory();
 	factoryList[(int)(MissileType::Laser)] = new LaserMissileFactory();
+	factoryList[(int)(MissileType::Straight)] = new StraightMissileFactory();
 }
 
 void MissileManager::Release()
@@ -84,5 +85,7 @@ Missile* MissileManager::CreateMissile(MissileType type, FPOINT pos, float angle
 		return nullptr;
 	case MissileType::Laser:
 		return factoryList[(int)(MissileType::Laser)]->CreateMissile(pos, angle, speed);
+	case MissileType::Straight:
+		return factoryList[(int)(MissileType::Straight)]->CreateMissile(pos, angle, speed);
 	}
 }

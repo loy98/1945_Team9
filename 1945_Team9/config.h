@@ -47,6 +47,7 @@ enum class MissileType
 	Normal,
 	Sin,
 	Laser,
+	Straight,
 	MissileTypeLength
 };
 enum class CollisionGroup
