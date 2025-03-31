@@ -92,6 +92,9 @@
     <ClInclude Include="HomingMissile.h">
       <Filter>MainGame\Missile</Filter>
     </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>MainGame</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionManager.cpp">
@@ -156,6 +159,9 @@
     </ClCompile>
     <ClCompile Include="HomingMissile.cpp">
       <Filter>MainGame\Missile</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>MainGame</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
