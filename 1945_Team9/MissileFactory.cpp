@@ -2,6 +2,7 @@
 #include "Missile.h"
 #include "NormalMissile.h"
 #include "LaserMissile.h"
+#include "StraightMissile.h"
 
 
 MissileFactory::~MissileFactory()
@@ -54,5 +55,28 @@ Missile* LaserMissileFactory::CreateMissile(FPOINT pos, float angle, float speed
 	Missile* missile = new LaserMissile(pos);
 	missile->Init();
 	missile->SetPos(pos);
+	return missile;
+}
+
+StraightMissileFactory::~StraightMissileFactory()
+{
+}
+
+Missile* StraightMissileFactory::CreateMissile()
+{
+	return nullptr;
+}
+
+Missile* StraightMissileFactory::CreateMissile(FPOINT pos, float angle, float speed)
+{
+	Missile* missile = new StraightMissile();
+	missile->Init();
+	if (missile->GetIsActived() == false)
+	{
+		missile->SetIsActived(true);
+		missile->SetPos(pos);
+		missile->SetAngle(angle);
+		missile->SetMoveSpeed(speed);
+	}
 	return missile;
 }

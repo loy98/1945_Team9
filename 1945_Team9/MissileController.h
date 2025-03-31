@@ -28,3 +28,14 @@ public:
 
 	//void Move(FPOINT& pos, const float& speed, const float& angle) override;
 };
+
+class StraightController : public MissileController
+{
+public:
+	StraightController();
+	virtual ~StraightController();
+
+	void Move(Missile* missile) override;
+private:
+	vector<Missile*> vecMissile;
+};

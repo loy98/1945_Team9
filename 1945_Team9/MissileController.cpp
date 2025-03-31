@@ -26,17 +26,10 @@ void NormalController::Move(Missile* missile)
 	FPOINT pos = missile->GetPos();
 	float moveSpeed = missile->GetMoveSpeed();
 	float angle = missile->GetAngle();
-	float slowSpeed = moveSpeed / 2.0f;
-	float addSpeed = 0.01f;
-	
+		
+	pos.x += moveSpeed * time * cosf(DEG_TO_RAD(angle));
+	pos.y -= moveSpeed * time * sinf(DEG_TO_RAD(angle));
 
-	for (int i = 0; i < 5; i++)
-	{
-		moveSpeed += addSpeed * 0.01f;
-		pos.x += moveSpeed * time * cosf(DEG_TO_RAD(angle));
-		pos.y -= moveSpeed * time * sinf(DEG_TO_RAD(angle));
-	}
-	
 	missile->SetPos(pos);
 }
 
@@ -46,4 +39,28 @@ LaserController::LaserController()
 
 LaserController::~LaserController()
 {
+}
+
+StraightController::StraightController()
+{
+}
+
+StraightController::~StraightController()
+{
+}
+
+void StraightController::Move(Missile* missile)
+{	
+	float time = TimeManager::GetInstance()->GetDeltaTime();
+	FPOINT pos = missile->GetPos();
+	float moveSpeed = missile->GetMoveSpeed();
+	float angle = missile->GetAngle();
+	//float slowSpeed = moveSpeed / 2.0f;
+	//float addSpeed = 0.01f;
+
+	//moveSpeed += addSpeed * 0.01f;
+	pos.x += moveSpeed * time * cosf(DEG_TO_RAD(angle));
+	pos.y -= moveSpeed * time * sinf(DEG_TO_RAD(angle));
+
+	missile->SetPos(pos);
 }

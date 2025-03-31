@@ -67,6 +67,8 @@ void Tank::Update()
 		dir.x = 1;
 		Move();
 	}
+	if (km->IsOnceKeyDown('Q'))
+		Fire(MissileType::Straight);
 	UpdateRectAtCenter(rc, pos);
 	for (auto& collider : colliderList)
 	{
@@ -111,6 +113,12 @@ void Tank::Fire(MissileType type)
 		if (LaserLaunched)	return;
 		AddMissile(this, MissileType::Laser, barrelEnd, fireAngle, missileSpeed);
 		LaserLaunched = true;
+		break;
+	case MissileType::Straight:
+		if (size < 2)
+			AddMissile(this, MissileType::Straight, barrelEnd, fireAngle, missileSpeed);
+		else
+			missileManager->Launch(barrelEnd);
 		break;
 	}
 }

@@ -41,3 +41,13 @@ public:
 	virtual Missile* CreateMissile(FPOINT pos, float angle, float speed) override;
 
 };
+
+class StraightMissileFactory : public MissileFactory
+{
+public:
+	StraightMissileFactory() {}
+	virtual ~StraightMissileFactory();
+
+	virtual Missile* CreateMissile() override;
+	virtual Missile* CreateMissile(FPOINT pos, float angle, float speed) override;
+};
