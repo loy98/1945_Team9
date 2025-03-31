@@ -56,12 +56,12 @@ void StraightController::Move(Missile* missile)
 	float moveSpeed = missile->GetMoveSpeed();
 	float addSpeed = missile->GetAddSpeed();
 	float angle = missile->GetAngle();
-	float maxSpeed = 1000.f;
+	float maxSpeed = 900.f;
 
 	if (moveSpeed < maxSpeed)
 	{
 		moveSpeed += 60 * addSpeed * time;
-		missile->SetAddSpeed(addSpeed + 10 * time * addSpeed);
+		missile->SetAddSpeed(addSpeed + 5 * time * addSpeed);
 	}
 
 	else if (moveSpeed >= maxSpeed)
