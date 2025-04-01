@@ -2,15 +2,11 @@
 #include "CommonFunction.h"
 #include "Collider.h"
 #include "CollisionManager.h"
-
-void Missile::Init()
-{
-	type = ObjectType::Missile;
-}
+#include "MissileController.h"
 
 void Missile::Release()
 {
-	for (auto& collider : colliderList)
+	for (auto& collider : colliderList)	// gameobject
 	{
 		if (collider)
 		{
@@ -23,40 +19,62 @@ void Missile::Release()
 
 void Missile::Update()
 {
-	// collider 확인용
-	if (!isActived) return;
-	for (auto& collider : colliderList)
+	if(isActived)
 	{
-		if (collider)
-			collider->Update();
+		Move();
 	}
+
+	if (isActived && IsOutofScreen())
+	{
+		isActived = false;
+	}
+	// collider 확인용
+	if (isActived)
+	{
+		for (auto& collider : colliderList)
+		{
+			if (collider)
+				collider->Update();
+		}
+	}
+
+	// collider 업데이트, 무브, isActive 상태 업데이트(isoutofscreen)
+	// active일 경우에만. move, isActived 상태. 유도미사일의 경우 target pos까지.-기존거에 추가하는 방향으로.
 }
 
 void Missile::Render(HDC hdc, bool isFlip)
 {
 	// collider 확인용
-	if (!isActived) return;
-	for (auto& collider : colliderList)
+	if (isActived)
 	{
-		if (collider)
-			collider->Render(hdc);
+		for (auto& collider : colliderList)
+		{
+			if (collider)
+				collider->Render(hdc);
+		}
 	}
 }
 
 void Missile::AddCollider(CollisionGroup group)
 {
-	Collider* collider = new Collider(this, pos);
+	Collider* collider = new Collider(this->owner, this->pos);
 	colliderList.push_back(collider);
 	CollisionManager::GetInstance()->AddCollider(collider, group);
 }
 
 void Missile::Move()
 {
-	
+	if(isActived)
+	{
+		controller->Move(this);
+	}
 }
 
-void Missile::ReLoad(FPOINT pos)
+void Missile::ReLoad(FPOINT pos)		// 발사한다면 세팅.
 {
+	this->pos = pos;
+	isActived = true;
+	isCollision = false;
 }
 
 bool Missile::IsOutofScreen()
@@ -71,10 +89,6 @@ bool Missile::IsOutofScreen()
 		return true;
 
 	return false;
-}
-
-Missile::Missile()
-{
 }
 
 Missile::~Missile()
