@@ -3,42 +3,30 @@
 #include "NormalMissile.h"
 #include "LaserMissile.h"
 #include "StraightMissile.h"
+#include "HomingMissile.h"
 
 
 MissileFactory::~MissileFactory()
 {
 }
 
-Missile* MissileFactory::CreateMissile()
+Missile* MissileFactory::AddMissile()
 {
-	return nullptr;
+	vector<Missile*> pack;
+	pack.resize(2);
+
+	Missile* missile = CreateMissile();
+	missile->Init();
+	return missile;
 }
 
 NormalMissileFactory::~NormalMissileFactory()
 {
 }
 
-Missile* NormalMissileFactory::CreateMissile(FPOINT pos, float angle, float speed)
+Missile* NormalMissileFactory::CreateMissile()
 {
-	Missile* missile = new NormalMissile();
-	missile->Init();
-	if (missile->GetIsActived() == false)
-	{
-		missile->SetIsActived(true);
-		missile->SetPos(pos);
-		missile->SetAngle(angle);
-		//missile->SetMoveSpeed(speed);
-	}
-	return missile;
-}
-
-SinMissileFactory::~SinMissileFactory()
-{
-}
-
-Missile* SinMissileFactory::CreateMissile(FPOINT pos, float angle, float speed)
-{
-	return nullptr;
+	return new NormalMissile();
 }
 
 LaserMissileFactory::~LaserMissileFactory()
@@ -47,15 +35,7 @@ LaserMissileFactory::~LaserMissileFactory()
 
 Missile* LaserMissileFactory::CreateMissile()
 {
-	return nullptr;
-}
-
-Missile* LaserMissileFactory::CreateMissile(FPOINT pos, float angle, float speed)
-{
-	Missile* missile = new LaserMissile(pos);
-	missile->Init();
-	missile->SetPos(pos);
-	return missile;
+	return new LaserMissile();
 }
 
 StraightMissileFactory::~StraightMissileFactory()
@@ -64,19 +44,28 @@ StraightMissileFactory::~StraightMissileFactory()
 
 Missile* StraightMissileFactory::CreateMissile()
 {
-	return nullptr;
+	return new StraightMissile();
 }
 
-Missile* StraightMissileFactory::CreateMissile(FPOINT pos, float angle, float speed)
+//Missile* StraightMissileFactory::CreateMissile(FPOINT pos, float angle, float speed)
+//{
+//	Missile* missile = new StraightMissile();
+//	missile->Init();
+//	if (missile->GetIsActived() == false)
+//	{
+//		missile->SetIsActived(true);
+//		missile->SetPos(pos);
+//		missile->SetAngle(angle);
+//		missile->SetMoveSpeed(speed);
+//	}
+//	return missile;
+//}
+
+HomingMissileFactory::~HomingMissileFactory()
 {
-	Missile* missile = new StraightMissile();
-	missile->Init();
-	if (missile->GetIsActived() == false)
-	{
-		missile->SetIsActived(true);
-		missile->SetPos(pos);
-		missile->SetAngle(angle);
-		missile->SetMoveSpeed(speed);
-	}
-	return missile;
+}
+
+Missile* HomingMissileFactory::CreateMissile()
+{
+	return new HomingMissile();
 }

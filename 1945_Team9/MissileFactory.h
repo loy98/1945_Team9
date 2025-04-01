@@ -8,8 +8,10 @@ class MissileFactory
 public:
 	MissileFactory() {}
 	virtual ~MissileFactory();
-	virtual Missile* CreateMissile(FPOINT pos, float angle, float speed) = 0;
-	virtual Missile* CreateMissile();
+	Missile* AddMissile();
+
+private:
+	virtual Missile* CreateMissile() = 0;
 };
 
 class NormalMissileFactory : public MissileFactory
@@ -18,7 +20,8 @@ public:
 	NormalMissileFactory() {}
 	virtual ~NormalMissileFactory();
 
-	virtual Missile* CreateMissile(FPOINT pos, float angle, float speed) override;
+private:
+	virtual Missile* CreateMissile() override;
 
 };
 
@@ -28,7 +31,8 @@ public:
 	SinMissileFactory() {}
 	virtual ~SinMissileFactory();
 
-	virtual Missile* CreateMissile(FPOINT pos, float angle, float speed) override;
+private:
+	virtual Missile* CreateMissile() override;
 };
 
 class LaserMissileFactory : public MissileFactory
@@ -37,9 +41,8 @@ public:
 	LaserMissileFactory() {}
 	virtual ~LaserMissileFactory();
 
+private:
 	virtual Missile* CreateMissile() override;
-	virtual Missile* CreateMissile(FPOINT pos, float angle, float speed) override;
-
 };
 
 class StraightMissileFactory : public MissileFactory
@@ -48,6 +51,16 @@ public:
 	StraightMissileFactory() {}
 	virtual ~StraightMissileFactory();
 
+private:
 	virtual Missile* CreateMissile() override;
-	virtual Missile* CreateMissile(FPOINT pos, float angle, float speed) override;
+};
+
+class HomingMissileFactory : public MissileFactory
+{
+public:
+	HomingMissileFactory() {}
+	virtual ~HomingMissileFactory();
+
+private:
+	virtual Missile* CreateMissile() override;
 };
