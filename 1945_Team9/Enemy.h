@@ -16,6 +16,7 @@ public:
 	virtual void Render(HDC hdc);
 
 	virtual void Move();
+	virtual void Reset(FPOINT pos);
 	void Rush();
 	bool IsOutofScreen();
 
@@ -31,8 +32,7 @@ public:
 	float GetRushSpeed() { return rushSpeed; }
 	MissileManager* GetMissileManager() { return missileManager; }
 
-private:
-	FPOINT pos;
+protected:
 	FPOINT dir{ 1, 0 };
 	float moveSpeed;
 	float rushSpeed;

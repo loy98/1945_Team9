@@ -39,6 +39,8 @@ void MainGame::Init()
 
 	ItemManager::GetInstance()->AddItem({ 300, 500 }, {60, 60});
 
+	//if (enemyManager) enemyManager->DiagonalAppear();
+
 }
 
 void MainGame::Release()

@@ -18,7 +18,7 @@ Item::~Item()
 void Item::Init(FPOINT pos, FPOINT size)
 {
 	this->pos = pos;
-	moveSpeed = 500.0f;
+	moveSpeed = 300.0f;
 	angle = 45.0f;
 	lifeTime = 12.0f;
 	this->size.x = size.x;
@@ -28,7 +28,7 @@ void Item::Init(FPOINT pos, FPOINT size)
 	animationFrame = 0;
 	maxAnimationFrame = 7;
 
-	offsetX = 14;
+	offsetX = 20;
 	offsetY = 0;
 
 	Collider* collider = new Collider(this, pos);
@@ -40,11 +40,11 @@ void Item::Init(FPOINT pos, FPOINT size)
 
 void Item::Update()
 {
-	//isDead = isCollision;
+	isDead = isCollision;
 	elapsedTime += TimeManager::GetInstance()->GetDeltaTime();
 	elapsedAnimTime += TimeManager::GetInstance()->GetDeltaTime();
 	
-	if (elapsedAnimTime >= 0.2f)
+	if (elapsedAnimTime >= 0.3f)
 	{
 		elapsedAnimTime = 0;
 		animationFrame++;
@@ -54,10 +54,10 @@ void Item::Update()
 	
 	if (isDead)
 		return;
-	if (pos.x <= 0 || pos.x >= WINSIZE_X) {
+	if (rc.left <= 0 || rc.right >= WINSIZE_X) {
 		dir.x *= -1;
 	}
-	if (pos.y <= 0 || pos.y >= WINSIZE_Y) {
+	if (rc.top <= 0 || rc.bottom >= WINSIZE_Y) {
 		dir.y *= -1;
 	}
 	pos.x += dir.x * moveSpeed * DEG_TO_RAD(angle) * TimeManager::GetInstance()->GetDeltaTime();

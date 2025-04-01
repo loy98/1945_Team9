@@ -74,7 +74,7 @@ void Tank::Update()
 
 void Tank::Render(HDC hdc)
 {
-	if (image) image->FrameRender(hdc, pos.x, pos.y, 1, 0);
+	if (image) image->TestFrameRender(hdc, rc.left,rc.top,rc.right, size.y, 1, 0, false);
 	//if (missileManager) missileManager->Render(hdc);
 	for (auto& collider : colliderList)
 	{

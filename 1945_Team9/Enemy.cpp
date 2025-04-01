@@ -9,17 +9,17 @@
 void Enemy::Init(float posX, float posY)
 {
 	pos = { posX, posY };
-	moveSpeed = 50.0f;
+	moveSpeed = 150.0f;
 	rushSpeed = 50.0f;
 	angle = -90.0f;
-	isAlive = true;
+	isAlive = false;
 	size = { 40,40 };
 	animationFrame = 0;
 	elapsedFrame = 0;
 	elapsedTime = 0.0f;
 	elapsedMoveTime = 0.0f;
 	maxMoveTime = 3.0f; 
-	isRush = false;
+
 	type = ObjectType::Enemy;
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
 
@@ -57,20 +57,13 @@ void Enemy::Update()
 		if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = 0;
 	}
 
-	if (isRush == true)
-	{
-		Rush();
-		if (missileManager)
-			missileManager->Update();
-	}
-	else	
-		Move();
+	Move();
 
-	if (elapsedMoveTime > maxMoveTime)
-	{
-		elapsedMoveTime = 0;
-		dir.x *= -1.0f;
-	}
+	//if (elapsedMoveTime > maxMoveTime)
+	//{
+	//	elapsedMoveTime = 0;
+	//	dir.x *= -1.0f;
+	//}
 	UpdateRectAtCenter(rc, pos);
 
 	for (auto& collider : colliderList)
@@ -102,9 +95,13 @@ void Enemy::Move()
 	pos.x += moveSpeed * dir.x * TimeManager::GetInstance()->GetDeltaTime();
 }
 
+void Enemy::Reset(FPOINT pos)
+{
+}
+
 void Enemy::Rush()
 {
-	pos.y += rushSpeed * TimeManager::GetInstance()->GetDeltaTime();
+	//pos.y += rushSpeed * TimeManager::GetInstance()->GetDeltaTime();
 }
 
 bool Enemy::IsOutofScreen()

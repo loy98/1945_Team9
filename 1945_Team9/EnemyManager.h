@@ -12,11 +12,12 @@ public:
 
 	void AddEnemy(int size);
 
-
+	void DiagonalAppear();
 private:
-	vector<Enemy*> vecEnemys/*{10, new Enemy()}*/;
+	vector<Enemy*> vecEnemys[(int)EnemyType::EnemyTypeLength];
 
 	float elapsedTime;
-	float rushTime;
+	float diagoanlElpasedTime;
+	float diagoanlMaxAppearTime;
 };
 

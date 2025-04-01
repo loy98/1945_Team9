@@ -36,12 +36,14 @@ void NormalMissile::Update()
 	{
 		isActived = false;
 	}
+	if (isCollision)
+		isActived = false;
 	Super::Update();
 }
 
 void NormalMissile::Render(HDC hdc, bool isFlip)
 {
-	if (isActived && !isCollision)
+	if (isActived)
 	{
 		Super::Render(hdc, isFlip);
 		image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0, isFlip);
