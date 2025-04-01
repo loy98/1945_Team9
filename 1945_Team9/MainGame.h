@@ -5,6 +5,7 @@ class Image;
 class EnemyManager;
 class Tank;
 class Timer;
+class BackGround;
 class MainGame : public GameObject
 {
 private:
@@ -15,23 +16,11 @@ private:
 	wchar_t szText[128];
 
 	Image* backBuffer;
-	Image* backGround;
 	Tank* rocket;
 
 	EnemyManager* enemyManager;
 
-	// Test
-	Image* ground;
-	Image* underGround;
-
-	Image* tempImage;
-
-	float groundMoveSpeed;
-	float groundFrameY;
-	float underGroundMoveSpeed;
-	float underGroundFrameY;
-
-	float elapsedTime;
+	BackGround* backGround;
 
 public:
 	void Init();	// override (부모클래스와 같은 함수이름, 로직을 다르게 구현하고 싶을 때)

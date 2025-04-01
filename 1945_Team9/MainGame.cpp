@@ -6,6 +6,7 @@
 #include "MissileManager.h"
 #include "CollisionManager.h"
 #include "Timer.h"
+#include "BackGround.h"
 
 /*
 	실습1. 이오리 집에 보내기
@@ -25,35 +26,15 @@ void MainGame::Init()
 		MessageBox(g_hWnd, 
 			TEXT("백버퍼 생성 실패"), TEXT("경고"), MB_OK);
 	}
-	//backGround = new Image();
-	//if (FAILED(backGround->Init(TEXT("Image/BackGround.bmp"), WINSIZE_X, WINSIZE_Y)))
-	//{
-	//	MessageBox(g_hWnd,
-	//		TEXT("Image/BackGround.bmp 생성 실패"), TEXT("경고"), MB_OK);
-	//}
+
 	enemyManager = new EnemyManager();
 	enemyManager->Init();
 
 	rocket = new Tank();
 	rocket->Init();
-	
-	// Test
-	ground = ImageManager::GetInstance()->AddImage(
-		L"ground", TEXT("Image\\1945BackGround1.bmp"), 320, 6114, 1, 1, false, true, RGB(255, 0, 255));
 
-	tempImage = ImageManager::GetInstance()->AddImage(
-		L"groundFlip", TEXT("Image\\1945BackGround1Filp.bmp"), 320, 6114, 1, 1, false, true, RGB(255, 0, 255));
-
-	underGround = ImageManager::GetInstance()->AddImage(
-		L"underGround", TEXT("Image\\1945BackGround2.bmp"), 320, 6114, 1, 1, false, true, RGB(255, 0, 255));
-
-	groundMoveSpeed = 1.0f;
-	underGroundMoveSpeed = 0.8f;
-
-	groundFrameY = 0.0f;
-	underGroundFrameY = 0.0f;
-
-	elapsedTime = 0.0f;
+	backGround = new BackGround();
+	backGround->Init();
 
 }
 
@@ -73,18 +54,17 @@ void MainGame::Release()
 		rocket = nullptr;
 	}
 
-	if (backGround)
-	{
-		backGround->Release();
-		delete backGround;
-		backGround = nullptr;
-	}
-
 	if (backBuffer)
 	{
 		backBuffer->Release();
 		delete backBuffer;
 		backBuffer = nullptr;
+	}
+
+	if (backGround)
+	{
+		backGround->Release();
+		backGround = nullptr;
 	}
 
 	KeyManager::GetInstance()->Release();
@@ -99,22 +79,10 @@ void MainGame::Update()
 
 	if (enemyManager) enemyManager->Update();
 	if (rocket) rocket->Update();
+
+	backGround->Update();
+
 	CollisionManager::GetInstance()->Update();
-
-	groundFrameY += groundMoveSpeed * TimeManager::GetInstance()->GetDeltaTime();
-	underGroundFrameY += underGroundMoveSpeed * TimeManager::GetInstance()->GetDeltaTime();
-
-	if (((groundFrameY + 1) * 600 >= 6114))
-	{
-		// 그라운드 이미지 교체
-		tempImage = ImageManager::GetInstance()->FindImage(L"ground");
-
-		ground = (tempImage == ground) ?
-			ImageManager::GetInstance()->FindImage(L"groundFlip") : ImageManager::GetInstance()->FindImage(L"ground");
-
-		groundFrameY = 0;
-		underGroundFrameY = 0;
-	}
 }
 
 void MainGame::Render()
@@ -122,11 +90,7 @@ void MainGame::Render()
 	// 백버퍼에 먼저 복사
 	HDC hBackBufferDC = backBuffer->GetMemDC();
 
-	//backGround->Render(hBackBufferDC);
-
-	// Test
-	underGround->TestRender(hBackBufferDC, 0, 0, underGroundFrameY, false);
-	ground->TestRender(hBackBufferDC, 0, 0, groundFrameY, false);
+	backGround->Render(hBackBufferDC);
 	if (enemyManager) enemyManager->Render(hBackBufferDC);
 	if (rocket) rocket->Render(hBackBufferDC);
 
