@@ -1,10 +1,11 @@
 #include "Enemy.h"
 #include "CommonFunction.h"
-#include "Tank.h"
+#include "Player.h"
 #include "Image.h"
 #include "MissileManager.h"
 #include "CollisionManager.h"
 #include "Collider.h"
+#include "NormalMissileManager.h"
 
 void Enemy::Init(float posX, float posY)
 {
@@ -25,7 +26,7 @@ void Enemy::Init(float posX, float posY)
 
 	image = ImageManager::GetInstance()->AddImage(L"ufo", TEXT("Image\\ufo.bmp"), 540, 32, 10, 1, true, true, RGB(255, 0, 255));
 
-	missileManager = new MissileManager();
+	missileManager = new NormalMissileManager();
 	missileManager->Init();
 
 	Collider* collider = new Collider(this, pos);

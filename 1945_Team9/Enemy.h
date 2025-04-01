@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
-class Tank;
+class Player;
 class Image;
 class MissileManager;
 class Enemy : public GameObject	// is-a
@@ -24,7 +24,7 @@ public:
 	void SetIsRush(bool isRush) { this->isRush = isRush; }
 	bool GetIsRush() { return isRush; }
 
-	inline void SetTarget(Tank* target) { this->target = target; }
+	inline void SetTarget(Player* target) { this->target = target; }
 	inline FPOINT GetPos() { return pos; }
 	float GetAngle() { return angle; }
 	float GetMoveSpeed() { return moveSpeed; }
@@ -43,7 +43,7 @@ private:
 	float elapsedTime;
 	float elapsedMoveTime;
 	float maxMoveTime;
-	Tank* target;
+	Player* target;
 	bool isRush;
 
 	Image* image;
