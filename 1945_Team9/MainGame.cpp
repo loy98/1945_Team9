@@ -37,7 +37,7 @@ void MainGame::Init()
 	backGround = new BackGround();
 	backGround->Init();
 
-	ItemManager::GetInstance()->AddItem({ 300, 500 }, {60, 60});
+	ItemManager::GetInstance()->AddItem(ItemType::Normal, { 300, 500 }, {60, 60});
 }
 
 void MainGame::Release()

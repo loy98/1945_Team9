@@ -20,22 +20,18 @@ void Item::Init(FPOINT pos, FPOINT size)
 	this->pos = pos;
 	moveSpeed = 300.0f;
 	angle = 45.0f;
-	lifeTime = 12.0f;
+	lifeTime = 300.0f;
 	this->size.x = size.x;
 	this->size.y = size.y;
 	dir = { 1, 1 };
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
 	animationFrame = 0;
-	maxAnimationFrame = 7;
 
-	offsetX = 20;
-	offsetY = 0;
 
 	Collider* collider = new Collider(this, pos);
 	colliderList.push_back(collider);
 	CollisionManager::GetInstance()->AddCollider(collider, CollisionGroup::Item);
-	image = ImageManager::GetInstance()->AddImage(
-		L"LaserItem", TEXT("Image\\LaserItem.bmp"), 224, 14, 7, 1, false, true, RGB(255, 0, 255));
+	
 }
 
 void Item::Update()

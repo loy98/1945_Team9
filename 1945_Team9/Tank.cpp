@@ -49,6 +49,7 @@ void Tank::Release()
 
 void Tank::Update()
 {
+	isCollision = false;
 	barrelEnd.x = pos.x + barrelSize * cosf(DEG_TO_RAD(fireAngle));
 	barrelEnd.y = pos.y - barrelSize * sinf(DEG_TO_RAD(fireAngle));
 
@@ -118,10 +119,10 @@ void Tank::Fire(MissileType type)
 	switch (type)
 	{
 	case MissileType::Normal:
-		//if (size < 8)
+		if (size < 8)
 			AddMissile(this, MissileType::Normal, barrelEnd, DEG_TO_RAD(fireAngle), missileSpeed);
-		//else
-        	//missileManager->Launch(barrelEnd);
+		else
+        	missileManager->Launch(barrelEnd);
 		break;
 	case MissileType::Sin:
 		AddMissile(this, MissileType::Sin, barrelEnd, fireAngle, missileSpeed);
