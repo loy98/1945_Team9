@@ -4,7 +4,7 @@
 class Missile;
 class Image;
 class MissileManager;
-class Tank : public GameObject
+class Player : public GameObject
 {
 private:
 	
@@ -22,8 +22,10 @@ private:
 	float missileSpeed;
 	bool LaserLaunched = false;
 
-	MissileManager* missileManager;
+	vector<MissileManager*> vecMissileManager;
+	vector<MissileManager*>::iterator iter;
 	CollisionGroup group;
+
 public:
 	void Init();	
 	void Release();	
@@ -35,7 +37,7 @@ public:
 	void AddMissile(GameObject* owner, MissileType type, FPOINT pos, float angle, float speed);
 	void Dead();
 
-	Tank();
-	~Tank();
+	Player();
+	~Player();
 };
 

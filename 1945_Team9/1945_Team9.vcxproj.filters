@@ -21,6 +21,9 @@
     <Filter Include="MainGame\Missile">
       <UniqueIdentifier>{03fef4fd-61c3-4cfa-ae76-41556ed84b31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\Missile\MissileManager">
+      <UniqueIdentifier>{9b0e21fe-e7c4-45f8-bc4e-ae05b36cc6c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonFunction.h">
@@ -39,9 +42,6 @@
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="KeyManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="MissileManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h">
@@ -80,7 +80,7 @@
     <ClInclude Include="MainGame.h">
       <Filter>MainGame</Filter>
     </ClInclude>
-    <ClInclude Include="Tank.h">
+    <ClInclude Include="Player.h">
       <Filter>MainGame</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
@@ -95,6 +95,24 @@
     <ClInclude Include="BackGround.h">
       <Filter>MainGame</Filter>
     </ClInclude>
+    <ClInclude Include="MissileManager.h">
+      <Filter>MainGame\Missile\MissileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="StraightMissileManager.h">
+      <Filter>MainGame\Missile\MissileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalMissileManager.h">
+      <Filter>MainGame\Missile\MissileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="HomingMissileManager.h">
+      <Filter>MainGame\Missile\MissileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="StraightMissile.h">
+      <Filter>MainGame\Missile</Filter>
+    </ClInclude>
+    <ClInclude Include="LaserMissileManager.h">
+      <Filter>MainGame\Missile\MissileManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionManager.cpp">
@@ -107,9 +125,6 @@
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="KeyManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="MissileManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="TimeManager.cpp">
@@ -148,7 +163,7 @@
     <ClCompile Include="NormalMissile.cpp">
       <Filter>MainGame\Missile</Filter>
     </ClCompile>
-    <ClCompile Include="Tank.cpp">
+    <ClCompile Include="Player.cpp">
       <Filter>MainGame</Filter>
     </ClCompile>
     <ClCompile Include="EnemyManager.cpp">
@@ -162,6 +177,24 @@
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="MissileManager.cpp">
+      <Filter>MainGame\Missile\MissileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="HomingMissileManager.cpp">
+      <Filter>MainGame\Missile\MissileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="StraightMissileManager.cpp">
+      <Filter>MainGame\Missile\MissileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalMissileManager.cpp">
+      <Filter>MainGame\Missile\MissileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="StraightMissile.cpp">
+      <Filter>MainGame\Missile</Filter>
+    </ClCompile>
+    <ClCompile Include="LaserMissileManager.cpp">
+      <Filter>MainGame\Missile\MissileManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
