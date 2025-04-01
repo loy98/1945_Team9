@@ -51,11 +51,11 @@ void EnemyManager::Update()
 			randEnemy->SetIsRush(true);
 			MissileManager* m = randEnemy->GetMissileManager();
 
-			Missile* missile = m->CreateMissile(MissileType::Normal, randEnemy->GetPos(),
-				randEnemy->GetAngle(), randEnemy->GetRushSpeed() + 50);
+			//Missile* missile = m->CreateMissile(MissileType::Normal, randEnemy->GetPos(),
+			//	randEnemy->GetAngle(), randEnemy->GetRushSpeed() + 50);
 
-			missile->AddCollider(CollisionGroup::Enemy);
-			m->AddMissile(missile);
+			//missile->AddCollider(CollisionGroup::Enemy);
+			//m->AddMissile(missile);
 		}
 		elapsedTime = 0.0f;
 	}
