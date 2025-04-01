@@ -2,13 +2,14 @@
 #include "CommonFunction.h"
 #include "Tank.h"
 #include "Image.h"
+#include "EnemyManager.h"
 #include "MissileManager.h"
 #include "CollisionManager.h"
 #include "Collider.h"
 
-void Enemy::Init(float posX, float posY)
+void Enemy::Init()
 {
-	pos = { posX, posY };
+	pos = { 0,0 };
 	moveSpeed = 50.0f;
 	rushSpeed = 50.0f;
 	angle = -90.0f;
@@ -24,6 +25,8 @@ void Enemy::Init(float posX, float posY)
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
 
 	image = ImageManager::GetInstance()->AddImage(L"ufo", TEXT("Image\\ufo.bmp"), 540, 32, 10, 1, true, true, RGB(255, 0, 255));
+
+	enemyManager = new EnemyManager();
 
 	missileManager = new MissileManager();
 	missileManager->Init();
@@ -100,6 +103,23 @@ void Enemy::Render(HDC hdc)
 void Enemy::Move()
 {
 	pos.x += moveSpeed * dir.x * TimeManager::GetInstance()->GetDeltaTime();
+}
+
+void Enemy::showEnemy(EnemyType type)
+{
+	switch (type)
+	{
+	case EnemyType:: Straight:
+		AddEnemy(EnemyType::Straight, { 50.0f ,-20.0f }, angle, moveSpeed);
+		AddEnemy(EnemyType::Straight, { 40.0f ,-30.0f }, angle, moveSpeed);
+		AddEnemy(EnemyType::Straight, { 60.0f ,-30.0f }, angle, moveSpeed);
+	}
+}
+
+void Enemy::AddEnemy(EnemyType type, FPOINT pos, float angle, float speed)
+{
+	
+	enemyManager->AddEnemy(this);
 }
 
 void Enemy::Rush()

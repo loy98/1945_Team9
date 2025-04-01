@@ -44,7 +44,8 @@ extern HINSTANCE g_hInstance;
 
 enum class EnemyType
 {
-	Straight
+	Straight,
+	EnemyTypeLength
 };
 enum class MissileType
 {
