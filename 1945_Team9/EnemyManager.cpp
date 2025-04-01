@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "Missile.h"
 #include "DiagonalEnemy.h"
+#include "StraightEnemy.h"
 
 EnemyManager::EnemyManager(GameObject* target) : target(target)
 {
@@ -25,6 +26,16 @@ void EnemyManager::Init()
 	elapsedTime = 0.0f;
 	diagonalMaxAppearTime = 0.2f;
 	diagonalMaxAppearCount = 4;
+
+	vecEnemys[(int)EnemyType::Straight].resize(3);
+	int straightSize = vecEnemys[(int)EnemyType::Straight].size();
+
+	for (int i = 0; i < straightSize; i++)
+	{
+		vecEnemys[(int)EnemyType::Straight][i] = new StraightEnemy();
+		vecEnemys[(int)EnemyType::Straight][i]->Init(20, -20);
+		vecEnemys[(int)EnemyType::Straight][i]->SetTarget(target);
+	}
 }
 
 void EnemyManager::Release()
@@ -58,6 +69,7 @@ void EnemyManager::Update()
 		}
 	}
 	DiagonalAppear();
+	StraightAppear();
 }
 
 void EnemyManager::Render(HDC hdc)
@@ -110,4 +122,9 @@ void EnemyManager::DiagonalAppear()
 	}
 	//diagonalAppearCount++;
 	//DiagonalAppear(left);
+}
+
+void EnemyManager::StraightAppear()
+{
+
 }

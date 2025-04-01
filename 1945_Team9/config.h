@@ -44,6 +44,7 @@ extern HINSTANCE g_hInstance;
 
 enum class EnemyType
 {
+	Diagonal,
 	Straight,
 	EnemyTypeLength
 };

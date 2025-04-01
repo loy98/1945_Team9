@@ -1,7 +1,6 @@
 #pragma once
 #include "Enemy.h"
 
-
 class Image;
 class StraightEnemy : public Enemy
 {
@@ -10,14 +9,16 @@ public:
 	StraightEnemy();
 	~StraightEnemy();
 
-	virtual void Init() override;
-	virtual void Release() override;
-	virtual void Update() override;
-	virtual void Render(HDC hdc) override;
-	virtual void ReLoad(FPOINT pos) override;
-	virtual void Move() override;
+	void Init(float posX, float posY) override;
+	void Release() override;
+	void Update() override;
+	void Render(HDC hdc) override;
+	
+	void Reset(FPOINT pos);
+	void Move() override;
+	void Fire() override;
 
 private:
-	Image* image;
+	float elapsedFireTime;
+	float maxFireTime;
 };
-

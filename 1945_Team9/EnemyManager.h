@@ -15,6 +15,8 @@ public:
 	void AddEnemy(int size);
 
 	void DiagonalAppear();
+	void StraightAppear();
+
 private:
 	vector<Enemy*> vecEnemys[(int)EnemyType::EnemyTypeLength];
 	GameObject* target;
@@ -24,5 +26,8 @@ private:
 	float diagonalMaxAppearTime;
 	int diagonalAppearCount{  };
 	int diagonalMaxAppearCount;
+
+	float straightElpasedTime;
+	int straightAppearCount;
 };
 

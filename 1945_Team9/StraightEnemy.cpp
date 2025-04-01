@@ -1,5 +1,8 @@
 #include "StraightEnemy.h"
-#include "EnemyController.h"
+#include "TimeManager.h"
+#include "MissileManager.h"
+#include "CommonFunction.h"
+#include "Missile.h"
 #include "Image.h"
 
 StraightEnemy::StraightEnemy()
@@ -10,78 +13,68 @@ StraightEnemy::~StraightEnemy()
 {
 }
 
-void StraightEnemy::Init()
+void StraightEnemy::Init(float posX, float posY)
 {
-	pos = { 0.0f, 0.0f };
-	moveSpeed = 50.0f;
-	//rushSpeed = 50.0f;
-	angle = -90.0f;
-	isAlive = true;
-	//size = { 40,40 }; 
-	isRush = false;
-	type = ObjectType::Enemy;
+	Super::Init(posX, posY);
 
+	dir = { 1,0 };
+
+	offsetX = 10;
+	offsetY = 10;
 	image = ImageManager::GetInstance()->AddImage(L"StraightEnemy", TEXT("Image\\Enemy\\StraightEnemyPlane.bmp"), 31, 48, 1, 1, false, true, RGB(248, 0, 248));
-	controller = new StraightEnemyController();
 }
 
 void StraightEnemy::Release()
 {
+	Super::Release();
 }
 
 void StraightEnemy::Update()
 {
 	Super::Update();
+	if (!isAlive) return;
+
 	Move();
 
-	//elapsedTime += TimeManager::GetInstance()->GetDeltaTime();
-	//if (elapsedTime > rushTime)
-	//{
-	//	int randNum = rand() % 3;
-	//	Enemy* randEnemy = vecEnemys[randNum];
-	//	if (randEnemy && !randEnemy->GetIsRush())
-	//	{
-	//		randEnemy->SetIsRush(true);
-	//		EnemyManager* m = randEnemy->GetMissileManager();
-
-	//		Enemy* enemy = m->CreateMissile(MissileType::Normal, randEnemy->GetPos(),
-	//			randEnemy->GetAngle(), randEnemy->GetRushSpeed() + 50);
-
-	//		enemy->AddCollider(CollisionGroup::Enemy);
-	//		m->AddMissile(missile);
-	//	}
-	//	elapsedTime = 0.0f;
-	//}
-	// 충돌처리나면 isAlive = false
-
-	if (isCollision == true)
-	{
-		isAlive = false;
-	}	
 }
 
 void StraightEnemy::Render(HDC hdc)
 {
 	Super::Render(hdc);
-
 	if (isAlive)
 	{
 		image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0);
+		image->FrameRender(hdc, pos.x - offsetX, pos.y - offsetY, animationFrame, 0);
+		image->FrameRender(hdc, pos.x + offsetX, pos.y + offsetX, animationFrame, 0);
 	}
 }
 
-void StraightEnemy::ReLoad(FPOINT pos)
+void StraightEnemy::Reset(FPOINT pos)
 {
-	this->pos = pos;
 	isAlive = true;
+	this->pos = pos;
 	isCollision = false;
-	angle = 90.0f;
+	elapsedFireTime = 0;
 }
 
 void StraightEnemy::Move()
 {
-	if (isAlive)
+	if (pos.y <= 50)
 	{
-		controller->Move(this);
+		pos.x += moveSpeed * TimeManager::GetInstance()->GetDeltaTime();
+		pos.y += moveSpeed * TimeManager::GetInstance()->GetDeltaTime();
 	}
+	else
+	{
+		pos.x = pos.x;
+		pos.y = pos.y;
+	}
+}
+
+void StraightEnemy::Fire()
+{
+	float angle = ::GetAngle(pos, target->GetPos());
+	Missile* missile = missileManager->CreateMissile(MissileType::Normal, pos, angle, moveSpeed);
+	missile->AddCollider(CollisionGroup::Enemy);
+	missileManager->AddMissile(missile);
 }
