@@ -2,31 +2,27 @@
 #include "CommonFunction.h"
 #include "Tank.h"
 #include "Image.h"
-#include "EnemyManager.h"
 #include "MissileManager.h"
 #include "CollisionManager.h"
 #include "Collider.h"
 
-void Enemy::Init()
+void Enemy::Init(float posX, float posY)
 {
-	pos = { 0,0 };
-	moveSpeed = 50.0f;
-	rushSpeed = 50.0f;
+	pos = { posX, posY };
+	moveSpeed = 150.0f;
 	angle = -90.0f;
-	isAlive = true;
+	isAlive = false;
 	size = { 40,40 };
 	animationFrame = 0;
 	elapsedFrame = 0;
 	elapsedTime = 0.0f;
 	elapsedMoveTime = 0.0f;
 	maxMoveTime = 3.0f; 
-	isRush = false;
+
 	type = ObjectType::Enemy;
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
 
-	image = ImageManager::GetInstance()->AddImage(L"ufo", TEXT("Image\\ufo.bmp"), 540, 32, 10, 1, true, true, RGB(255, 0, 255));
-
-	enemyManager = new EnemyManager();
+	//image = ImageManager::GetInstance()->AddImage(L"ufo", TEXT("Image\\ufo.bmp"), 540, 32, 10, 1, true, true, RGB(255, 0, 255));
 
 	missileManager = new MissileManager();
 	missileManager->Init();
@@ -59,21 +55,12 @@ void Enemy::Update()
 		animationFrame++;
 		if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = 0;
 	}
-
-	if (isRush == true)
+	if (missileManager)
 	{
-		Rush();
-		if (missileManager)
-			missileManager->Update();
+		missileManager->Update();
 	}
-	else	
-		Move();
+	Move();
 
-	if (elapsedMoveTime > maxMoveTime)
-	{
-		elapsedMoveTime = 0;
-		dir.x *= -1.0f;
-	}
 	UpdateRectAtCenter(rc, pos);
 
 	for (auto& collider : colliderList)
@@ -87,7 +74,7 @@ void Enemy::Render(HDC hdc)
 {
 	if (isAlive)
 	{
-		image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0);
+		///image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0);
 	}
 	if (missileManager)
 	{
@@ -105,26 +92,17 @@ void Enemy::Move()
 	pos.x += moveSpeed * dir.x * TimeManager::GetInstance()->GetDeltaTime();
 }
 
-void Enemy::showEnemy(EnemyType type)
+void Enemy::Fire()
 {
-	switch (type)
-	{
-	case EnemyType:: Straight:
-		AddEnemy(EnemyType::Straight, { 50.0f ,-20.0f }, angle, moveSpeed);
-		AddEnemy(EnemyType::Straight, { 40.0f ,-30.0f }, angle, moveSpeed);
-		AddEnemy(EnemyType::Straight, { 60.0f ,-30.0f }, angle, moveSpeed);
-	}
 }
 
-void Enemy::AddEnemy(EnemyType type, FPOINT pos, float angle, float speed)
+void Enemy::Reset(FPOINT pos)
 {
-	
-	enemyManager->AddEnemy(this);
 }
 
-void Enemy::Rush()
+void Enemy::ChangeApperSide()
 {
-	pos.y += rushSpeed * TimeManager::GetInstance()->GetDeltaTime();
+	isLeft = !isLeft;
 }
 
 bool Enemy::IsOutofScreen()

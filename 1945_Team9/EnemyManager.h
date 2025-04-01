@@ -2,24 +2,27 @@
 #include "GameObject.h"
 
 class Enemy;
-class EnemyFactory;
 class EnemyManager : public GameObject
 {
 public:
+	EnemyManager(GameObject* target);
+	virtual ~EnemyManager();
 	void Init();
 	void Release();
 	void Update();
 	void Render(HDC hdc);
 
-	void AddEnemy(Enemy* enemy);
-	Enemy* CreateEnemy(EnemyType type, FPOINT pos, float angle, float speed);
+	void AddEnemy(int size);
 
+	void DiagonalAppear();
 private:
-	vector<Enemy*> vecEnemys;
-	vector<Enemy*> EnemyList;
-	vector<EnemyFactory*> factoryList{ (int)(EnemyType::EnemyTypeLength), nullptr };
+	vector<Enemy*> vecEnemys[(int)EnemyType::EnemyTypeLength];
+	GameObject* target;
 
 	float elapsedTime;
-	float rushTime;
+	float diagonalElpasedTime;
+	float diagonalMaxAppearTime;
+	int diagonalAppearCount{  };
+	int diagonalMaxAppearCount;
 };
 

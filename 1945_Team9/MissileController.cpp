@@ -27,8 +27,12 @@ void NormalController::Move(Missile* missile)
 	float moveSpeed = missile->GetMoveSpeed();
 	float angle = missile->GetAngle();
 		
-	pos.x += moveSpeed * time * cosf(DEG_TO_RAD(angle));
-	pos.y -= moveSpeed * time * sinf(DEG_TO_RAD(angle));
+	pos.x += moveSpeed * time * cosf(angle);
+	pos.y -= moveSpeed * time * sinf(angle);
+
+	// enemyMissile test 때문에 radian 배고 실험
+	//pos.x += moveSpeed * time * cosf(DEG_TO_RAD(angle));
+	//pos.y -= moveSpeed * time * sinf(DEG_TO_RAD(angle));
 
 	missile->SetPos(pos);
 }

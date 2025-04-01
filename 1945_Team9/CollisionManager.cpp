@@ -27,6 +27,32 @@ void CollisionManager::Update()
 	}
 }
 
+void CollisionManager::CheckPlayerItemCollision()
+{
+	const vector<Collider*>& playerColliders = colliderList[(int)CollisionGroup::Player];
+	const vector<Collider*>& ItemColliders = colliderList[(int)CollisionGroup::Item];
+
+	for (int i = 0; i < playerColliders.size(); ++i)
+	{
+		for (int j = 0; j < ItemColliders.size(); ++j)
+		{
+			Collider* src = playerColliders[i];
+			Collider* dest = ItemColliders[j];
+
+			if (src->GetOwner()->GetIsCollision() || dest->GetOwner()->GetIsCollision())
+				continue;
+
+			if (src->CheckCollision(dest))
+			{
+				if (src->GetOwner()->GetObjectType() == ObjectType::Missile)
+					continue;
+				//src->GetOwner()->SetIsCollision(true);
+				dest->GetOwner()->SetIsCollision(true);
+			}
+		}
+	}
+}
+
 void CollisionManager::AddCollider(Collider* collider, CollisionGroup group)
 {
 	switch (group)
@@ -36,6 +62,9 @@ void CollisionManager::AddCollider(Collider* collider, CollisionGroup group)
 		break;
 	case CollisionGroup::Enemy:
 		colliderList[(int)CollisionGroup::Enemy].push_back(collider);
+		break;
+	case CollisionGroup::Item:
+		colliderList[(int)CollisionGroup::Item].push_back(collider);
 		break;
 	}
 }

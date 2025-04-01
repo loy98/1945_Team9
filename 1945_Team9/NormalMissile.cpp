@@ -10,7 +10,7 @@ void NormalMissile::Init()
 	pos = { 0, 0 };
 	isActived = false;
 	moveSpeed = 500.0f;
-	angle = 90.0f;
+	angle = DEG_TO_RAD(90.0f); //enemyMissile 실험 끝나면 DEG_TO 뺴기 + controller도 확인
 	size = { 20,20 };
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
 	animationFrame = 0;
@@ -36,12 +36,14 @@ void NormalMissile::Update()
 	{
 		isActived = false;
 	}
+	if (isCollision)
+		isActived = false;
 	Super::Update();
 }
 
 void NormalMissile::Render(HDC hdc, bool isFlip)
 {
-	if (isActived && !isCollision)
+	if (isActived)
 	{
 		Super::Render(hdc, isFlip);
 		image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0, isFlip);
@@ -55,7 +57,7 @@ void NormalMissile::ReLoad(FPOINT pos)
 	this->pos = pos;
 	isActived = true;
 	isCollision = false;
-	angle = 90.0f;
+	angle = DEG_TO_RAD(90.0f); //enemyMissile 실험 끝나면 DEG_TO 뺴기 + controller도 확인
 }
 
 void NormalMissile::Move()
