@@ -5,6 +5,14 @@
 
 void EnemyManager::Init()
 {
+	//StraightEnemy
+	vecEnemys.resize(3);
+	for (int i = 0; i < 3; i++)
+	{
+		vecEnemys[i] = new Enemy();
+		vecEnemys[i]->Init(20.0f + 10.0f * (i % 3), 30.0f + 10.0f * (i / 3));
+	}
+
 	vecEnemys.resize(10);
 	for (int i = 0; i < 10; i++)
 	{

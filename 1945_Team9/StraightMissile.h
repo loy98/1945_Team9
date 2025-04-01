@@ -17,8 +17,7 @@ public:
 
 	virtual void Move() override;
 
-private:
-	vector<Missile*> vecMissiles;
+private:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 	Image* image;
 	int animationFrame;
 	int elapsedFrame;

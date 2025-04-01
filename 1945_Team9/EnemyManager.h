@@ -14,7 +14,8 @@ public:
 
 
 private:
-	vector<Enemy*> vecEnemys/*{10, new Enemy()}*/;
+	vector<Enemy*> vecEnemys;
+	vector<Enemy*> EnemyList;
 
 	float elapsedTime;
 	float rushTime;

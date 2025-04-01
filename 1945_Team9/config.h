@@ -42,6 +42,10 @@ typedef struct tagFPOINT
 extern HWND g_hWnd;
 extern HINSTANCE g_hInstance;
 
+enum class EnemyType
+{
+	Straight
+};
 enum class MissileType
 {
 	Normal,

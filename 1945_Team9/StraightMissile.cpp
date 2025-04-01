@@ -29,13 +29,6 @@ void StraightMissile::Init()
 	elapsedMoveTime = 0.0f;
 	maxMoveTime = 3.0f;
 
-	vecMissiles.resize(2);
-	for (int i = 0; i < 2; i++)
-	{
-		vecMissiles[i] = new Missile();
-		vecMissiles[i]->Init();
-	}
-
 	image = ImageManager::GetInstance()->AddImage(L"Bomb_Bullet1", TEXT("Image\\Bomb_Bullet1.bmp"), 240, 64, 8, 1, false, true, RGB(0, 248, 0));
 	controller = new StraightController();
 }
@@ -55,15 +48,6 @@ void StraightMissile::Update()
 		elapsedTime = 0.0f;
 		animationFrame++;
 		if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = image->GetMaxFrameX() - 1;
-	}
-
-	for (int i = 0; i < vecMissiles.size(); i++)
-	{
-		vecMissiles[i]->Update();
-		if (vecMissiles[i]->IsOutofScreen())
-		{
-			vecMissiles[i]->SetIsActived(false);
-		}
 	}
 	
 	Super::Update();
@@ -93,11 +77,6 @@ void StraightMissile::Update()
 void StraightMissile::Render(HDC hdc, bool isFlip)
 {
 	Super::Render(hdc, isFlip);
-
-	for (int i = 0; i < vecMissiles.size(); i++)
-	{
-		vecMissiles[i]->Render(hdc,isFlip);
-	}
 
 	if (isActived)
 	{

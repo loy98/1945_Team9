@@ -14,6 +14,7 @@ public:
 	virtual void Release();		
 	virtual void Update();		
 	virtual void Render(HDC hdc);
+	virtual void ReLoad(FPOINT pos);
 
 	virtual void Move();
 	void Rush();
@@ -31,7 +32,7 @@ public:
 	float GetRushSpeed() { return rushSpeed; }
 	MissileManager* GetMissileManager() { return missileManager; }
 
-private:
+protected:
 	FPOINT pos;
 	FPOINT dir{ 1, 0 };
 	float moveSpeed;

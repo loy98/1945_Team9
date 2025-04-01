@@ -19,7 +19,7 @@ public:
 
 	void Move(Missile* missile) override;
 };
-
+                   
 class LaserController : public MissileController
 {
 public:
