@@ -2,7 +2,7 @@
 #include "CommonFunction.h"
 #include "Image.h"
 #include "EnemyManager.h"
-#include "Tank.h"
+#include "Player.h"
 #include "MissileManager.h"
 #include "CollisionManager.h"
 #include "Timer.h"
@@ -30,7 +30,7 @@ void MainGame::Init()
 	enemyManager = new EnemyManager();
 	enemyManager->Init();
 
-	rocket = new Tank();
+	rocket = new Player();
 	rocket->Init();
 
 	backGround = new BackGround();

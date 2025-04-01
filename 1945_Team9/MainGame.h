@@ -3,7 +3,7 @@
 
 class Image;
 class EnemyManager;
-class Tank;
+class Player;
 class Timer;
 class BackGround;
 class MainGame : public GameObject
@@ -16,7 +16,7 @@ private:
 	wchar_t szText[128];
 
 	Image* backBuffer;
-	Tank* rocket;
+	Player* rocket;
 
 	EnemyManager* enemyManager;
 
