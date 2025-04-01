@@ -1,4 +1,6 @@
 #pragma once
+#include "config.h"
+
 class Image;
 class BackGround
 {
