@@ -24,7 +24,7 @@ void LaserMissile::Init()
 	missileType = MissileType::Laser;
 	animationFrame = 0;
 	maxAnimationFrame = 14;
-	offsetX = 80;
+	offsetX = 60;
 	offsetY = 150;
 
 	rc = GetNormalRect(pos.x - size.x / 2, 0, size.x, size.y);
