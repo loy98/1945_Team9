@@ -17,7 +17,7 @@ using namespace std;
 #include "TimeManager.h"
 
 #define WINSIZE_X	600
-#define WINSIZE_Y	1200
+#define WINSIZE_Y	800
 #define DEG_TO_RAD(degree) ((3.14 / 180.0) * degree)
 #define RAD_TO_DEG(radian) ((180.0 / 3.14) * radian)
 
