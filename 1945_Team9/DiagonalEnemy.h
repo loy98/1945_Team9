@@ -14,8 +14,11 @@ public:
 
 	void Reset(FPOINT pos);
 	void Move() override;
+	void Fire() override;
 
 protected:
+	float elapsedFireTime;
+	float maxFireTime;
 
 };
 

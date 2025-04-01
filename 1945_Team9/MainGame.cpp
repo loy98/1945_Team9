@@ -28,19 +28,16 @@ void MainGame::Init()
 			TEXT("백버퍼 생성 실패"), TEXT("경고"), MB_OK);
 	}
 
-	enemyManager = new EnemyManager();
-	enemyManager->Init();
-
 	rocket = new Tank();
 	rocket->Init();
+
+	enemyManager = new EnemyManager(rocket);
+	enemyManager->Init();
 
 	backGround = new BackGround();
 	backGround->Init();
 
 	ItemManager::GetInstance()->AddItem({ 300, 500 }, {60, 60});
-
-	//if (enemyManager) enemyManager->DiagonalAppear();
-
 }
 
 void MainGame::Release()

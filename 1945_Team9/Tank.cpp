@@ -119,7 +119,7 @@ void Tank::Fire(MissileType type)
 	{
 	case MissileType::Normal:
 		//if (size < 8)
-			AddMissile(this, MissileType::Normal, barrelEnd, fireAngle, missileSpeed);
+			AddMissile(this, MissileType::Normal, barrelEnd, DEG_TO_RAD(fireAngle), missileSpeed);
 		//else
         	//missileManager->Launch(barrelEnd);
 		break;
@@ -140,7 +140,7 @@ void Tank::Fire(MissileType type)
 
 void Tank::AddMissile(GameObject* owner, MissileType type, FPOINT pos, float angle, float speed)
 {
-	Missile* missile = missileManager->CreateMissile(type, pos, fireAngle, missileSpeed);
+	Missile* missile = missileManager->CreateMissile(type, pos, angle, missileSpeed);
 	missile->AddCollider(group);
 	missile->SetOwner(this);
 	missileManager->AddMissile(missile);

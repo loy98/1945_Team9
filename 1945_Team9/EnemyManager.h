@@ -5,6 +5,8 @@ class Enemy;
 class EnemyManager : public GameObject
 {
 public:
+	EnemyManager(GameObject* target);
+	virtual ~EnemyManager();
 	void Init();
 	void Release();
 	void Update();
@@ -15,9 +17,12 @@ public:
 	void DiagonalAppear();
 private:
 	vector<Enemy*> vecEnemys[(int)EnemyType::EnemyTypeLength];
+	GameObject* target;
 
 	float elapsedTime;
-	float diagoanlElpasedTime;
-	float diagoanlMaxAppearTime;
+	float diagonalElpasedTime;
+	float diagonalMaxAppearTime;
+	int diagonalAppearCount{  };
+	int diagonalMaxAppearCount;
 };
 

@@ -4,6 +4,14 @@
 #include "Missile.h"
 #include "DiagonalEnemy.h"
 
+EnemyManager::EnemyManager(GameObject* target) : target(target)
+{
+}
+
+EnemyManager::~EnemyManager()
+{
+}
+
 void EnemyManager::Init()
 {
 	vecEnemys[(int)EnemyType::Diagonal].resize(10);
@@ -12,9 +20,11 @@ void EnemyManager::Init()
 	{
 		vecEnemys[(int)EnemyType::Diagonal][i] = new DiagonalEnemy();
 		vecEnemys[(int)EnemyType::Diagonal][i]->Init(-20, -20);
+		vecEnemys[(int)EnemyType::Diagonal][i]->SetTarget(target);
 	}
 	elapsedTime = 0.0f;
-	diagoanlMaxAppearTime = 0.2f;
+	diagonalMaxAppearTime = 0.2f;
+	diagonalMaxAppearCount = 4;
 }
 
 void EnemyManager::Release()
@@ -77,21 +87,27 @@ void EnemyManager::AddEnemy(int size)
 
 void EnemyManager::DiagonalAppear()
 {
-	diagoanlElpasedTime += TimeManager::GetInstance()->GetDeltaTime();
-	static int num = 1;
+	//if (diagonalAppearCount == diagonalMaxAppearCount) return;
+
+	diagonalElpasedTime += TimeManager::GetInstance()->GetDeltaTime();
+	static int dy = 1;
+	
 	int diagonalSize = vecEnemys[(int)EnemyType::Diagonal].size();
-	if (diagoanlElpasedTime >= diagoanlMaxAppearTime)
+	if (diagonalElpasedTime >= diagonalMaxAppearTime)
 	{
 		for (int i = 0; i < diagonalSize; ++i)
 		{
-			diagoanlElpasedTime = 0;
+			diagonalElpasedTime = 0;
 			if (vecEnemys[(int)EnemyType::Diagonal][i]->GetIsAlive())
 				continue;
-			vecEnemys[(int)EnemyType::Diagonal][i]->Reset({ 0, 100 + (float)num * 30 });
-			num *= -1;
+			vecEnemys[(int)EnemyType::Diagonal][i]->ChangeApperSide();
+
+			int appearX = vecEnemys[(int)EnemyType::Diagonal][i]->GetIsLeft() ? 20 : WINSIZE_X - 20;
+			vecEnemys[(int)EnemyType::Diagonal][i]->Reset({ (float)appearX, 100 + (float)dy * 30 });
+			dy *= -1;
 			break;
 		}
-
 	}
-
+	//diagonalAppearCount++;
+	//DiagonalAppear(left);
 }
