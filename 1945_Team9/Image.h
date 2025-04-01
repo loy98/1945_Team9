@@ -59,7 +59,7 @@ private:
 
 public:
 	// 빈 비트맵 이미지를 만드는 함수
-	HRESULT Init(int width, int height);
+	HRESULT Init(int width, int height, COLORREF transColor = false);
 
 	// 파일로부터 이미지를 로드하는 함수
 	HRESULT Init(const wchar_t* filePath, int width, int height, 
@@ -74,9 +74,11 @@ public:
 	void Render(HDC hdc, int destX = 0, int destY = 0);
 	void Render(HDC hdc, int destX, int destY, int frameIndex, bool isFlip = false);
 	void FrameRender(HDC hdc, int destX, int destY, int frameX, int frameY, bool isFlip = false);
+
 	// Test
 	void TestFrameRender(HDC hdc, float startX, float startY, float destX, float destY, int frameX, int frameY, bool isFlip);
-	void TestRender(HDC hdc, int destX, int destY, float frameY, bool isFlip = false);
+	//void TestRender(HDC hdc, int destX, int destY, float frameY, bool isFlip = false);
+	void CameraRender(HDC hdc, Image* current, Image* next, float cameraY);
 
 	// 메모리 해제
 	void Release();

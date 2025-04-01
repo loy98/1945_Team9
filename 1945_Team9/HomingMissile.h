@@ -1,5 +1,6 @@
 #pragma once
 #include "Missile.h"
+#include <vector>
 
 class Image;
 class HomingMissile: public Missile
@@ -12,7 +13,23 @@ class HomingMissile: public Missile
 
 	virtual void Move() override;
 private:
-	Image* image;
+	Image* idle;
 	int animationFrame;
+	vector<Image*> left;
+	vector<Image*> right;
+	FPOINT currPos;
+	FPOINT prevPos;
+
+	void UpdateImage();
+
+	/*
+	bool isActived;
+	float moveSpeed;
+	float angle;
+	FPOINT destination;
+
+	GameObject* owner;
+	MissileController* controller;
+	*/
 };
 
