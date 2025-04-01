@@ -45,9 +45,9 @@ extern HINSTANCE g_hInstance;
 enum class MissileType
 {
 	Normal,
-	Sin,
 	Laser,
 	Straight,
+	Homing,
 	MissileTypeLength
 };
 enum class CollisionGroup
