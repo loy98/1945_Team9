@@ -16,7 +16,6 @@ public:
 	virtual void Move() override;
 
 private:
-	Image* image;
-	int animationFrame;
+	
 };
 

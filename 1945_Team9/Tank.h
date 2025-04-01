@@ -8,7 +8,7 @@ class Tank : public GameObject
 {
 private:
 	
-	FPOINT dir{ 1, 0 };
+	FPOINT dir{ 1, 1 };
 	float damage;
 	float moveSpeed;
 	Image* image;

@@ -1,8 +1,10 @@
 #pragma once
 #include "GameObject.h"
+#include "config.h"
 
 class MissileController;
 class Tank;
+class Image;
 class Missile : public GameObject
 {
 public:
@@ -40,7 +42,13 @@ protected:
 	float angle;
 	FPOINT destination;
 
+	float offsetX;
+	float offsetY;
+	Image* image;
+	int animationFrame;
+	int maxAnimationFrame;
 	GameObject* owner;
 	MissileController* controller;
+	MissileType missileType;
 };
 

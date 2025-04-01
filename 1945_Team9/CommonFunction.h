@@ -81,15 +81,14 @@ inline void UpdateRectAtCenter(RECT& rc, FPOINT pt)
 	rc.bottom = rc.top + height;
 }
 
-inline void UpdateNormalRect(RECT& rc, FPOINT pt)
+inline void UpdateLaserRect(RECT& rc, FPOINT pt)
 {
 	float width = rc.right - rc.left;
-	float height = rc.bottom - rc.top;
 
 	rc.left = pt.x - (width / 2);
 	rc.right = rc.left + width;
-	rc.top = pt.y - (height);
-	rc.bottom = rc.top + height;
+	rc.top = 0;
+	rc.bottom = pt.y;
 }
 
 inline float GetAngle(FPOINT start, FPOINT end)

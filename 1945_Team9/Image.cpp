@@ -93,7 +93,10 @@ HRESULT Image::Init(const wchar_t* filePath, int width, int height, int maxFrame
     imageInfo->currFrameX = imageInfo->currFrameY = 0;
 
     imageInfo->hTempDC = CreateCompatibleDC(hdc);
-    imageInfo->hTempBit = CreateCompatibleBitmap(hdc, width, height);
+
+    //imageInfo->hTempBit = CreateCompatibleBitmap(hdc, width, height);
+    imageInfo->hTempBit = CreateCompatibleBitmap(hdc, WINSIZE_X, WINSIZE_Y);        // ï¿½ï¿½ï¿?ï¿½ï¿½ï¿½ï¿½ï¿?ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
     imageInfo->hOldTemp = (HBITMAP)SelectObject(imageInfo->hTempDC, imageInfo->hTempBit);
 
     ReleaseDC(g_hWnd, hdc);
@@ -127,13 +130,13 @@ void Image::Render(HDC hdc, int destX, int destY)
     else
     {
         BitBlt(
-            hdc,                // º¹»ç ¸ñÀûÁö DC
-            destX, destY,       // º¹»ç ¸ñÀûÁö À§Ä¡
-            imageInfo->width,   // ¿øº»¿¡¼­ º¹»çµÉ °¡·ÎÅ©±â
-            imageInfo->height,  // ¿øº»¿¡¼­ º¹»çµÉ ¼¼·ÎÅ©±â
-            imageInfo->hMemDC,  // ¿øº» DC
-            0, 0,               // ¿øº» º¹»ç ½ÃÀÛ À§Ä¡
-            SRCCOPY             // º¹»ç ¿É¼Ç
+            hdc,                
+            destX, destY,       
+            imageInfo->width,   
+            imageInfo->height,  
+            imageInfo->hMemDC,  
+            0, 0,               
+            SRCCOPY             
         );
     }
 }
@@ -243,7 +246,29 @@ void Image::FrameRender(HDC hdc, int destX, int destY, int frameX, int frameY, b
     }
 }
 
+
+void Image::TestFrameRender(HDC hdc, float startX, float startY, float destX, float destY, int frameX, int frameY, bool isFlip)
+{
+    imageInfo->currFrameX = frameX;
+    imageInfo->currFrameY = frameY;
+
+    if (isTransparent)
+    {
+        GdiTransparentBlt(hdc,
+            startX, startY,
+            destX - startX, destY,
+            imageInfo->hMemDC,
+            imageInfo->frameWidth * imageInfo->currFrameX,
+            imageInfo->frameHeight * imageInfo->currFrameY,
+            imageInfo->frameWidth, imageInfo->frameHeight,
+            transColor);
+    }
+}
+
+// Test
+
 void Image::CameraRender(HDC hdc, Image* current, Image* next, float cameraY)
+
 {
     StretchBlt(imageInfo->hTempDC,
         0.0f, 0.0f,

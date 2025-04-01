@@ -7,24 +7,26 @@
 #include "Collider.h"
 #include "CollisionManager.h"
 
+
 void Tank::Init()
 {
 	pos.x = WINSIZE_X / 2;
 	pos.y = WINSIZE_Y - 200;
 	size = {40, 40};
 	damage = 10;
-	moveSpeed = 0.1f;
+	moveSpeed = 1.0f;
 	group = CollisionGroup::Player;
 	type = ObjectType::Player;
-	// Æ÷½Å
+	// ï¿½ï¿½ï¿½ï¿½
 	barrelSize = 30;
 	barrelEnd.x = pos.x;
 	barrelEnd.y = pos.y - barrelSize;
 	fireAngle = 90.0f;
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
 
-	image = ImageManager::GetInstance()->AddImage(L"rocket", TEXT("Image/rocket.bmp"), 52, 64, true, RGB(255, 0, 255));
-	// ¹Ì»çÀÏ
+	image = ImageManager::GetInstance()->AddImage(
+		L"player", TEXT("Image/player.bmp"), 64, 32, 2, 1, false, true, RGB(255, 0, 255));
+	// ï¿½Ì»ï¿½ï¿½ï¿½
 	missileSpeed = 150.0f;
 
 	missileManager = new MissileManager();
@@ -52,24 +54,17 @@ void Tank::Update()
 
 	if (missileManager) missileManager->Update();
 
-	KeyManager* km = KeyManager::GetInstance();
-	if (km->IsOnceKeyDown(VK_SPACE))	
+	if (KeyManager::GetInstance()->IsOnceKeyDown(VK_SPACE))
 		Fire(MissileType::Normal);
-	if (km->IsOnceKeyDown('E'))
+	if (KeyManager::GetInstance()->IsOnceKeyDown('E'))
 		Fire(MissileType::Laser);
-	if (km->IsStayKeyDown('A'))
-	{
-		dir.x = -1;
-		Move();
-	}
-	if (km->IsStayKeyDown('D'))
-	{
-		dir.x = 1;
-		Move();
-	}
-	if (km->IsOnceKeyDown('Q'))
+	if (KeyManager::GetInstance()->IsOnceKeyDown('Q'))
 		Fire(MissileType::Straight);
+	Move();
+
+
 	UpdateRectAtCenter(rc, pos);
+
 	for (auto& collider : colliderList)
 	{
 		if (collider)
@@ -79,7 +74,7 @@ void Tank::Update()
 
 void Tank::Render(HDC hdc)
 {
-	if (image) image->Render(hdc, pos.x, pos.y);
+	if (image) image->FrameRender(hdc, pos.x, pos.y, 1, 0);
 	//if (missileManager) missileManager->Render(hdc);
 	for (auto& collider : colliderList)
 	{
@@ -91,8 +86,30 @@ void Tank::Render(HDC hdc)
 
 void Tank::Move()
 {
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+	dir = { 0, 0 };
+
+	// ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ dir ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	if (KeyManager::GetInstance()->IsStayKeyDown('A'))	
+		dir.x = -1.0f;
+	if (KeyManager::GetInstance()->IsStayKeyDown('D'))
+		dir.x = 1.0f;
+	if (KeyManager::GetInstance()->IsStayKeyDown('W'))
+		dir.y = -1.0f;
+	if (KeyManager::GetInstance()->IsStayKeyDown('S'))
+		dir.y = 1.0f;
+
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­
+	if (dir.x != 0 || dir.y != 0)
+		dir.Normalize();
+
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	pos.x += moveSpeed * dir.x;
+	pos.y += moveSpeed * dir.y;
+
+	// È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 	pos.x = clamp(pos.x, (float)size.x / 2, (float)WINSIZE_X - size.x / 2);
+	pos.y = clamp(pos.y, (float)size.y / 2, (float)WINSIZE_Y - size.y / 2);
 }
 
 void Tank::Fire(MissileType type)
@@ -101,10 +118,10 @@ void Tank::Fire(MissileType type)
 	switch (type)
 	{
 	case MissileType::Normal:
-		if (size < 8)
+		//if (size < 8)
 			AddMissile(this, MissileType::Normal, barrelEnd, fireAngle, missileSpeed);
-		else
-			missileManager->Launch(barrelEnd);
+		//else
+        	//missileManager->Launch(barrelEnd);
 		break;
 	case MissileType::Sin:
 		AddMissile(this, MissileType::Sin, barrelEnd, fireAngle, missileSpeed);

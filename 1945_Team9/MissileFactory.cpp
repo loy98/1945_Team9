@@ -27,7 +27,7 @@ Missile* NormalMissileFactory::CreateMissile(FPOINT pos, float angle, float spee
 		missile->SetIsActived(true);
 		missile->SetPos(pos);
 		missile->SetAngle(angle);
-		missile->SetMoveSpeed(speed);
+		//missile->SetMoveSpeed(speed);
 	}
 	return missile;
 }

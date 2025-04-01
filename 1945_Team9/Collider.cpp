@@ -19,6 +19,7 @@ void Collider::Update()
 
 void Collider::Render(HDC hdc)
 {
+	//collider는 개발단계에서만 render할것!
 	if (!showDebug) return;
 	HBRUSH myBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
 	HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, myBrush);
