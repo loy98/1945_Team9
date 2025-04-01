@@ -7,6 +7,7 @@ class CollisionManager : public Singleton<CollisionManager>
 {
 public:
 	void Update();
+	void CheckPlayerItemCollision();
 	void AddCollider(Collider* collider, CollisionGroup layer);
 private:
 	vector<Collider*> colliderList[(int)CollisionGroup::GroupLength];

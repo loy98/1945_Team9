@@ -41,24 +41,24 @@ void EnemyManager::Update()
 			}
 		}
 	}
-	elapsedTime += TimeManager::GetInstance()->GetDeltaTime();
-	if (elapsedTime > rushTime)
-	{
-		int randNum = rand() % vecEnemys.size();
-		Enemy* randEnemy = vecEnemys[randNum];
-		if (randEnemy && !randEnemy->GetIsRush())
-		{
-			randEnemy->SetIsRush(true);
-			MissileManager* m = randEnemy->GetMissileManager();
+	//elapsedTime += TimeManager::GetInstance()->GetDeltaTime();
+	//if (elapsedTime > rushTime)
+	//{
+	//	int randNum = rand() % vecEnemys.size();
+	//	Enemy* randEnemy = vecEnemys[randNum];
+	//	if (randEnemy && !randEnemy->GetIsRush())
+	//	{
+	//		randEnemy->SetIsRush(true);
+	//		MissileManager* m = randEnemy->GetMissileManager();
 
-			Missile* missile = m->CreateMissile(MissileType::Normal, randEnemy->GetPos(),
-				randEnemy->GetAngle(), randEnemy->GetRushSpeed() + 50);
+	//		Missile* missile = m->CreateMissile(MissileType::Normal, randEnemy->GetPos(),
+	//			randEnemy->GetAngle(), randEnemy->GetRushSpeed() + 50);
 
-			missile->AddCollider(CollisionGroup::Enemy);
-			m->AddMissile(missile);
-		}
-		elapsedTime = 0.0f;
-	}
+	//		missile->AddCollider(CollisionGroup::Enemy);
+	//		m->AddMissile(missile);
+	//	}
+	//	elapsedTime = 0.0f;
+	//}
 }
 
 void EnemyManager::Render(HDC hdc)

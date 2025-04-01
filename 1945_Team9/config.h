@@ -54,6 +54,7 @@ enum class CollisionGroup
 {
 	Player,
 	Enemy,
+	Item,
 	GroupLength
 };
 enum class ObjectType
@@ -61,8 +62,18 @@ enum class ObjectType
 	Player,
 	Enemy,
 	Missile,
+	Item,
 	TypeLength
 };
+enum class ItemType
+{
+	Normal,
+	Laser,
+	Homing,
+	Straight,
+	ItemTypeLength
+};
+
 struct Size
 {
 	float x;

@@ -139,6 +139,8 @@
     <ClInclude Include="HomingMissile.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemManager.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="LaserMissile.h" />
     <ClInclude Include="MainGame.h" />
@@ -147,7 +149,6 @@
     <ClInclude Include="MissileFactory.h" />
     <ClInclude Include="MissileManager.h" />
     <ClInclude Include="NormalMissile.h" />
-    <ClInclude Include="ShowUpEnemy.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="StraightMissile.h" />
     <ClInclude Include="Tank.h" />
@@ -165,6 +166,8 @@
     <ClCompile Include="HomingMissile.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LaserMissile.cpp" />
     <ClCompile Include="MainGame.cpp" />
@@ -173,7 +176,6 @@
     <ClCompile Include="MissileFactory.cpp" />
     <ClCompile Include="MissileManager.cpp" />
     <ClCompile Include="NormalMissile.cpp" />
-    <ClCompile Include="ShowUpEnemy.cpp" />
     <ClCompile Include="StraightMissile.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TimeManager.cpp" />
