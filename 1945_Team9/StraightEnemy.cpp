@@ -17,8 +17,6 @@ void StraightEnemy::Init(float posX, float posY)
 {
 	Super::Init(posX, posY);
 
-	dir = { 1,0 };
-
 	offsetX = 10;
 	offsetY = 10;
 	image = ImageManager::GetInstance()->AddImage(L"StraightEnemy", TEXT("Image\\StraightEnemyPlane.bmp"), 31, 48, 1, 1, false, true, RGB(248, 0, 248));
@@ -34,8 +32,7 @@ void StraightEnemy::Update()
 	Super::Update();
 	if (!isAlive) return;
 
-	Move();
-
+	Fire();
 }
 
 void StraightEnemy::Render(HDC hdc)
@@ -44,8 +41,6 @@ void StraightEnemy::Render(HDC hdc)
 	if (isAlive)
 	{
 		image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0);
-		/*image->FrameRender(hdc, pos.x - offsetX, pos.y - offsetY, animationFrame, 0);
-		image->FrameRender(hdc, pos.x + offsetX, pos.y + offsetX, animationFrame, 0);*/
 	}
 }
 
@@ -59,7 +54,8 @@ void StraightEnemy::Reset(FPOINT pos)
 
 void StraightEnemy::Move()
 {
-	Super::Move();
+	// pos.x += moveSpeed * TimeManager::GetInstance()->GetDeltaTime();
+	pos.y += moveSpeed * TimeManager::GetInstance()->GetDeltaTime();
 }
 
 void StraightEnemy::Fire()

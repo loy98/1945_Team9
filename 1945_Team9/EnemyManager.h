@@ -28,7 +28,6 @@ private:
 	int diagonalAppearCount;
 	int diagonalMaxAppearCount;
 
-	float straightElpasedTime;
-	int straightAppearCount;
+	float straightAppearCoolTime;
 };
 

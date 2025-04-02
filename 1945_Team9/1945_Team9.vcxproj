@@ -154,6 +154,7 @@
     <ClInclude Include="NormalItem.h" />
     <ClInclude Include="NormalMissile.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="StraightEnemy.h" />
     <ClInclude Include="StraightItem.h" />
     <ClInclude Include="StraightMissile.h" />
     <ClInclude Include="Tank.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="MissileManager.cpp" />
     <ClCompile Include="NormalItem.cpp" />
     <ClCompile Include="NormalMissile.cpp" />
+    <ClCompile Include="StraightEnemy.cpp" />
     <ClCompile Include="StraightItem.cpp" />
     <ClCompile Include="StraightMissile.cpp" />
     <ClCompile Include="Tank.cpp" />
