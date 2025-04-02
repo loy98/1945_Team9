@@ -15,6 +15,12 @@ void Missile::Release()
 			collider = nullptr;
 		}
 	}
+
+	if (controller)
+	{
+		delete controller;
+		controller = nullptr;
+	}
 }
 
 void Missile::Update()
