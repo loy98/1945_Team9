@@ -4,19 +4,20 @@
 #include "LaserMissile.h"
 #include "StraightMissile.h"
 #include "HomingMissile.h"
-
+#include "Collider.h"
 
 MissileFactory::~MissileFactory()
 {
 }
 
-Missile* MissileFactory::AddMissile()
+Missile* MissileFactory::AddMissile(CollisionGroup group)
 {
 	vector<Missile*> pack;
 	pack.resize(2);
 
 	Missile* missile = CreateMissile();
 	missile->Init();
+	missile->AddCollider(missile, group);
 	return missile;
 }
 

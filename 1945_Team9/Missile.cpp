@@ -55,9 +55,9 @@ void Missile::Render(HDC hdc, bool isFlip)
 	}
 }
 
-void Missile::AddCollider(CollisionGroup group)
+void Missile::AddCollider(Missile* missile, CollisionGroup group)
 {
-	Collider* collider = new Collider(this->owner, this->pos);
+	Collider* collider = new Collider(missile, missile->pos);
 	colliderList.push_back(collider);
 	CollisionManager::GetInstance()->AddCollider(collider, group);
 }

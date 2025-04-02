@@ -8,7 +8,7 @@ class MissileFactory
 public:
 	MissileFactory() {}
 	virtual ~MissileFactory();
-	Missile* AddMissile();
+	Missile* AddMissile(CollisionGroup group);
 
 private:
 	virtual Missile* CreateMissile() = 0;

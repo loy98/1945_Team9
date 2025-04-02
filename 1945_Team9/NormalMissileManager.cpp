@@ -17,7 +17,7 @@ void NormalMissileManager::Init()
 
 	for (iter = vecMissileList.begin(); iter != vecMissileList.end(); iter++)
 	{
-		(*iter) = missileFactory->AddMissile();
+		(*iter) = missileFactory->AddMissile(collisionGroup);
 	}
 }
 
@@ -80,6 +80,6 @@ void NormalMissileManager::Launch(FPOINT pos)
 
 void NormalMissileManager::AddMissile()
 {
-	vecMissileList.push_back(missileFactory->AddMissile());
+	vecMissileList.push_back(missileFactory->AddMissile(collisionGroup));
 	vecMissileList.back()->SetOwner(owner);
 }

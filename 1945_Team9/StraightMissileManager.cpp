@@ -85,7 +85,7 @@ void StraightMissileManager::AddMissile()
 	pack.resize(2);
 	for (int i = 0; i < pack.size(); i++)
 	{
-		pack.at(i) = missileFactory->AddMissile();
+		pack.at(i) = missileFactory->AddMissile(collisionGroup);
 		//pack.back()->SetOwner(owner);
 	}
 

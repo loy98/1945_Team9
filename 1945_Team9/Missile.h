@@ -16,7 +16,7 @@ public:
 	virtual void Update();		// active일 경우에만. move, isActived 상태. 유도미사일의 경우 target pos까지.-기존거에 추가하는 방향으로.
 	virtual void Render(HDC hdc, bool isFlip);		// active일 경우 렌더.
 	
-	void AddCollider(CollisionGroup group);
+	void AddCollider(Missile* missile, CollisionGroup group);
 	void ReLoad(FPOINT pos);		// 발사할 경우 세팅. 플레이어의 위치를 받는다.
 	void Move();
 	bool IsOutofScreen();

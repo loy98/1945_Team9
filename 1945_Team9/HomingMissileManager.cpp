@@ -19,7 +19,7 @@ void HomingMissileManager::Init()
 	{
 		for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
 		{
-			(*iter) = missileFactory->AddMissile();
+			(*iter) = missileFactory->AddMissile(collisionGroup);
 		}
 	}
 }
@@ -79,7 +79,7 @@ void HomingMissileManager::AddMissile()
 
 	for (int i = 0; i < pack.size(); i++)
 	{
-		pack.push_back(missileFactory->AddMissile());
+		pack.push_back(missileFactory->AddMissile(collisionGroup));
 		pack.back()->SetOwner(owner);
 	}
 	vecvecMissileList.push_back(pack);

@@ -50,6 +50,7 @@ void Player::Init()
 	{
 		(*iter)->SetOwner(this);
 		(*iter)->Init();
+		(*iter)->SetCollisionGroup(group);
 	}
 
 	Collider* collider = new Collider(this, pos);

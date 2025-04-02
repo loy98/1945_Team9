@@ -17,7 +17,7 @@ void LaserMissileManager::Init()
 
 	for (iter = vecMissileList.begin(); iter != vecMissileList.end(); iter++)
 	{
-		(*iter) = missileFactory->AddMissile();
+		(*iter) = missileFactory->AddMissile(collisionGroup);
 	}
 }
 
@@ -94,6 +94,6 @@ void LaserMissileManager::Launch(FPOINT pos)
 
 void LaserMissileManager::AddMissile()
 {
-	vecMissileList.push_back(missileFactory->AddMissile());
+	vecMissileList.push_back(missileFactory->AddMissile(collisionGroup));
 	vecMissileList.back()->SetOwner(owner);
 }
