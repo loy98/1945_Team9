@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "Missile.h"
 #include "DiagonalEnemy.h"
+#include "StraightEnemy.h"
 
 EnemyManager::EnemyManager(GameObject* target) : target(target)
 {
@@ -27,7 +28,7 @@ void EnemyManager::Init()
 	int straigntSize = vecEnemys[(int)EnemyType::Straight].size();
 	for (int i = 0; i < straigntSize; i++)
 	{
-		vecEnemys[(int)EnemyType::Straight][i] = new DiagonalEnemy();
+		vecEnemys[(int)EnemyType::Straight][i] = new StraightEnemy();
 		vecEnemys[(int)EnemyType::Straight][i]->Init(20, -20);
 		vecEnemys[(int)EnemyType::Straight][i]->SetTarget(target);
 	}
@@ -85,8 +86,8 @@ void EnemyManager::Update()
 
 	if (diagonalAppearCount < diagonalMaxAppearCount)
 
-		DiagonalAppear();
-		StraightAppear();
+	DiagonalAppear();
+	StraightAppear();
 }
 
 void EnemyManager::Render(HDC hdc)
@@ -140,5 +141,36 @@ void EnemyManager::DiagonalAppear()
 
 void EnemyManager::StraightAppear()
 {
+	static int num = 0;
+	static FPOINT pos = { 0,0};
+	if (num == 0)
+	{
+		pos = { (float)(rand() % (WINSIZE_X - 100))  , -20.f };
+	}
 
+	int straightSize = vecEnemys[(int)EnemyType::Straight].size();
+	for (int i = 0; i < straightSize; i++)
+	{
+		if (!vecEnemys[(int)EnemyType::Straight][i]->GetIsAlive())
+		{
+			float posX = pos.x;
+			float posY = pos.y;
+			if (num == 0)
+			{
+				posY += 50.0f;
+			}
+			else if (num == 1)
+			{
+				posX -= 50.0f;
+			}
+			else if (num == 2)
+			{
+				posX += 50.0f;
+			}
+
+			vecEnemys[(int)EnemyType::Straight][i]->Reset({ posX,posY});
+			num = (num+1) % straightSize;
+		} 
+		
+	}
 }

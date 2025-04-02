@@ -19,6 +19,6 @@ public:
 	void Fire() override;
 
 private:
-	float elapsedFireTime;
+	float fireTime;
 	float maxFireTime;
 };
