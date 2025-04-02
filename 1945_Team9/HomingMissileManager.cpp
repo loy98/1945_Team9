@@ -81,7 +81,14 @@ void HomingMissileManager::Init()
 	targetList = CollisionManager::GetInstance()->GetCollider(CollisionGroup::Enemy);
 	// 적의 충돌 위치 받아오고, 그 중 하나를 타겟으로 한다. 만약 타겟이 죽으면 타겟 갱신, 부딪혔으면 끝
 
-	targets.reserve(vecvecMissileList.size());
+	// 타겟 리스트 정리
+	for (targetIter = targetList.begin(); targetIter != targetList.end(); targetIter++)
+	{
+		if ((*targetIter)->GetOwner()->GetObjectType() != ObjectType::Enemy)	// 적이 아니라면
+		{
+			targetList.erase(targetIter);	// 삭제
+		}
+	}
 }
 
 void HomingMissileManager::Release()
