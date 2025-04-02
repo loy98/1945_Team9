@@ -13,10 +13,11 @@ public:
 	virtual void Render(HDC hdc);
 
 	bool GetIsDead() { return isDead; }
-	
+	ItemType GetItemType() { return itemType; }
 protected:
 	Image* image;
 	FPOINT dir;
+	ItemType itemType;
 	float moveSpeed;
 	float angle;
 	float lifeTime;

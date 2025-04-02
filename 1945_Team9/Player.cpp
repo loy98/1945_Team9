@@ -141,6 +141,25 @@ void Player::Render(HDC hdc)
 	}
 }
 
+void Player::LevelUp(ItemType type)
+{
+	switch (type)
+	{
+	case ItemType::Laser:
+		vecMissileManager[(int)MissileType::Laser]->LevelUp();
+		break;
+	case ItemType::Homing:
+		vecMissileManager[(int)MissileType::Homing]->LevelUp();
+		break;
+	case ItemType::Normal:
+		vecMissileManager[(int)MissileType::Normal]->LevelUp();
+		break;
+	case ItemType::Straight:
+		vecMissileManager[(int)MissileType::Straight]->LevelUp();
+		break;
+	}
+}
+
 void Player::Move()
 {
 	// ���� ���� �ʱ�ȭ

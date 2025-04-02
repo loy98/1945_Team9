@@ -45,6 +45,7 @@ public:
 	void Update();	
 	void Render(HDC hdc);
 
+	void LevelUp(ItemType type);
 	void Move();
 	void Fire(MissileType type);
 	void AddMissile(GameObject* owner, MissileType type, FPOINT pos, float angle, float speed);

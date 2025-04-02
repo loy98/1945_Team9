@@ -96,15 +96,18 @@ void StraightMissileManager::Launch(FPOINT pos)
 {
 	for (int i = 0; i < vecvecMissileList.size(); i++)
 	{
-		for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
+		if (!isActivedPack(i))
 		{
-			if (!(*iter)->GetIsActived())
+			for (int j = 0; j < vecvecMissileList[i].size(); j++)
 			{
-				(*iter)->ReLoad({ pos.x - 25 + (50 * (i % 2)), pos.y });
+				if (!vecvecMissileList[i][j]->GetIsActived())
+				{
+					vecvecMissileList[i][j]->ReLoad({ pos.x - 25 + (50 * (j % 2)), pos.y });
+				}
+				else break;
 			}
-			else break;
+			break;
 		}
-		//if (iter == vecvecMissileList[i].end()) break;
 	}
 }
 

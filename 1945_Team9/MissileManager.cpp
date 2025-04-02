@@ -10,3 +10,7 @@ MissileManager::MissileManager()
 MissileManager::~MissileManager()
 {
 }
+
+void MissileManager::LevelUp()
+{
+}

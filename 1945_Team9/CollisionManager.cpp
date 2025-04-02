@@ -1,6 +1,8 @@
 #include "CollisionManager.h"
 #include "Collider.h"
 #include "GameObject.h"
+#include "Player.h"
+#include "Item.h"
 void CollisionManager::Update()
 {
 	const vector<Collider*>& playerColliders = colliderList[(int)CollisionGroup::Player];
@@ -48,6 +50,7 @@ void CollisionManager::CheckPlayerItemCollision()
 					continue;
 				//src->GetOwner()->SetIsCollision(true);
 				dest->GetOwner()->SetIsCollision(true);
+				dynamic_cast<Player*>(src->GetOwner())->LevelUp(dynamic_cast<Item*>(dest->GetOwner())->GetItemType());
 			}
 		}
 	}

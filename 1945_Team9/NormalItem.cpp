@@ -2,6 +2,7 @@
 
 NormalItem::NormalItem()
 {
+	itemType = ItemType::Normal;
 }
 
 NormalItem::~NormalItem()

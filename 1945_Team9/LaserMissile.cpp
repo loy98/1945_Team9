@@ -20,7 +20,8 @@ void LaserMissile::Init()
 	isActived = false;
 	isLaunch = false;
 	elapsedlaunchTime = 3.0f;
-	launchTime = 3.0f;
+	launchTime = 1.0f;
+	coolTime = 4.0f;
 	missileType = MissileType::Laser;
 	animationFrame = 0;
 	maxAnimationFrame = 14;
@@ -49,7 +50,12 @@ void LaserMissile::Update()
 		Super::Update();
 
 		elapsedlaunchTime += TimeManager::GetInstance()->GetDeltaTime();
-		if (elapsedlaunchTime > launchTime)
+		if (!isLaunch && elapsedlaunchTime > coolTime)
+		{
+			elapsedlaunchTime = 0;
+			isLaunch = isLaunch ? false : true;
+		}
+		if (isLaunch && elapsedlaunchTime > launchTime)
 		{
 			elapsedlaunchTime = 0;
 			isLaunch = isLaunch ? false : true;
@@ -72,4 +78,13 @@ void LaserMissile::Render(HDC hdc, bool isFlip)
 		image->TestFrameRender(hdc, pos.x - offsetX, pos.y - WINSIZE_Y, pos.x + offsetX, WINSIZE_Y + offsetY, animationFrame, 0, false);
 		animationFrame++;
 	}
+}
+
+void LaserMissile::LevelUp()
+{
+	size.x *= 1.55;
+	rc = GetNormalRect(pos.x - size.x / 2, 0, size.x, size.y);
+	offsetX += 40;
+	launchTime += 1.f;
+	coolTime -= 1.f;
 }

@@ -2,6 +2,7 @@
 
 StraightItem::StraightItem()
 {
+	itemType = ItemType::Straight;
 }
 
 StraightItem::~StraightItem()

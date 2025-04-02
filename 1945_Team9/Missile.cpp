@@ -91,6 +91,11 @@ bool Missile::IsOutofScreen()
 	return false;
 }
 
+Missile::Missile()
+{
+	type = ObjectType::Missile;
+}
+
 Missile::~Missile()
 {
 }

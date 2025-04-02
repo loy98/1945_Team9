@@ -1,6 +1,7 @@
 #include "LaserMissileManager.h"
 #include "MissileFactory.h"
 #include "Missile.h"
+#include "LaserMissile.h"
 
 LaserMissileManager::LaserMissileManager()
 {
@@ -90,6 +91,19 @@ void LaserMissileManager::Launch(FPOINT pos)
 			break;
 		}
 	}*/
+}
+
+void LaserMissileManager::LevelUp()
+{
+	for (auto missile : vecMissileList)
+	{
+		if (missile)
+		{
+			dynamic_cast<LaserMissile*>(missile)->LevelUp();
+			break;
+		}
+	}
+	
 }
 
 void LaserMissileManager::AddMissile()
