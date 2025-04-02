@@ -17,7 +17,7 @@ void LaserMissile::Init()
 	pos = { 0,0 };
 	moveSpeed = 50.0f;
 	size = { 20, pos.y };
-	isActived = true;
+	isActived = false;
 	isLaunch = false;
 	elapsedlaunchTime = 3.0f;
 	launchTime = 3.0f;
