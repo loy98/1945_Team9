@@ -52,9 +52,9 @@ enum class EnemyType
 enum class MissileType
 {
 	Normal,
-	Sin,
 	Laser,
 	Straight,
+	Homing,
 	MissileTypeLength
 };
 enum class CollisionGroup

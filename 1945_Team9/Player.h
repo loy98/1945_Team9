@@ -22,8 +22,10 @@ private:
 	float missileSpeed;
 	bool LaserLaunched = false;
 
-	MissileManager* missileManager;
+	vector<MissileManager*> vecMissileManager;
+	vector<MissileManager*>::iterator iter;
 	CollisionGroup group;
+
 public:
 	void Init();	
 	void Release();	

@@ -129,7 +129,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BackGround.h" />
-    <ClInclude Include="Boss.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="CommonFunction.h" />
@@ -140,6 +139,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="HomingItem.h" />
     <ClInclude Include="HomingMissile.h" />
+    <ClInclude Include="HomingMissileManager.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="Item.h" />
@@ -147,6 +147,7 @@
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="LaserItem.h" />
     <ClInclude Include="LaserMissile.h" />
+    <ClInclude Include="LaserMissileManager.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Missile.h" />
     <ClInclude Include="MissileController.h" />
@@ -154,10 +155,11 @@
     <ClInclude Include="MissileManager.h" />
     <ClInclude Include="NormalItem.h" />
     <ClInclude Include="NormalMissile.h" />
+    <ClInclude Include="NormalMissileManager.h" />
     <ClInclude Include="Singleton.h" />
-    <ClInclude Include="StraightEnemy.h" />
     <ClInclude Include="StraightItem.h" />
     <ClInclude Include="StraightMissile.h" />
+    <ClInclude Include="StraightMissileManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
@@ -165,7 +167,6 @@
   <ItemGroup>
     <ClCompile Include="1945_Team9.cpp" />
     <ClCompile Include="BackGround.cpp" />
-    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="DiagonalEnemy.cpp" />
@@ -174,6 +175,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="HomingItem.cpp" />
     <ClCompile Include="HomingMissile.cpp" />
+    <ClCompile Include="HomingMissileManager.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -181,6 +183,7 @@
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LaserItem.cpp" />
     <ClCompile Include="LaserMissile.cpp" />
+    <ClCompile Include="LaserMissileManager.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Missile.cpp" />
     <ClCompile Include="MissileController.cpp" />
@@ -188,9 +191,10 @@
     <ClCompile Include="MissileManager.cpp" />
     <ClCompile Include="NormalItem.cpp" />
     <ClCompile Include="NormalMissile.cpp" />
-    <ClCompile Include="StraightEnemy.cpp" />
+    <ClCompile Include="NormalMissileManager.cpp" />
     <ClCompile Include="StraightItem.cpp" />
     <ClCompile Include="StraightMissile.cpp" />
+    <ClCompile Include="StraightMissileManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />

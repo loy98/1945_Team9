@@ -7,11 +7,7 @@ MissileController::MissileController()
 MissileController::~MissileController()
 {
 }
-
-void MissileController::Move(Missile* missile)
-{
-}
-
+//
 NormalController::NormalController()
 {
 }
@@ -34,9 +30,9 @@ void NormalController::Move(Missile* missile)
 	//pos.x += moveSpeed * time * cosf(DEG_TO_RAD(angle));
 	//pos.y -= moveSpeed * time * sinf(DEG_TO_RAD(angle));
 
-	missile->SetPos(pos);
+	missile->SetPos(pos);		// 이동한만큼 pos 반환
 }
-
+//
 LaserController::LaserController()
 {
 }
@@ -45,6 +41,10 @@ LaserController::~LaserController()
 {
 }
 
+void LaserController::Move(Missile* missile)
+{
+}
+//
 StraightController::StraightController()
 {
 }
@@ -73,11 +73,32 @@ void StraightController::Move(Missile* missile)
 		moveSpeed = maxSpeed;
 	}
 
-	pos.x += moveSpeed * time * cosf(DEG_TO_RAD(angle));
-	pos.y -= moveSpeed * time * sinf(DEG_TO_RAD(angle));
+	pos.x += moveSpeed * time * cosf(DEG_TO_RAD(missile->GetAngle()));
+	pos.y -= moveSpeed * time * sinf(DEG_TO_RAD(missile->GetAngle()));
 
 	missile->SetMoveSpeed(moveSpeed);
 	
 	//missile->SetAddSpeed(1.01f * addSpeed);
+	missile->SetPos(pos);
+}
+//
+HomingController::HomingController()
+{
+}
+
+HomingController::~HomingController()
+{
+}
+
+void HomingController::Move(Missile* missile)
+{
+	float time = TimeManager::GetInstance()->GetDeltaTime();
+	FPOINT pos = missile->GetPos();
+	float moveSpeed = missile->GetMoveSpeed();
+	float angle = missile->GetAngle();
+
+	pos.x += moveSpeed * time * cosf(DEG_TO_RAD(missile->GetAngle()));
+	pos.y -= moveSpeed * time * sinf(DEG_TO_RAD(missile->GetAngle()));
+
 	missile->SetPos(pos);
 }

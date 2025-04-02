@@ -5,19 +5,21 @@ class LaserMissile : public Missile
 {
 public:
 	using Super = Missile;
-	LaserMissile(FPOINT pos);
-	~LaserMissile();
 
-	void Init() override;
-	void Release() override;
-	void Update() override;
-	void Render(HDC hdc,bool isFlip) override;
+	LaserMissile();
+	virtual ~LaserMissile();
 
-	void Move() override;
-	void LaserMissileMove() override;
+	virtual void Init() override;
+	virtual void Release() override;
+	virtual void Update() override;
+	virtual void Render(HDC hdc, bool isFlip) override;
+
+	void SetOwner(GameObject* owner) { this->owner = owner; };
+
 private:
 	float elapsedlaunchTime;
 	float launchTime;
 	bool isLaunch;
+	GameObject* owner;
 };
 

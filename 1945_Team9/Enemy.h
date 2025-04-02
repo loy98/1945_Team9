@@ -25,7 +25,10 @@ public:
 	inline bool GetIsAlive() { return isAlive; }
 	bool GetIsLeft() { return isLeft; }
 
+
+	//inline void SetTarget(Player* target) { this->target = target; }
 	inline void SetTarget(GameObject* target) { this->target = target; }
+
 	inline FPOINT GetPos() { return pos; }
 	float GetAngle() { return angle; }
 	float GetMoveSpeed() { return moveSpeed; }
@@ -41,6 +44,8 @@ protected:
 	float elapsedTime;
 	float elapsedMoveTime;
 	float maxMoveTime;
+
+	//Player* target;
 	GameObject* target;
 	bool isLeft;
 

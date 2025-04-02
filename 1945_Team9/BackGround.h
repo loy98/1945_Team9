@@ -1,7 +1,8 @@
 #pragma once
-#include "GameObject.h"
+#include "config.h"
+
 class Image;
-class BackGround:public GameObject
+class BackGround
 {
 private:
 	Image* currentGround;

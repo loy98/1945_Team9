@@ -7,7 +7,7 @@ public:
 	MissileController();
 	virtual ~MissileController();
 
-	virtual void Move(Missile* missile);
+	virtual void Move(Missile* missile) =0;
 
 };
 
@@ -26,6 +26,7 @@ public:
 	LaserController();
 	virtual ~LaserController();
 
+	void Move(Missile* missile) override;
 	//void Move(FPOINT& pos, const float& speed, const float& angle) override;
 };
 
@@ -36,6 +37,13 @@ public:
 	virtual ~StraightController();
 
 	void Move(Missile* missile) override;
-private:
-	vector<Missile*> vecMissile;
+};
+
+class HomingController : public MissileController
+{
+public:
+	HomingController();
+	virtual ~HomingController();
+
+	void Move(Missile* missile) override;
 };

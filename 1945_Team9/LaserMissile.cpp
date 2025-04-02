@@ -1,23 +1,23 @@
 #include "LaserMissile.h"
 #include "CommonFunction.h"
+#include "Image.h"
 #include "MissileController.h"
 #include "Player.h"
 #include "ImageManager.h"
-#include "Image.h"
 
-LaserMissile::LaserMissile(FPOINT pos)
+LaserMissile::LaserMissile()
 {
-	this->pos = pos;
 }
 LaserMissile::~LaserMissile()
 {
 }
+
 void LaserMissile::Init()
 {
-	Super::Init();
+	pos = { 0,0 };
 	moveSpeed = 50.0f;
 	size = { 20, pos.y };
-	isActived = true;
+	isActived = false;
 	isLaunch = false;
 	elapsedlaunchTime = 3.0f;
 	launchTime = 3.0f;
@@ -31,8 +31,7 @@ void LaserMissile::Init()
 	controller = new LaserController();
 
 	image = ImageManager::GetInstance()->AddImage(
-		L"laser1", L"Image\\laser1.bmp", 462, 105, 14, 1, false, true, RGB(248, 0, 248)
-	);
+		L"laser1", L"Image\\laser1.bmp", 462, 105, 14, 1, false, true, RGB(248, 0, 248));
 }
 
 void LaserMissile::Release()
@@ -41,24 +40,27 @@ void LaserMissile::Release()
 
 void LaserMissile::Update()
 {
-	float launchRenderTime = launchTime / maxAnimationFrame;
-
-	pos = owner->GetPos();
-	UpdateLaserRect(rc, pos);
-	Super::Update();
-
-	elapsedlaunchTime += TimeManager::GetInstance()->GetDeltaTime();
-	if (elapsedlaunchTime > launchTime)
+	if(isActived)
 	{
-		elapsedlaunchTime = 0;
-		isLaunch = isLaunch ? false : true;
+		float launchRenderTime = launchTime / maxAnimationFrame;
+
+		//pos = owner->GetPos();
+		UpdateLaserRect(rc, pos);
+		Super::Update();
+
+		elapsedlaunchTime += TimeManager::GetInstance()->GetDeltaTime();
+		if (elapsedlaunchTime > launchTime)
+		{
+			elapsedlaunchTime = 0;
+			isLaunch = isLaunch ? false : true;
+		}
+		if (elapsedlaunchTime > launchRenderTime)
+		{
+			animationFrame++;
+			if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = 0;
+		}
+		isCollision = isLaunch ? false : true;
 	}
-	if (elapsedlaunchTime > launchRenderTime)
-	{
-		animationFrame++;
-		if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = 0;
-	}
-	isCollision = isLaunch ? false : true;
 }
 
 void LaserMissile::Render(HDC hdc, bool isFlip)
@@ -70,13 +72,4 @@ void LaserMissile::Render(HDC hdc, bool isFlip)
 		image->TestFrameRender(hdc, pos.x - offsetX, pos.y - WINSIZE_Y, pos.x + offsetX, WINSIZE_Y + offsetY, animationFrame, 0, false);
 		animationFrame++;
 	}
-}
-
-void LaserMissile::Move()
-{
-}
-
-void LaserMissile::LaserMissileMove()
-{
-
 }
