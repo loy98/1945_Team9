@@ -33,7 +33,7 @@ void EnemyManager::Init()
 	for (int i = 0; i < straightSize; i++)
 	{
 		vecEnemys[(int)EnemyType::Straight][i] = new StraightEnemy();
-		vecEnemys[(int)EnemyType::Straight][i]->Init(20, -20);
+		vecEnemys[(int)EnemyType::Straight][i]->Init(20.0f, -20.f);
 		vecEnemys[(int)EnemyType::Straight][i]->SetTarget(target);
 	}
 }
@@ -84,7 +84,6 @@ void EnemyManager::Render(HDC hdc)
 			}
 		}
 	}
-
 }
 
 void EnemyManager::AddEnemy(int size)

@@ -79,11 +79,7 @@ enum class ItemType
 	Straight,
 	ItemTypeLength
 };
-enum class EnemyType
-{
-	Diagonal,
-	EnemyTypeLength
-};
+
 struct Size
 {
 	float x;
