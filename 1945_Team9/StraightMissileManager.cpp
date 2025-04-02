@@ -100,14 +100,8 @@ void StraightMissileManager::Launch(FPOINT pos)
 			//LaunchPack(i);
 			for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
 			{
-				if (!(*iter)->GetIsActived())
-				{
 					(*iter)->ReLoad({ pos.x - 25+position, pos.y });
 					position += 50;
-				}
-				else break;
-
-
 			}
 			break;
 		}
@@ -126,4 +120,8 @@ void StraightMissileManager::AddMissile()
 	}
 
 	vecvecMissileList.push_back(pack);
+}
+
+void StraightMissileManager::LevelUp()
+{
 }

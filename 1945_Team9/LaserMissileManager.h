@@ -19,5 +19,7 @@ public:
 	virtual void Launch(FPOINT pos) override;
 
 	virtual void AddMissile() override;
+
+	virtual void LevelUp() override;
 };
 

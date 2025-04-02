@@ -83,3 +83,7 @@ void NormalMissileManager::AddMissile()
 	vecMissileList.push_back(missileFactory->AddMissile(collisionGroup));
 	vecMissileList.back()->SetOwner(owner);
 }
+
+void NormalMissileManager::LevelUp()
+{
+}

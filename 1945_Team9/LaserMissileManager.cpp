@@ -97,3 +97,7 @@ void LaserMissileManager::AddMissile()
 	vecMissileList.push_back(missileFactory->AddMissile(collisionGroup));
 	vecMissileList.back()->SetOwner(owner);
 }
+
+void LaserMissileManager::LevelUp()
+{
+}
