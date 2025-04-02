@@ -7,6 +7,8 @@ class StraightMissileManager: public MissileManager
 private:
 	vector<vector<Missile*>> vecvecMissileList;
 
+	bool isActivedPack(int num);
+	void LaunchPack(int num);
 public:
 	StraightMissileManager();
 	virtual ~StraightMissileManager();

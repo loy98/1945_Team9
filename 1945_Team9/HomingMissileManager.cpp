@@ -2,6 +2,28 @@
 #include "MissileFactory.h"
 #include "Missile.h"
 
+bool HomingMissileManager::isActivedPack(int num)
+{
+	for (iter = vecvecMissileList[num].begin(); iter != vecvecMissileList[num].end(); iter++)
+	{
+		if ((*iter)->GetIsActived())
+			return true;		// 하나라도 active면 true 리턴
+	}
+
+	return false;		// 다 활성상태가 아니면 false 리턴
+}
+
+void HomingMissileManager::LaunchPack(int num)
+{
+	if (!isActivedPack(num))		// 활성상태인게 없으면 발사
+	{
+		for (iter = vecvecMissileList[num].begin(); iter != vecvecMissileList[num].end(); iter++)
+		{
+			(*iter)->ReLoad(pos);
+		}
+	}
+}
+
 HomingMissileManager::HomingMissileManager()
 {
 }
@@ -12,15 +34,11 @@ HomingMissileManager::~HomingMissileManager()
 
 void HomingMissileManager::Init()
 {
-	vecvecMissileList.resize(5);
+	vecvecMissileList.reserve(5);
 	missileFactory = new HomingMissileFactory;
-
-	for (int i = 0; i < vecvecMissileList.size(); i++)
+	for (int i = 0; i < vecvecMissileList.capacity(); i++)
 	{
-		for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
-		{
-			(*iter) = missileFactory->AddMissile(collisionGroup);
-		}
+		AddMissile();
 	}
 }
 
@@ -43,9 +61,12 @@ void HomingMissileManager::Update()
 {
 	for(int i = 0; i< vecvecMissileList.size(); i++)
 	{
-		for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
+		if(isActivedPack(i))
 		{
-			(*iter)->Update();
+			for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
+			{
+				(*iter)->Update();
+			}
 		}
 	}
 }
@@ -54,9 +75,12 @@ void HomingMissileManager::Render(HDC hdc, bool isFlip)
 {
 	for (int i = 0; i < vecvecMissileList.size(); i++)
 	{
-		for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
+		if(isActivedPack(i))
 		{
-			(*iter)->Render(hdc, isFlip);
+			for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
+			{
+				(*iter)->Render(hdc, isFlip);
+			}
 		}
 	}
 }
@@ -65,10 +89,7 @@ void HomingMissileManager::Launch(FPOINT pos)
 {
 	for (int i = 0; i < vecvecMissileList.size(); i++)
 	{
-		for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
-		{
-			(*iter)->ReLoad(pos);
-		}
+		LaunchPack(i); 
 	}
 }
 
@@ -79,8 +100,9 @@ void HomingMissileManager::AddMissile()
 
 	for (int i = 0; i < pack.size(); i++)
 	{
-		pack.push_back(missileFactory->AddMissile(collisionGroup));
-		pack.back()->SetOwner(owner);
+		pack.at(i) = missileFactory->AddMissile(collisionGroup);
+		//pack.back()->SetOwner(owner);
 	}
+
 	vecvecMissileList.push_back(pack);
 }

@@ -2,6 +2,30 @@
 #include "MissileFactory.h"
 #include "Missile.h"
 
+
+bool StraightMissileManager::isActivedPack(int num)
+{
+	for (iter = vecvecMissileList[num].begin(); iter != vecvecMissileList[num].end(); iter++)
+	{
+		if ((*iter)->GetIsActived())
+			return true;		// 하나라도 active면 true 리턴
+	}
+
+	return false;		// 다 활성상태가 아니면 false 리턴
+}
+
+void StraightMissileManager::LaunchPack(int num)
+{
+	if (!isActivedPack(num))		// 활성상태인게 없으면 발사
+	{
+		for (iter = vecvecMissileList[num].begin(); iter != vecvecMissileList[num].end(); iter++)
+		{
+			(*iter)->ReLoad(pos);
+		}
+	}
+}
+
+
 StraightMissileManager::StraightMissileManager()
 {
 }
@@ -40,10 +64,12 @@ void StraightMissileManager::Update()
 {
 	for (int i = 0; i < vecvecMissileList.size(); i++)
 	{
-		for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
+		if(isActivedPack(i))
 		{
-			if ((*iter)->GetIsActived())
+			for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
+			{
 				(*iter)->Update();
+			}
 		}
 	}
 }
@@ -52,13 +78,16 @@ void StraightMissileManager::Render(HDC hdc, bool isFlip)
 {
 	for (int i = 0; i < vecvecMissileList.size(); i++)
 	{
-		for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
+		if(isActivedPack(i))
 		{
-			if ((*iter)->GetIsActived())
-				(*iter)->Render(hdc, isFlip);
-			else break;
+			vecvecMissileList[i].at(0)->Render(hdc, isFlip);
+			vecvecMissileList[i].at(1)->Render(hdc, isFlip);
+			//for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
+			//{
+			//	(*iter)->Render(hdc, isFlip);
+			//}
 		}
-		if (iter == vecvecMissileList[i].end()) break;
+		//if (iter == vecvecMissileList[i].end()) break;
 	}
 
 }
@@ -71,11 +100,11 @@ void StraightMissileManager::Launch(FPOINT pos)
 		{
 			if (!(*iter)->GetIsActived())
 			{
-				(*iter)->ReLoad({ pos.x - 25 + (50*i), pos.y });
+				(*iter)->ReLoad({ pos.x - 25 + (50 * (i % 2)), pos.y });
 			}
 			else break;
 		}
-		if (iter == vecvecMissileList[i].end()) break;
+		//if (iter == vecvecMissileList[i].end()) break;
 	}
 }
 

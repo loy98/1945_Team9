@@ -4,7 +4,10 @@ class HomingMissileManager: public MissileManager
 {
 private:
 	vector<vector<Missile*>> vecvecMissileList;
+	vector<Missile*>::iterator iter;
 
+	bool isActivedPack(int num);
+	void LaunchPack(int num);
 public:
 	HomingMissileManager();
 	virtual ~HomingMissileManager();
