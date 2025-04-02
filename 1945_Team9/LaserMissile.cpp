@@ -48,6 +48,7 @@ void LaserMissile::Update()
 		//pos = owner->GetPos();
 		UpdateLaserRect(rc, pos);
 		Super::Update();
+		isAlive = true;
 
 		elapsedlaunchTime += TimeManager::GetInstance()->GetDeltaTime();
 		if (!isLaunch && elapsedlaunchTime > coolTime)
@@ -66,6 +67,7 @@ void LaserMissile::Update()
 			if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = 0;
 		}
 		isCollision = isLaunch ? false : true;
+		
 	}
 }
 
