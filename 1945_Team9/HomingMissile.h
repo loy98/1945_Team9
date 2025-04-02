@@ -7,11 +7,15 @@ class HomingMissile: public Missile
 {
 private:
 	Image* idle;
-	int animationFrame;
 	vector<Image*> left;
 	vector<Image*> right;
+	Image* currentAnimation;
+
 	FPOINT currPos;
 	FPOINT prevPos;
+
+	int currentFrame;
+	int maxFrame;
 
 	void UpdateImage();
 
