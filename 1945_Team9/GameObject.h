@@ -17,14 +17,18 @@ public:
 	ObjectType GetObjectType() { return type; }
 	virtual RECT GetRect() { return rc; }
 	Size GetSize() { return size; }
+	inline void SetIsAlive(bool isAlive) { this->isAlive = isAlive; }
+	inline bool GetIsAlive() { return isAlive; }
 
 	GameObject();
 	~GameObject();
 protected:
 	FPOINT pos;
 	vector<Collider*> colliderList;
-	bool isCollision;
 	ObjectType type;
 	RECT rc;
 	Size size;
+
+	bool isCollision;
+	bool isAlive;
 };

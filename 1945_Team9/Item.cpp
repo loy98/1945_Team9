@@ -8,7 +8,7 @@
 Item::Item()
 {
 	type = ObjectType::Item;
-	
+	isAlive = true;
 }
 
 Item::~Item()

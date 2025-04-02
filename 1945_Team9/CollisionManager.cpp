@@ -23,7 +23,9 @@ void CollisionManager::Update()
 				if (src->GetOwner()->GetObjectType() == dest->GetOwner()->GetObjectType())
 					continue;
 				src->GetOwner()->SetIsCollision(true);
+				src->GetOwner()->SetIsAlive(false);
 				dest->GetOwner()->SetIsCollision(true);
+				dest->GetOwner()->SetIsAlive(false);
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 #pragma once
 #include "config.h"
-class GameObject;
-class Collider
+#include "GameObject.h"
+class Collider : public GameObject
 {
 public:
 	Collider(GameObject* owner, FPOINT pos);

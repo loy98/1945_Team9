@@ -46,6 +46,11 @@ void Enemy::Release()
 
 void Enemy::Update()
 {
+	for (auto& collider : colliderList)
+	{
+		if (collider)
+			collider->Update();
+	}
 	if (!isAlive) return;
 
 	elapsedTime += TimeManager::GetInstance()->GetDeltaTime();
@@ -65,19 +70,10 @@ void Enemy::Update()
 
 	UpdateRectAtCenter(rc, pos);
 
-	for (auto& collider : colliderList)
-	{
-		if (collider)
-			collider->Update();
-	}
 }
 
 void Enemy::Render(HDC hdc)
 {
-	if (isAlive)
-	{
-		///image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0);
-	}
 	if (missileManager)
 	{
 		missileManager->Render(hdc,true);

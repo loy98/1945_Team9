@@ -21,8 +21,6 @@ public:
 	void ChangeApperSide();
 	bool IsOutofScreen();
 
-	inline void SetIsAlive(bool isAlive) { this->isAlive = isAlive; }
-	inline bool GetIsAlive() { return isAlive; }
 	bool GetIsLeft() { return isLeft; }
 
 
@@ -38,7 +36,7 @@ protected:
 	FPOINT dir{ 1, 0 };
 	float moveSpeed;
 	float angle;
-	bool isAlive;
+	
 	int animationFrame;
 	int elapsedFrame;
 	float elapsedTime;

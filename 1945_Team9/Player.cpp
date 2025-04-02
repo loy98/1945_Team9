@@ -24,6 +24,7 @@ void Player::Init()
 	group = CollisionGroup::Player;
 	type = ObjectType::Player;
 	state = PlayerState::Idle;
+	isAlive = true;
 	// ����
 	//barrelSize = 30;
 	//barrelEnd.x = pos.x;

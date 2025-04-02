@@ -1,7 +1,8 @@
 #include "Collider.h"
-#include "GameObject.h"
+
 Collider::Collider(GameObject* owner, FPOINT pos) : owner(owner), pos(pos)
 {
+	isAlive = true;
 	rc = owner->GetRect();
 	isCollision = owner->GetIsCollision();
 }
@@ -16,11 +17,13 @@ void Collider::Update()
 	pos = owner->GetPos();
 	rc = owner->GetRect();
 	isCollision = owner->GetIsCollision();
+	isAlive = owner->GetIsAlive();
 }
 
 void Collider::Render(HDC hdc)
 {
 	//collider는 개발단계에서만 render할것!
+	if (!isAlive) return;
 	if (!showDebug) return;
 	HBRUSH myBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
 	HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, myBrush);
