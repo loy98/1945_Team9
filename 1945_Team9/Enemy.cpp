@@ -1,6 +1,6 @@
 #include "Enemy.h"
 #include "CommonFunction.h"
-#include "Tank.h"
+#include "Player.h"
 #include "Image.h"
 #include "MissileManager.h"
 #include "CollisionManager.h"

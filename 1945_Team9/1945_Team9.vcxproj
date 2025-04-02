@@ -158,7 +158,7 @@
     <ClInclude Include="StraightEnemy.h" />
     <ClInclude Include="StraightItem.h" />
     <ClInclude Include="StraightMissile.h" />
-    <ClInclude Include="Tank.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
@@ -191,7 +191,7 @@
     <ClCompile Include="StraightEnemy.cpp" />
     <ClCompile Include="StraightItem.cpp" />
     <ClCompile Include="StraightMissile.cpp" />
-    <ClCompile Include="Tank.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>

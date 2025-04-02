@@ -1,4 +1,4 @@
-#include "Tank.h"
+#include "Player.h"
 #include "CommonFunction.h"
 #include "Missile.h"
 #include "Image.h"
@@ -8,7 +8,7 @@
 #include "CollisionManager.h"
 
 
-void Tank::Init()
+void Player::Init()
 {
 	pos.x = WINSIZE_X / 2;
 	pos.y = WINSIZE_Y - 200;
@@ -37,7 +37,7 @@ void Tank::Init()
 	CollisionManager::GetInstance()->AddCollider(collider, CollisionGroup::Player);
 }
 
-void Tank::Release()
+void Player::Release()
 {
 	if (missileManager)
 	{
@@ -47,7 +47,7 @@ void Tank::Release()
 	}
 }
 
-void Tank::Update()
+void Player::Update()
 {
 	isCollision = false;
 	barrelEnd.x = pos.x + barrelSize * cosf(DEG_TO_RAD(fireAngle));
@@ -73,7 +73,7 @@ void Tank::Update()
 	}
 }
 
-void Tank::Render(HDC hdc)
+void Player::Render(HDC hdc)
 {
 	if (image) image->TestFrameRender(hdc, rc.left,rc.top,rc.right, size.y, 1, 0, false);
 	//if (missileManager) missileManager->Render(hdc);
@@ -85,7 +85,7 @@ void Tank::Render(HDC hdc)
 	if (missileManager) missileManager->Render(hdc, false);
 }
 
-void Tank::Move()
+void Player::Move()
 {
 	// ���� ���� �ʱ�ȭ
 	dir = { 0, 0 };
@@ -113,7 +113,7 @@ void Tank::Move()
 	pos.y = clamp(pos.y, (float)size.y / 2, (float)WINSIZE_Y - size.y / 2);
 }
 
-void Tank::Fire(MissileType type)
+void Player::Fire(MissileType type)
 {
 	int size = missileManager->GetMissileListSize();
 	switch (type)
@@ -139,7 +139,7 @@ void Tank::Fire(MissileType type)
 	}
 }
 
-void Tank::AddMissile(GameObject* owner, MissileType type, FPOINT pos, float angle, float speed)
+void Player::AddMissile(GameObject* owner, MissileType type, FPOINT pos, float angle, float speed)
 {
 	Missile* missile = missileManager->CreateMissile(type, pos, angle, missileSpeed);
 	missile->AddCollider(group);
@@ -147,14 +147,14 @@ void Tank::AddMissile(GameObject* owner, MissileType type, FPOINT pos, float ang
 	missileManager->AddMissile(missile);
 }
 
-void Tank::Dead()
+void Player::Dead()
 {
 }
 
-Tank::Tank()
+Player::Player()
 {
 }
 
-Tank::~Tank()
+Player::~Player()
 {
 }

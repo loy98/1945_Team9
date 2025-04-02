@@ -80,7 +80,7 @@
     <ClInclude Include="MainGame.h">
       <Filter>MainGame</Filter>
     </ClInclude>
-    <ClInclude Include="Tank.h">
+    <ClInclude Include="Player.h">
       <Filter>MainGame</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
@@ -118,6 +118,12 @@
     </ClInclude>
     <ClInclude Include="HomingItem.h">
       <Filter>MainGame\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="StraightEnemy.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -169,7 +175,7 @@
     <ClCompile Include="NormalMissile.cpp">
       <Filter>MainGame\Missile</Filter>
     </ClCompile>
-    <ClCompile Include="Tank.cpp">
+    <ClCompile Include="Player.cpp">
       <Filter>MainGame</Filter>
     </ClCompile>
     <ClCompile Include="EnemyManager.cpp">
@@ -207,6 +213,12 @@
     </ClCompile>
     <ClCompile Include="NormalItem.cpp">
       <Filter>MainGame\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="StraightEnemy.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

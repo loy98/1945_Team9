@@ -1,7 +1,7 @@
 #include "LaserMissile.h"
 #include "CommonFunction.h"
 #include "MissileController.h"
-#include "Tank.h"
+#include "Player.h"
 #include "ImageManager.h"
 #include "Image.h"
 

@@ -2,7 +2,7 @@
 #include "CommonFunction.h"
 #include "Image.h"
 #include "EnemyManager.h"
-#include "Tank.h"
+#include "Player.h"
 #include "MissileManager.h"
 #include "CollisionManager.h"
 #include "Timer.h"
@@ -28,7 +28,7 @@ void MainGame::Init()
 			TEXT("백버퍼 생성 실패"), TEXT("경고"), MB_OK);
 	}
 
-	rocket = new Tank();
+	rocket = new Player();
 	rocket->Init();
 
 	enemyManager = new EnemyManager(rocket);

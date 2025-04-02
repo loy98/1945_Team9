@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
-class Tank;
+class Player;
 class Image;
 class MissileManager;
 class Enemy : public GameObject	// is-a

@@ -2,7 +2,7 @@
 #include "CommonFunction.h"
 #include "MissileController.h"
 #include "Image.h"
-#include "Tank.h"
+#include "Player.h"
 
 StraightMissile::StraightMissile()
 {

@@ -3,7 +3,7 @@
 #include "config.h"
 
 class MissileController;
-class Tank;
+class Player;
 class Image;
 class Missile : public GameObject
 {

@@ -4,7 +4,7 @@
 class Missile;
 class Image;
 class MissileManager;
-class Tank : public GameObject
+class Player : public GameObject
 {
 private:
 	
@@ -35,7 +35,7 @@ public:
 	void AddMissile(GameObject* owner, MissileType type, FPOINT pos, float angle, float speed);
 	void Dead();
 
-	Tank();
-	~Tank();
+	Player();
+	~Player();
 };
 
