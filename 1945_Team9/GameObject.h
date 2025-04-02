@@ -17,6 +17,9 @@ public:
 	ObjectType GetObjectType() { return type; }
 	virtual RECT GetRect() { return rc; }
 	Size GetSize() { return size; }
+	
+	void SetTarget(GameObject* target) { this->target = target; }
+	FPOINT GetTargetPos() { return target->GetPos(); }
 
 	GameObject();
 	~GameObject();
@@ -27,4 +30,6 @@ protected:
 	ObjectType type;
 	RECT rc;
 	Size size;
+
+	GameObject* target;
 };
