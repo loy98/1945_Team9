@@ -21,10 +21,11 @@ private:
 	vector<Enemy*> vecEnemys[(int)EnemyType::EnemyTypeLength];
 	GameObject* target;
 
-	float elapsedTime;
 	float diagonalElpasedTime;
 	float diagonalMaxAppearTime;
-	int diagonalAppearCount{  };
+	float diagonalAppearCoolTime;
+	float diagonalElapsedCoolTime;
+	int diagonalAppearCount;
 	int diagonalMaxAppearCount;
 
 	float straightElpasedTime;

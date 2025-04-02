@@ -14,10 +14,10 @@ public:
 	void Release();
 	void Render(HDC hdc);
 
-	void AddItem(FPOINT pos, FPOINT size);
+	void AddItem(ItemType type, FPOINT pos, FPOINT size);
 	void DeleteItem(Item* item);
 
-	Item* CreateItem(FPOINT pos);
+	//Item* CreateItem(FPOINT pos);
 
 private:
 	vector<Item*> itemList;

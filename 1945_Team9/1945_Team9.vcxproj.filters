@@ -21,6 +21,9 @@
     <Filter Include="MainGame\Missile">
       <UniqueIdentifier>{03fef4fd-61c3-4cfa-ae76-41556ed84b31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\Item">
+      <UniqueIdentifier>{0a5efd14-c785-4ba6-a17d-a2fe30db4481}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonFunction.h">
@@ -54,9 +57,6 @@
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>MainGame\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="ShowUpEnemy.h">
       <Filter>MainGame\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyManager.h">
@@ -95,17 +95,29 @@
     <ClInclude Include="BackGround.h">
       <Filter>MainGame</Filter>
     </ClInclude>
+    <ClInclude Include="DiagonalEnemy.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
     <ClInclude Include="StraightMissile.h">
-      <Filter>MainGame\Missile</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="StraightEnemy.h">
-      <Filter>MainGame\Enemy</Filter>
+    <ClInclude Include="Item.h">
+      <Filter>MainGame\Item</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyFactory.h">
-      <Filter>MainGame\Enemy</Filter>
+    <ClInclude Include="ItemManager.h">
+      <Filter>MainGame\Item</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyController.h">
-      <Filter>MainGame\Enemy</Filter>
+    <ClInclude Include="StraightItem.h">
+      <Filter>MainGame\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalItem.h">
+      <Filter>MainGame\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="LaserItem.h">
+      <Filter>MainGame\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="HomingItem.h">
+      <Filter>MainGame\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -132,9 +144,6 @@
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>MainGame</Filter>
-    </ClCompile>
-    <ClCompile Include="ShowUpEnemy.cpp">
-      <Filter>MainGame\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>MainGame\Enemy</Filter>
@@ -175,17 +184,29 @@
     <ClCompile Include="BackGround.cpp">
       <Filter>MainGame</Filter>
     </ClCompile>
+    <ClCompile Include="DiagonalEnemy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="StraightMissile.cpp">
-      <Filter>MainGame\Missile</Filter>
+      <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="StraightEnemy.cpp">
-      <Filter>MainGame\Enemy</Filter>
+    <ClCompile Include="Item.cpp">
+      <Filter>MainGame\Item</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyFactory.cpp">
-      <Filter>MainGame\Enemy</Filter>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>MainGame\Item</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyController.cpp">
-      <Filter>MainGame\Enemy</Filter>
+    <ClCompile Include="LaserItem.cpp">
+      <Filter>MainGame\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="HomingItem.cpp">
+      <Filter>MainGame\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="StraightItem.cpp">
+      <Filter>MainGame\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalItem.cpp">
+      <Filter>MainGame\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

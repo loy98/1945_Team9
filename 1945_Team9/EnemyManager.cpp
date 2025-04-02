@@ -3,7 +3,6 @@
 #include "Enemy.h"
 #include "Missile.h"
 #include "DiagonalEnemy.h"
-#include "StraightEnemy.h"
 
 EnemyManager::EnemyManager(GameObject* target) : target(target)
 {
@@ -23,19 +22,11 @@ void EnemyManager::Init()
 		vecEnemys[(int)EnemyType::Diagonal][i]->Init(-20, -20);
 		vecEnemys[(int)EnemyType::Diagonal][i]->SetTarget(target);
 	}
-	elapsedTime = 0.0f;
+	diagonalAppearCoolTime = 0.0f;
 	diagonalMaxAppearTime = 0.2f;
-	diagonalMaxAppearCount = 4;
-
-	vecEnemys[(int)EnemyType::Straight].resize(3);
-	int straightSize = vecEnemys[(int)EnemyType::Straight].size();
-
-	for (int i = 0; i < straightSize; i++)
-	{
-		vecEnemys[(int)EnemyType::Straight][i] = new StraightEnemy();
-		vecEnemys[(int)EnemyType::Straight][i]->Init(20.0f, -20.f);
-		vecEnemys[(int)EnemyType::Straight][i]->SetTarget(target);
-	}
+	diagonalMaxAppearCount = 40;
+	diagonalAppearCount = 40;
+	diagonalElapsedCoolTime = 20.0f;
 }
 
 void EnemyManager::Release()
@@ -68,8 +59,21 @@ void EnemyManager::Update()
 			}
 		}
 	}
-	DiagonalAppear();
-	StraightAppear();
+	if (diagonalAppearCount == diagonalMaxAppearCount)
+	{
+		diagonalAppearCoolTime += TimeManager::GetInstance()->GetDeltaTime();
+
+	}
+
+	if (diagonalAppearCoolTime > diagonalElapsedCoolTime)
+	{
+		diagonalAppearCoolTime = 0;
+		diagonalAppearCount = 0;
+	}
+
+	if (diagonalAppearCount < diagonalMaxAppearCount)
+		DiagonalAppear();
+
 }
 
 void EnemyManager::Render(HDC hdc)
@@ -84,6 +88,7 @@ void EnemyManager::Render(HDC hdc)
 			}
 		}
 	}
+
 }
 
 void EnemyManager::AddEnemy(int size)
@@ -98,7 +103,7 @@ void EnemyManager::AddEnemy(int size)
 
 void EnemyManager::DiagonalAppear()
 {
-	//if (diagonalAppearCount == diagonalMaxAppearCount) return;
+	
 
 	diagonalElpasedTime += TimeManager::GetInstance()->GetDeltaTime();
 	static int dy = 1;
@@ -116,14 +121,8 @@ void EnemyManager::DiagonalAppear()
 			int appearX = vecEnemys[(int)EnemyType::Diagonal][i]->GetIsLeft() ? 20 : WINSIZE_X - 20;
 			vecEnemys[(int)EnemyType::Diagonal][i]->Reset({ (float)appearX, 100 + (float)dy * 30 });
 			dy *= -1;
+			diagonalAppearCount++;
 			break;
 		}
 	}
-	//diagonalAppearCount++;
-	//DiagonalAppear(left);
-}
-
-void EnemyManager::StraightAppear()
-{
-
 }

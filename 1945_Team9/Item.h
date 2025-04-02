@@ -5,12 +5,12 @@ class Item : public GameObject
 {
 public:
 	Item();
-	~Item();
+	virtual ~Item();
 
-	void Init(FPOINT pos, FPOINT size);
-	void Update();
-	void Release();
-	void Render(HDC hdc);
+	virtual void Init(FPOINT pos, FPOINT size);
+	virtual void Update();
+	virtual void Release();
+	virtual void Render(HDC hdc);
 
 	bool GetIsDead() { return isDead; }
 	

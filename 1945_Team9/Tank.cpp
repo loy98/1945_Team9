@@ -14,7 +14,7 @@ void Tank::Init()
 	pos.y = WINSIZE_Y - 200;
 	size = {40, 40};
 	damage = 10;
-	moveSpeed = 1.0f;
+	moveSpeed = 0.5f;
 	group = CollisionGroup::Player;
 	type = ObjectType::Player;
 	// ����
@@ -49,6 +49,7 @@ void Tank::Release()
 
 void Tank::Update()
 {
+	isCollision = false;
 	barrelEnd.x = pos.x + barrelSize * cosf(DEG_TO_RAD(fireAngle));
 	barrelEnd.y = pos.y - barrelSize * sinf(DEG_TO_RAD(fireAngle));
 
