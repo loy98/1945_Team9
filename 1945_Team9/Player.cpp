@@ -84,6 +84,8 @@ void Player::Update()
 		Fire(MissileType::Laser);
 	if (KeyManager::GetInstance()->IsOnceKeyDown('Q'))
 		Fire(MissileType::Straight);
+	if (KeyManager::GetInstance()->IsOnceKeyDown('R'))
+		Fire(MissileType::Homing);
 	
 	Move();
 
