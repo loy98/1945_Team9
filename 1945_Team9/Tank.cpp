@@ -14,7 +14,7 @@ void Tank::Init()
 	pos.y = WINSIZE_Y - 200;
 	size = {40, 40};
 	damage = 10;
-	moveSpeed = 1.0f;
+	moveSpeed = 0.5f;
 	group = CollisionGroup::Player;
 	type = ObjectType::Player;
 	// ����
@@ -119,10 +119,10 @@ void Tank::Fire(MissileType type)
 	switch (type)
 	{
 	case MissileType::Normal:
-		if (size < 8)
+		//if (size < 8)
 			AddMissile(this, MissileType::Normal, barrelEnd, DEG_TO_RAD(fireAngle), missileSpeed);
-		else
-        	missileManager->Launch(barrelEnd);
+		//else
+        	//missileManager->Launch(barrelEnd);
 		break;
 	case MissileType::Sin:
 		AddMissile(this, MissileType::Sin, barrelEnd, fireAngle, missileSpeed);

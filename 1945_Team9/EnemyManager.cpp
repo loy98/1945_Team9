@@ -22,9 +22,11 @@ void EnemyManager::Init()
 		vecEnemys[(int)EnemyType::Diagonal][i]->Init(-20, -20);
 		vecEnemys[(int)EnemyType::Diagonal][i]->SetTarget(target);
 	}
-	elapsedTime = 0.0f;
+	diagonalAppearCoolTime = 0.0f;
 	diagonalMaxAppearTime = 0.2f;
-	diagonalMaxAppearCount = 4;
+	diagonalMaxAppearCount = 40;
+	diagonalAppearCount = 40;
+	diagonalElapsedCoolTime = 20.0f;
 }
 
 void EnemyManager::Release()
@@ -57,7 +59,21 @@ void EnemyManager::Update()
 			}
 		}
 	}
-	DiagonalAppear();
+	if (diagonalAppearCount == diagonalMaxAppearCount)
+	{
+		diagonalAppearCoolTime += TimeManager::GetInstance()->GetDeltaTime();
+
+	}
+
+	if (diagonalAppearCoolTime > diagonalElapsedCoolTime)
+	{
+		diagonalAppearCoolTime = 0;
+		diagonalAppearCount = 0;
+	}
+
+	if (diagonalAppearCount < diagonalMaxAppearCount)
+		DiagonalAppear();
+
 }
 
 void EnemyManager::Render(HDC hdc)
@@ -87,7 +103,7 @@ void EnemyManager::AddEnemy(int size)
 
 void EnemyManager::DiagonalAppear()
 {
-	//if (diagonalAppearCount == diagonalMaxAppearCount) return;
+	
 
 	diagonalElpasedTime += TimeManager::GetInstance()->GetDeltaTime();
 	static int dy = 1;
@@ -105,9 +121,8 @@ void EnemyManager::DiagonalAppear()
 			int appearX = vecEnemys[(int)EnemyType::Diagonal][i]->GetIsLeft() ? 20 : WINSIZE_X - 20;
 			vecEnemys[(int)EnemyType::Diagonal][i]->Reset({ (float)appearX, 100 + (float)dy * 30 });
 			dy *= -1;
+			diagonalAppearCount++;
 			break;
 		}
 	}
-	//diagonalAppearCount++;
-	//DiagonalAppear(left);
 }
