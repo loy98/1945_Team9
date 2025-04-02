@@ -127,3 +127,7 @@ void StraightMissileManager::AddMissile()
 
 	vecvecMissileList.push_back(pack);
 }
+
+void StraightMissileManager::LevelUp()
+{
+}

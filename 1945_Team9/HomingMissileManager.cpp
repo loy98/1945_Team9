@@ -106,3 +106,7 @@ void HomingMissileManager::AddMissile()
 
 	vecvecMissileList.push_back(pack);
 }
+
+void HomingMissileManager::LevelUp()
+{
+}

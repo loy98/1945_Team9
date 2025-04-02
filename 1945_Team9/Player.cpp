@@ -28,7 +28,7 @@ void Player::Init()
 	//barrelEnd.x = pos.x;
 	//barrelEnd.y = pos.y - barrelSize;
 	//fireAngle = 90.0f;
->
+
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
 
 	image = ImageManager::GetInstance()->AddImage(

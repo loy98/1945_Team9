@@ -73,8 +73,8 @@ void Boss::Move()
 
 void Boss::Fire()
 {
-	float angle = ::GetAngle(pos, target->GetPos());
+	/*float angle = ::GetAngle(pos, target->GetPos());
 	Missile* missile = missileManager->CreateMissile(MissileType::Normal, pos, angle, moveSpeed);
 	missile->AddCollider(CollisionGroup::Enemy);
-	missileManager->AddMissile(missile);
+	missileManager->AddMissile(missile);*/
 }
