@@ -16,9 +16,11 @@ public:
 
 	void DiagonalAppear();
 	void StraightAppear();
+	void BossAppear();
 
 private:
 	vector<Enemy*> vecEnemys[(int)EnemyType::EnemyTypeLength];
+	Enemy* boss;
 	GameObject* target;
 
 	float diagonalElpasedTime;
@@ -28,6 +30,8 @@ private:
 	int diagonalAppearCount;
 	int diagonalMaxAppearCount;
 
-	float straightAppearCoolTime;
+	float bossSpawnTime;
+	bool isBossSpawned;
+
 };
 

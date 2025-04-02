@@ -4,6 +4,7 @@
 #include "Missile.h"
 #include "DiagonalEnemy.h"
 #include "StraightEnemy.h"
+#include "Boss.h"
 
 EnemyManager::EnemyManager(GameObject* target) : target(target)
 {
@@ -33,14 +34,18 @@ void EnemyManager::Init()
 		vecEnemys[(int)EnemyType::Straight][i]->SetTarget(target);
 	}
 
+	boss = new Boss;
+	boss->Init(0, 0);
+	boss->SetTarget(target);
+
 	diagonalAppearCoolTime = 0.0f;
 	diagonalMaxAppearTime = 0.2f;
 	diagonalMaxAppearCount = 40;
 	diagonalAppearCount = 40;
 	diagonalElapsedCoolTime = 20.0f;
 	
-	straightAppearCoolTime = 0.0f;
-
+	bossSpawnTime = 0.0f;
+	isBossSpawned = false;
 }
 
 void EnemyManager::Release()
@@ -55,6 +60,8 @@ void EnemyManager::Release()
 		}
 		vecEnemys[i].clear();
 	}
+	if(boss)
+		boss->Release();
 }
 
 void EnemyManager::Update()
@@ -73,11 +80,22 @@ void EnemyManager::Update()
 			}
 		}
 	}
+	if (boss)
+	{
+		boss->Update();
+
+		if (boss->IsOutofScreen())
+		{
+			boss->SetIsAlive(false);
+		}
+		
+	}
+
 	if (diagonalAppearCount == diagonalMaxAppearCount)
 	{
 		diagonalAppearCoolTime += TimeManager::GetInstance()->GetDeltaTime();
 	}
-
+	
 	if (diagonalAppearCoolTime > diagonalElapsedCoolTime)
 	{
 		diagonalAppearCoolTime = 0;
@@ -85,9 +103,19 @@ void EnemyManager::Update()
 	}
 
 	if (diagonalAppearCount < diagonalMaxAppearCount)
+	{
+		DiagonalAppear();
+	}
 
-	DiagonalAppear();
 	StraightAppear();
+		
+	bossSpawnTime += TimeManager::GetInstance()->GetDeltaTime();
+
+	if (!isBossSpawned && bossSpawnTime >= 10.0f)
+	{
+		isBossSpawned = true;
+		BossAppear();
+	}
 }
 
 void EnemyManager::Render(HDC hdc)
@@ -103,6 +131,11 @@ void EnemyManager::Render(HDC hdc)
 		}
 	}
 
+	if (boss && boss->GetIsAlive())
+	{
+		boss->Render(hdc);
+	}
+	
 }
 
 void EnemyManager::AddEnemy(int size)
@@ -172,5 +205,13 @@ void EnemyManager::StraightAppear()
 			num = (num+1) % straightSize;
 		} 
 		
+	}
+}
+
+void EnemyManager::BossAppear()
+{
+	if (!boss->GetIsAlive())
+	{
+		boss->Reset({ WINSIZE_X/2 ,-10 });
 	}
 }

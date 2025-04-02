@@ -19,7 +19,7 @@ void StraightEnemy::Init(float posX, float posY)
 
 	offsetX = 30;
 	offsetY = 30;
-	maxFireTime = 2.0f;
+	maxFireTime = 5.0f;
 	image = ImageManager::GetInstance()->AddImage(L"StraightEnemy", TEXT("Image\\StraightEnemyPlane.bmp"), 31, 48, 1, 1, false, true, RGB(248, 0, 248));
 }
 

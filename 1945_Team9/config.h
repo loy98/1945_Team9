@@ -46,6 +46,7 @@ enum class EnemyType
 {
 	Diagonal,
 	Straight,
+	Boss,
 	EnemyTypeLength
 };
 enum class MissileType
