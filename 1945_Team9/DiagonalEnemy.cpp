@@ -19,6 +19,7 @@ void DiagonalEnemy::Init(float posX, float posY)
 	//angle = 330.0f;
 	dir = { 3, 1 };
 	maxFireTime = 1.0f;
+	//moveSpeed = 300.f;
 
 	offsetX = 30;
 	offsetY = 10;

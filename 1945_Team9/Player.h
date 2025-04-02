@@ -4,14 +4,26 @@
 class Missile;
 class Image;
 class MissileManager;
+
 class Player : public GameObject
 {
 private:
-	
+	enum PlayerState
+	{
+		Idle,
+		MoveLeft,
+		MoveRight,
+		PlayerStateLength
+	};
 	FPOINT dir{ 1, 1 };
 	float damage;
 	float moveSpeed;
-	Image* image;
+
+	int idleCurrFrame;
+	int moveCurrFrame;
+	float animIdleCurrTime;
+	float animMoveCurrTime;
+	vector<Image*> imageList{ PlayerStateLength, nullptr};
 
 	// Æ÷½Å
 	FPOINT barrelEnd;
@@ -26,6 +38,7 @@ private:
 	vector<MissileManager*>::iterator iter;
 	CollisionGroup group;
 
+	PlayerState state;
 public:
 	void Init();	
 	void Release();	

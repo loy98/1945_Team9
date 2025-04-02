@@ -22,11 +22,11 @@ void EnemyManager::Init()
 		vecEnemys[(int)EnemyType::Diagonal][i]->Init(-200, -200);
 		vecEnemys[(int)EnemyType::Diagonal][i]->SetTarget(target);
 	}
-	diagonalAppearCoolTime = 0.0f;
+	diagonalAppearCoolTime = 10.0f;
 	diagonalMaxAppearTime = 0.2f;
 	diagonalMaxAppearCount = 40;
 	diagonalAppearCount = 40;
-	diagonalElapsedCoolTime = 5.0f;
+	diagonalElapsedCoolTime = 0.0f;
 }
 
 void EnemyManager::Release()
@@ -61,12 +61,12 @@ void EnemyManager::Update()
 	}
 	if (diagonalAppearCount == diagonalMaxAppearCount)
 	{
-		diagonalAppearCoolTime += TimeManager::GetInstance()->GetDeltaTime();
+		diagonalElapsedCoolTime += TimeManager::GetInstance()->GetDeltaTime();
 	}
 
-	if (diagonalAppearCoolTime > diagonalElapsedCoolTime)
+	if (diagonalElapsedCoolTime > diagonalAppearCoolTime)
 	{
-		diagonalAppearCoolTime = 0;
+		diagonalElapsedCoolTime = 0;
 		diagonalAppearCount = 0;
 	}
 
@@ -104,8 +104,8 @@ void EnemyManager::DiagonalAppear()
 {
 	diagonalElpasedTime += TimeManager::GetInstance()->GetDeltaTime();
 	static int dy = 1;
-	
 	int diagonalSize = vecEnemys[(int)EnemyType::Diagonal].size();
+
 	if (diagonalElpasedTime >= diagonalMaxAppearTime)
 	{
 		for (int i = 0; i < diagonalSize; ++i)
@@ -113,9 +113,11 @@ void EnemyManager::DiagonalAppear()
 			diagonalElpasedTime = 0;
 			if (vecEnemys[(int)EnemyType::Diagonal][i]->GetIsAlive())
 				continue;
+
 			vecEnemys[(int)EnemyType::Diagonal][i]->ChangeApperSide();
 
 			int appearX = vecEnemys[(int)EnemyType::Diagonal][i]->GetIsLeft() ? 20 : WINSIZE_X - 20;
+
 			vecEnemys[(int)EnemyType::Diagonal][i]->Reset({ (float)appearX, 100 + (float)dy * 30 });
 			dy *= -1;
 			diagonalAppearCount++;

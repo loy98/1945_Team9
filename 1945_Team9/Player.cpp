@@ -20,9 +20,10 @@ void Player::Init()
 	pos.y = WINSIZE_Y - 200;
 	size = {40, 40};
 	damage = 10;
-	moveSpeed = 1.0f;
+	moveSpeed = 0.5f;
 	group = CollisionGroup::Player;
 	type = ObjectType::Player;
+	state = PlayerState::Idle;
 	// ����
 	//barrelSize = 30;
 	//barrelEnd.x = pos.x;
@@ -30,8 +31,13 @@ void Player::Init()
 	//fireAngle = 90.0f;
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
 
-	image = ImageManager::GetInstance()->AddImage(
-		L"player", TEXT("Image/player.bmp"), 64, 32, 2, 1, false, true, RGB(255, 0, 255));
+	imageList[Idle] = ImageManager::GetInstance()->AddImage(
+		L"player", TEXT("Image/playeridle.bmp"), 46, 32, 2, 1, false, true, RGB(255, 0, 255));
+	imageList[MoveLeft] = ImageManager::GetInstance()->AddImage(
+		L"PlayerMoveLeft", TEXT("Image/PlayerMoveLeft.bmp"), 161, 32, 7, 1, false, true, RGB(255, 0, 255));
+	imageList[MoveRight] = ImageManager::GetInstance()->AddImage(
+		L"PlayerMoveRight", TEXT("Image/PlayerMoveRight.bmp"), 161, 32, 7, 1, false, true, RGB(255, 0, 255));
+
 	// �̻���
 	missileSpeed = 150.0f;
 
@@ -72,6 +78,14 @@ void Player::Update()
 {
 	//barrelEnd.x = pos.x + barrelSize * cosf(DEG_TO_RAD(fireAngle));
 	//barrelEnd.y = pos.y - barrelSize * sinf(DEG_TO_RAD(fireAngle));
+	animIdleCurrTime += TimeManager::GetInstance()->GetDeltaTime();
+	if (animIdleCurrTime > 0.2f)
+	{
+		idleCurrFrame++;
+		animIdleCurrTime = 0;
+	}
+	if (idleCurrFrame >= 2)idleCurrFrame = 0;
+	
 
 	for (iter = vecMissileManager.begin(); iter != vecMissileManager.end(); iter++)
 	{
@@ -98,7 +112,22 @@ void Player::Update()
 
 void Player::Render(HDC hdc)
 {
-	if (image) image->FrameRender(hdc, pos.x, pos.y, 1, 0);
+	switch (state)
+	{
+	case PlayerState::Idle:
+		imageList[Idle]->TestFrameRender(
+			hdc, rc.left, rc.top, rc.right, size.y, idleCurrFrame, 0, false);
+		break;
+	case PlayerState::MoveLeft:
+		imageList[MoveLeft]->TestFrameRender(
+			hdc, rc.left, rc.top, rc.right, size.y, moveCurrFrame, 0, false);
+		break;
+	case PlayerState::MoveRight:
+		imageList[MoveRight]->TestFrameRender(
+			hdc, rc.left, rc.top, rc.right, size.y, moveCurrFrame, 0, false);
+		break;
+	}
+
 	//if (missileManager) missileManager->Render(hdc);
 	for (auto& collider : colliderList)
 	{
@@ -118,10 +147,37 @@ void Player::Move()
 	dir = { 0, 0 };
 
 	// �Է��� ���� ���⿡ ���� dir ���� ����
-	if (KeyManager::GetInstance()->IsStayKeyDown('A'))	
+	if (KeyManager::GetInstance()->IsStayKeyDown('A'))
+	{
 		dir.x = -1.0f;
+		state = PlayerState::MoveLeft;
+		animMoveCurrTime += TimeManager::GetInstance()->GetDeltaTime();
+		if (animMoveCurrTime > 0.05f)
+		{
+			if (moveCurrFrame < 6)
+				moveCurrFrame++;
+			animMoveCurrTime = 0;
+		}
+
+	}
 	if (KeyManager::GetInstance()->IsStayKeyDown('D'))
+	{
 		dir.x = 1.0f;
+		state = PlayerState::MoveRight;
+		animMoveCurrTime += TimeManager::GetInstance()->GetDeltaTime();
+		if (animMoveCurrTime > 0.05f)
+		{
+			if (moveCurrFrame < 6)
+				moveCurrFrame++;
+			animMoveCurrTime = 0;
+		}
+	}
+	if (KeyManager::GetInstance()->IsOnceKeyUp('A') || KeyManager::GetInstance()->IsOnceKeyUp('D'))
+	{
+		moveCurrFrame = 0;
+		animMoveCurrTime = 0;
+		state = PlayerState::Idle;
+	}
 	if (KeyManager::GetInstance()->IsStayKeyDown('W'))
 		dir.y = -1.0f;
 	if (KeyManager::GetInstance()->IsStayKeyDown('S'))
