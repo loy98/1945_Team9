@@ -36,6 +36,7 @@ void LaserMissile::Init()
 
 void LaserMissile::Release()
 {
+	Super::Release();
 }
 
 void LaserMissile::Update()
