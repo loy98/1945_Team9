@@ -14,7 +14,7 @@ bool StraightMissileManager::isActivedPack(int num)
 	return false;		// 다 활성상태가 아니면 false 리턴
 }
 
-void StraightMissileManager::LaunchPack(int num)
+void StraightMissileManager::LaunchPack(int num, FPOINT pos)
 {
 	for (iter = vecvecMissileList[num].begin(); iter != vecvecMissileList[num].end(); iter++)
 	{

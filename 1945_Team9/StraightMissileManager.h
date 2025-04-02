@@ -8,7 +8,7 @@ private:
 	vector<vector<Missile*>> vecvecMissileList;
 
 	bool isActivedPack(int num);
-	void LaunchPack(int num);
+	void LaunchPack(int num, FPOINT pos);
 public:
 	StraightMissileManager();
 	virtual ~StraightMissileManager();
