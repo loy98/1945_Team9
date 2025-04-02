@@ -8,6 +8,7 @@
 #include "Timer.h"
 #include "BackGround.h"
 #include "ItemManager.h"
+#include "EffectManager.h"
 
 /*
 	실습1. 이오리 집에 보내기
@@ -18,6 +19,7 @@ void MainGame::Init()
 {
 	KeyManager::GetInstance()->Init();
 	ImageManager::GetInstance()->Init();
+	EffectManager::GetInstance()->Init();
 
 	hdc = GetDC(g_hWnd);
 
@@ -73,6 +75,7 @@ void MainGame::Release()
 
 	KeyManager::GetInstance()->Release();
 	ImageManager::GetInstance()->Release();
+	EffectManager::GetInstance()->Release();
 
 	ReleaseDC(g_hWnd, hdc);
 }
@@ -88,6 +91,7 @@ void MainGame::Update()
 
 	CollisionManager::GetInstance()->Update();
 	ItemManager::GetInstance()->Update();
+	EffectManager::GetInstance()->Update();
 }
 
 void MainGame::Render()
@@ -99,6 +103,7 @@ void MainGame::Render()
 	if (enemyManager) enemyManager->Render(hBackBufferDC);
 	if (rocket) rocket->Render(hBackBufferDC);
 	ItemManager::GetInstance()->Render(hBackBufferDC);
+	EffectManager::GetInstance()->Render(hBackBufferDC);
 
 	wsprintf(szText, TEXT("Mouse X : %d, Y : %d"), mousePosX, mousePosY);
 	TextOut(hBackBufferDC, 20, 60, szText, wcslen(szText));

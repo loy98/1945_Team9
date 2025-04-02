@@ -20,7 +20,7 @@ void Item::Init(FPOINT pos, FPOINT size)
 	this->pos = pos;
 	moveSpeed = 300.0f;
 	angle = 45.0f;
-	lifeTime = 300.0f;
+	lifeTime = 500.0f;
 	this->size.x = size.x;
 	this->size.y = size.y;
 	dir = { 1, 1 };

@@ -2,10 +2,12 @@
 #include "CommonFunction.h"
 #include "Player.h"
 #include "Image.h"
+#include "Effect.h"
 #include "MissileManager.h"
 #include "CollisionManager.h"
 #include "Collider.h"
 #include "NormalMissileManager.h"
+#include "EffectManager.h"
 
 void Enemy::Init(float posX, float posY)
 {
@@ -20,6 +22,7 @@ void Enemy::Init(float posX, float posY)
 	elapsedMoveTime = 0.0f;
 	maxMoveTime = 3.0f; 
 	isCollision = false;
+	isEffect = false;
 
 	type = ObjectType::Enemy;
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
@@ -46,15 +49,19 @@ void Enemy::Release()
 
 void Enemy::Update()
 {
-	for (auto& collider : colliderList)
+	if (isCollision && !isEffect)
 	{
-		if (collider)
-			collider->Update();
+		Effect* effect = new Effect();
+		effect->Init(L"EnemyDie", pos, size, 30, 30);
+		EffectManager::GetInstance()->AddEffect(effect);
+		//isCollision = false;
+		isEffect = true;
 	}
 	if (!isAlive) return;
 
 	elapsedTime += TimeManager::GetInstance()->GetDeltaTime();
 	elapsedMoveTime += TimeManager::GetInstance()->GetDeltaTime();
+	elapsedApperTime += TimeManager::GetInstance()->GetDeltaTime();
 
 	if (elapsedTime > 0.1f)
 	{
@@ -69,6 +76,11 @@ void Enemy::Update()
 	Move();
 
 	UpdateRectAtCenter(rc, pos);
+	for (auto& collider : colliderList)
+	{
+		if (collider)
+			collider->Update();
+	}
 
 }
 
@@ -96,6 +108,7 @@ void Enemy::Fire()
 
 void Enemy::Reset(FPOINT pos)
 {
+	
 }
 
 void Enemy::ChangeApperSide()
@@ -105,6 +118,7 @@ void Enemy::ChangeApperSide()
 
 bool Enemy::IsOutofScreen()
 {
+	if (elapsedApperTime < 3.0f) return false;
 	float right = pos.x + size.x / 2;
 	float left = pos.x - size.x / 2;
 	float top = pos.y - size.y / 2;

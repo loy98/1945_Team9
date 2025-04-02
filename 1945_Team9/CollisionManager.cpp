@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "Item.h"
+
 void CollisionManager::Update()
 {
 	const vector<Collider*>& playerColliders = colliderList[(int)CollisionGroup::Player];

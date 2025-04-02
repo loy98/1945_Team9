@@ -42,10 +42,12 @@ protected:
 	float elapsedTime;
 	float elapsedMoveTime;
 	float maxMoveTime;
+	float elapsedApperTime;
 
 	//Player* target;
 	GameObject* target;
 	bool isLeft;
+	bool isEffect;
 
 	float offsetX;
 	float offsetY;

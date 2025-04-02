@@ -63,6 +63,8 @@ void DiagonalEnemy::Reset(FPOINT pos)
 	this->pos = pos;
 	isCollision = false;
 	elapsedFireTime = 0;
+	isEffect = false; 
+	elapsedApperTime = 0;
 }
 
 void DiagonalEnemy::Move()
