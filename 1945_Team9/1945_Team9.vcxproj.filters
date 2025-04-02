@@ -56,9 +56,6 @@
     <ClInclude Include="Enemy.h">
       <Filter>MainGame\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="ShowUpEnemy.h">
-      <Filter>MainGame\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyManager.h">
       <Filter>MainGame\Enemy</Filter>
     </ClInclude>
@@ -113,6 +110,27 @@
     <ClInclude Include="LaserMissileManager.h">
       <Filter>MainGame\Missile\MissileManager</Filter>
     </ClInclude>
+    <ClInclude Include="DiagonalEnemy.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="HomingItem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="LaserItem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalItem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="StraightItem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionManager.cpp">
@@ -135,9 +153,6 @@
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>MainGame</Filter>
-    </ClCompile>
-    <ClCompile Include="ShowUpEnemy.cpp">
-      <Filter>MainGame\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>MainGame\Enemy</Filter>
@@ -195,6 +210,27 @@
     </ClCompile>
     <ClCompile Include="LaserMissileManager.cpp">
       <Filter>MainGame\Missile\MissileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="DiagonalEnemy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="HomingItem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="LaserItem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalItem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="StraightItem.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

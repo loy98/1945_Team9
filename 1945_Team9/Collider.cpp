@@ -3,6 +3,7 @@
 Collider::Collider(GameObject* owner, FPOINT pos) : owner(owner), pos(pos)
 {
 	rc = owner->GetRect();
+	isCollision = owner->GetIsCollision();
 }
 
 Collider::~Collider()

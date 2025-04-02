@@ -19,14 +19,14 @@ void EnemyManager::Init()
 	for (int i = 0; i < diagonalSize; i++)
 	{
 		vecEnemys[(int)EnemyType::Diagonal][i] = new DiagonalEnemy();
-		vecEnemys[(int)EnemyType::Diagonal][i]->Init(-20, -20);
+		vecEnemys[(int)EnemyType::Diagonal][i]->Init(-200, -200);
 		vecEnemys[(int)EnemyType::Diagonal][i]->SetTarget(target);
 	}
 	diagonalAppearCoolTime = 0.0f;
 	diagonalMaxAppearTime = 0.2f;
 	diagonalMaxAppearCount = 40;
 	diagonalAppearCount = 40;
-	diagonalElapsedCoolTime = 20.0f;
+	diagonalElapsedCoolTime = 5.0f;
 }
 
 void EnemyManager::Release()

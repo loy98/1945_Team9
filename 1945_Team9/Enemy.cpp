@@ -19,6 +19,7 @@ void Enemy::Init(float posX, float posY)
 	elapsedTime = 0.0f;
 	elapsedMoveTime = 0.0f;
 	maxMoveTime = 3.0f; 
+	isCollision = false;
 
 	type = ObjectType::Enemy;
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
