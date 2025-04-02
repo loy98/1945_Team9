@@ -21,7 +21,7 @@ void EnemyManager::Init()
 	for (int i = 0; i < diagonalSize; i++)
 	{
 		vecEnemys[(int)EnemyType::Diagonal][i] = new DiagonalEnemy();
-		vecEnemys[(int)EnemyType::Diagonal][i]->Init(-20, -20);
+		vecEnemys[(int)EnemyType::Diagonal][i]->Init(-200, -200);
 		vecEnemys[(int)EnemyType::Diagonal][i]->SetTarget(target);
 	}
 
@@ -46,6 +46,7 @@ void EnemyManager::Init()
 	
 	bossSpawnTime = 0.0f;
 	isBossSpawned = false;
+
 }
 
 void EnemyManager::Release()

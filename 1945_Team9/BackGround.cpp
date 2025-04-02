@@ -63,13 +63,13 @@ void BackGround::Update()
 	float a = (WINSIZE_X / 310.f);
 	Image* g = ImageManager::GetInstance()->FindImage(L"ground");
 	Image* gf = ImageManager::GetInstance()->FindImage(L"groundFlip");
-	if (groundCameraY >= (6114.0f / WINSIZE_Y)+ (WINSIZE_X / 310.f))     // 첫번째 이미지 다 지나감, 두번째 이미지 WINSIZE_Y만큼 출력
+	if (groundCameraY >= (6114.0f / WINSIZE_Y)+ (310.0f/WINSIZE_X))     // 첫번째 이미지 다 지나감, 두번째 이미지 WINSIZE_Y만큼 출력
 	{
 		groundCameraY -= (6114.0f / WINSIZE_Y);
 		SwapGround(currentGround, nextGround);
 	}
 
-	if (underGroundCameraY >= (6114.0f / WINSIZE_Y) + (WINSIZE_X / 310.f))     // 첫번째 이미지 다 지나감, 두번째 이미지 WINSIZE_Y만큼 출력
+	if (underGroundCameraY >= (6114.0f / WINSIZE_Y) + (310.0f/WINSIZE_X))     // 첫번째 이미지 다 지나감, 두번째 이미지 WINSIZE_Y만큼 출력
 	{
 		underGroundCameraY -= (6114.0f / WINSIZE_Y);
 		SwapGround(currentUnderGround, nextUnderGround);
@@ -88,9 +88,9 @@ void BackGround::Render(HDC hdc)
 
 void BackGround::SwapGround(Image* current, Image* next)
 {
-	Image* temp;
-	temp = current;
+	Image temp;
+	temp = *current;
 
 	*current = *next;
-	*next = *temp;
+	*next = temp;
 }
