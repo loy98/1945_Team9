@@ -10,21 +10,20 @@
 void Enemy::Init(float posX, float posY)
 {
 	pos = { posX, posY };
-	moveSpeed = 50.0f;
-	rushSpeed = 50.0f;
+	moveSpeed = 150.0f;
 	angle = -90.0f;
-	isAlive = true;
+	isAlive = false;
 	size = { 40,40 };
 	animationFrame = 0;
 	elapsedFrame = 0;
 	elapsedTime = 0.0f;
 	elapsedMoveTime = 0.0f;
 	maxMoveTime = 3.0f; 
-	isRush = false;
+
 	type = ObjectType::Enemy;
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
 
-	image = ImageManager::GetInstance()->AddImage(L"ufo", TEXT("Image\\ufo.bmp"), 540, 32, 10, 1, true, true, RGB(255, 0, 255));
+	//image = ImageManager::GetInstance()->AddImage(L"ufo", TEXT("Image\\ufo.bmp"), 540, 32, 10, 1, true, true, RGB(255, 0, 255));
 
 	missileManager = new NormalMissileManager();
 	missileManager->Init();
@@ -57,21 +56,12 @@ void Enemy::Update()
 		animationFrame++;
 		if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = 0;
 	}
-
-	if (isRush == true)
+	if (missileManager)
 	{
-		Rush();
-		if (missileManager)
-			missileManager->Update();
+		missileManager->Update();
 	}
-	else	
-		Move();
+	Move();
 
-	if (elapsedMoveTime > maxMoveTime)
-	{
-		elapsedMoveTime = 0;
-		dir.x *= -1.0f;
-	}
 	UpdateRectAtCenter(rc, pos);
 
 	for (auto& collider : colliderList)
@@ -85,7 +75,7 @@ void Enemy::Render(HDC hdc)
 {
 	if (isAlive)
 	{
-		image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0);
+		///image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0);
 	}
 	if (missileManager)
 	{
@@ -103,9 +93,17 @@ void Enemy::Move()
 	pos.x += moveSpeed * dir.x * TimeManager::GetInstance()->GetDeltaTime();
 }
 
-void Enemy::Rush()
+void Enemy::Fire()
 {
-	pos.y += rushSpeed * TimeManager::GetInstance()->GetDeltaTime();
+}
+
+void Enemy::Reset(FPOINT pos)
+{
+}
+
+void Enemy::ChangeApperSide()
+{
+	isLeft = !isLeft;
 }
 
 bool Enemy::IsOutofScreen()

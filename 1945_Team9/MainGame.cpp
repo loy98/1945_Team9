@@ -7,6 +7,7 @@
 #include "CollisionManager.h"
 #include "Timer.h"
 #include "BackGround.h"
+#include "ItemManager.h"
 
 /*
 	실습1. 이오리 집에 보내기
@@ -27,15 +28,17 @@ void MainGame::Init()
 			TEXT("백버퍼 생성 실패"), TEXT("경고"), MB_OK);
 	}
 
-	enemyManager = new EnemyManager();
-	enemyManager->Init();
-
 	rocket = new Player();
+
 	rocket->Init();
+
+	enemyManager = new EnemyManager(rocket);
+	enemyManager->Init();
 
 	backGround = new BackGround();
 	backGround->Init();
 
+	ItemManager::GetInstance()->AddItem(ItemType::Normal, { 300, 500 }, {60, 60});
 }
 
 void MainGame::Release()
@@ -83,6 +86,7 @@ void MainGame::Update()
 	backGround->Update();
 
 	CollisionManager::GetInstance()->Update();
+	ItemManager::GetInstance()->Update();
 }
 
 void MainGame::Render()
@@ -93,6 +97,7 @@ void MainGame::Render()
 	backGround->Render(hBackBufferDC);
 	if (enemyManager) enemyManager->Render(hBackBufferDC);
 	if (rocket) rocket->Render(hBackBufferDC);
+	ItemManager::GetInstance()->Render(hBackBufferDC);
 
 	wsprintf(szText, TEXT("Mouse X : %d, Y : %d"), mousePosX, mousePosY);
 	TextOut(hBackBufferDC, 20, 60, szText, wcslen(szText));

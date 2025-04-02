@@ -16,26 +16,27 @@ public:
 	virtual void Render(HDC hdc);
 
 	virtual void Move();
-	void Rush();
+	virtual void Fire();
+	virtual void Reset(FPOINT pos);
+	void ChangeApperSide();
 	bool IsOutofScreen();
 
 	inline void SetIsAlive(bool isAlive) { this->isAlive = isAlive; }
 	inline bool GetIsAlive() { return isAlive; }
-	void SetIsRush(bool isRush) { this->isRush = isRush; }
-	bool GetIsRush() { return isRush; }
+	bool GetIsLeft() { return isLeft; }
 
-	inline void SetTarget(Player* target) { this->target = target; }
+
+	//inline void SetTarget(Player* target) { this->target = target; }
+	inline void SetTarget(GameObject* target) { this->target = target; }
+
 	inline FPOINT GetPos() { return pos; }
 	float GetAngle() { return angle; }
 	float GetMoveSpeed() { return moveSpeed; }
-	float GetRushSpeed() { return rushSpeed; }
 	MissileManager* GetMissileManager() { return missileManager; }
 
-private:
-	FPOINT pos;
+protected:
 	FPOINT dir{ 1, 0 };
 	float moveSpeed;
-	float rushSpeed;
 	float angle;
 	bool isAlive;
 	int animationFrame;
@@ -43,8 +44,13 @@ private:
 	float elapsedTime;
 	float elapsedMoveTime;
 	float maxMoveTime;
-	Player* target;
-	bool isRush;
+
+	//Player* target;
+	GameObject* target;
+	bool isLeft;
+
+	float offsetX;
+	float offsetY;
 
 	Image* image;
 	MissileManager* missileManager;

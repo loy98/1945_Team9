@@ -25,7 +25,7 @@ void LaserMissile::Init()
 	animationFrame = 0;
 	maxAnimationFrame = 14;
 	offsetX = 60;
-	offsetY = 150;
+	offsetY = 100;
 
 	rc = GetNormalRect(pos.x - size.x / 2, 0, size.x, size.y);
 	controller = new LaserController();
