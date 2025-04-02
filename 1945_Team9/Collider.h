@@ -18,6 +18,7 @@ public:
 	RECT GetRect() { return rc; }
 	bool GetIsCollision() { return isCollision; }
 
+
 private:
 	GameObject* owner;
 	FPOINT pos;

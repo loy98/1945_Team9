@@ -9,6 +9,8 @@ public:
 	void Update();
 	void CheckPlayerItemCollision();
 	void AddCollider(Collider* collider, CollisionGroup layer);
+	
+	vector<Collider*> GetCollider(CollisionGroup layer) { return colliderList[(int)layer]; }
 private:
 	vector<Collider*> colliderList[(int)CollisionGroup::GroupLength];
 };
