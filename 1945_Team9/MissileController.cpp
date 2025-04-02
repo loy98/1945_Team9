@@ -98,12 +98,12 @@ void HomingController::Move(Missile* missile)
 	float moveSpeed = missile->GetMoveSpeed();
 	//float angle = missile->GetAngle();
 
-	float angle = GetAngle(missile->GetPos(),missile->GetTargetPos());
+	float angle = GetAngle(missile->GetPos(),missile->GetTargetPos());	// 라디안
 
 	pos.x += moveSpeed * time * cosf(angle);
 	pos.y -= moveSpeed * time * sinf(angle);
 
-	missile->SetPos(pos);
+	missile->SetPos(pos);		//
 
 	// enemy의 포지션으로 움직임.
 	// 현재 상태 포인터로 계속 바꿔줌(prevpos와 currpos받아서 계산) 그렇게 바꾼걸 여기선 움직이기만 한다.

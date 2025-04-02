@@ -1,6 +1,7 @@
 #pragma once
 #include "MissileManager.h"
 
+class Missile;
 class Collider;
 class HomingMissileManager: public MissileManager
 {
@@ -11,12 +12,10 @@ private:
 	vector<Collider*> targetList;
 	vector<Collider*>::iterator targetIter;
 
-	vector<GameObject*> targets;
-
 	bool isActivedPack(int num);
 	void LaunchPack(int num, FPOINT pos);
-	void UpdateTarget(FPOINT pos);
-
+	void UpdateTarget();
+	void SortTargetList();
 public:
 	HomingMissileManager();
 	virtual ~HomingMissileManager();
@@ -27,7 +26,6 @@ public:
 	virtual void Launch(FPOINT pos) override;
 
 	virtual void AddMissile() override;
-
 	virtual void LevelUp() override;
 };
 
