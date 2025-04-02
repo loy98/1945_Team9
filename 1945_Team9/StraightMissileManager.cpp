@@ -16,12 +16,9 @@ bool StraightMissileManager::isActivedPack(int num)
 
 void StraightMissileManager::LaunchPack(int num)
 {
-	if (!isActivedPack(num))		// 활성상태인게 없으면 발사
+	for (iter = vecvecMissileList[num].begin(); iter != vecvecMissileList[num].end(); iter++)
 	{
-		for (iter = vecvecMissileList[num].begin(); iter != vecvecMissileList[num].end(); iter++)
-		{
-			(*iter)->ReLoad(pos);
-		}
+		(*iter)->ReLoad(pos);
 	}
 }
 
@@ -94,15 +91,25 @@ void StraightMissileManager::Render(HDC hdc, bool isFlip)
 
 void StraightMissileManager::Launch(FPOINT pos)
 {
+	int position = 0;
+
 	for (int i = 0; i < vecvecMissileList.size(); i++)
 	{
-		for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
+		if(!isActivedPack(i))
 		{
-			if (!(*iter)->GetIsActived())
+			//LaunchPack(i);
+			for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
 			{
-				(*iter)->ReLoad({ pos.x - 25 + (50 * (i % 2)), pos.y });
+				if (!(*iter)->GetIsActived())
+				{
+					(*iter)->ReLoad({ pos.x - 25+position, pos.y });
+					position += 50;
+				}
+				else break;
+
+
 			}
-			else break;
+			break;
 		}
 		//if (iter == vecvecMissileList[i].end()) break;
 	}
