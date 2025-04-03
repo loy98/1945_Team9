@@ -17,7 +17,7 @@ void EnemyMissile::Init()
 	animationFrame = 0;
 	// missileType = MissileType::Normal;
 
-	image = ImageManager::GetInstance()->AddImage(L"EnemyBullet", TEXT("Image\\bullet.bmp"), 21, 21, 1, 1, false, true, RGB(255, 0, 255));
+	image = ImageManager::GetInstance()->AddImage(L"EnemyBullet", TEXT("Image\\EnemyMissile.bmp"), 11, 11, 1, 1, false, true, RGB(255, 255, 255));
 	controller = new EnemyController();
 }
 
