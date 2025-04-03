@@ -27,7 +27,7 @@ void Player::Init()
 	isAlive = true;
 	spawnCurrTime = 0.0f;
 	spawnCurrFrame = 0;
-	life = 4;
+	life = 2;
 	// ����
 	//barrelSize = 30;
 	//barrelEnd.x = pos.x;

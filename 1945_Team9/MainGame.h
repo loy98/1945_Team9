@@ -22,6 +22,7 @@ private:
 	EnemyManager* enemyManager;
 
 	BackGround* backGround;
+	GameState state = GameState::Start;
 
 public:
 	void Init();	// override (부모클래스와 같은 함수이름, 로직을 다르게 구현하고 싶을 때)

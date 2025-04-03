@@ -86,6 +86,14 @@ enum class PlayerState
 	Spawn,
 	PlayerStateLength
 };
+enum class GameState
+{
+	Start,
+	Play,
+	Gameover,
+	Clear,
+	GameStateLength
+};
 struct Size
 {
 	float x;

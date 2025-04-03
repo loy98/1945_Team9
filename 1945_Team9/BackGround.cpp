@@ -82,8 +82,8 @@ void BackGround::Render(HDC hdc)
 	underGroundCamera->CameraRender(hdc, currentUnderGround, nextUnderGround, underGroundCameraY);
 	groundCamera->CameraRender(hdc, currentGround, nextGround, groundCameraY);
 
-	wsprintf(szText, TEXT("groundFrameY : %d"), (int)groundCameraY);
-	TextOut(hdc, 20, 60, szText, wcslen(szText));
+	//wsprintf(szText, TEXT("groundFrameY : %d"), (int)groundCameraY);
+	//TextOut(hdc, 20, 60, szText, wcslen(szText));
 }
 
 void BackGround::SwapGround(Image* current, Image* next)

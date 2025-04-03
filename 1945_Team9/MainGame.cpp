@@ -9,6 +9,7 @@
 #include "BackGround.h"
 #include "ItemManager.h"
 #include "EffectManager.h"
+#include "UiManager.h"
 
 /*
 	실습1. 이오리 집에 보내기
@@ -17,9 +18,6 @@
 
 void MainGame::Init()
 {
-	KeyManager::GetInstance()->Init();
-	ImageManager::GetInstance()->Init();
-	EffectManager::GetInstance()->Init();
 
 	hdc = GetDC(g_hWnd);
 
@@ -31,8 +29,12 @@ void MainGame::Init()
 	}
 
 	rocket = new Player();
-
 	rocket->Init();
+
+	KeyManager::GetInstance()->Init();
+	ImageManager::GetInstance()->Init();
+	EffectManager::GetInstance()->Init();
+	UiManager::GetInstance()->Init(rocket);
 
 	enemyManager = new EnemyManager(rocket);
 	enemyManager->Init();
@@ -40,12 +42,8 @@ void MainGame::Init()
 	backGround = new BackGround();
 	backGround->Init();
 
-	//gameover 확인용
-	ImageManager::GetInstance()->AddImage(
-		L"GameOver", L"Image\\GameOver.bmp", 136, 16, 1, 1, false, true, RGB(255, 0, 255));
-
 	//아이템 확인용
-	ItemManager::GetInstance()->AddItem(ItemType::Laser, { 300, 500 }, { 20, 20 });
+	//ItemManager::GetInstance()->AddItem(ItemType::Laser, { 300, 500 }, { 20, 20 });
 	
 }
 
@@ -89,56 +87,73 @@ void MainGame::Release()
 void MainGame::Update()
 {
 	backGround->Update();
-	if (GameOver)
+	
+	switch (state)
 	{
+	case GameState::Start:
+		if (KeyManager::GetInstance()->IsOnceKeyDown(VK_SPACE))
+		{
+			state = GameState::Play;
+		}
+		break;
+	case GameState::Play:
+		if (rocket) rocket->Update();
+		if (rocket->GetLife() <= 0)
+		{
+			state = GameState::Gameover;
+			UiManager::GetInstance()->ResetCurDatas();
+		}
+		if (enemyManager) enemyManager->Update();
+
+		EffectManager::GetInstance()->Update();
+		CollisionManager::GetInstance()->Update();
+		ItemManager::GetInstance()->Update();
+		break;
+	case GameState::Gameover:
 		if (KeyManager::GetInstance()->IsOnceKeyDown(VK_SPACE))
 		{
 			Release();
 			Init();
-			GameOver = false;
+			state = GameState::Play;
 		}
-		else
-			return;
+		break;
+	case GameState::Clear:
+		break;
+	default:
+		break;
 	}
-	//InvalidateRect(g_hWnd, NULL, false);
-	if (rocket) rocket->Update();
-	if (rocket->GetLife() <= 0)
-	{
-		GameOver = true;
-	}
-
-	if (enemyManager) enemyManager->Update();
-
-
-	EffectManager::GetInstance()->Update();
-	CollisionManager::GetInstance()->Update();
-	ItemManager::GetInstance()->Update();
+	UiManager::GetInstance()->Update(state);
 }
 
 void MainGame::Render()
 {
 	// 백버퍼에 먼저 복사
 	HDC hBackBufferDC = backBuffer->GetMemDC();
-
-
 	backGround->Render(hBackBufferDC);
-	if (GameOver)
+	UiManager::GetInstance()->Render(hBackBufferDC, state);
+
+	switch (state)
 	{
-		ImageManager::GetInstance()->FindImage(L"GameOver")
-			->TestFrameRender(hBackBufferDC,
-				100, 300, 500, 100, 0, 0, false);
-		backBuffer->Render(hdc);
-		return;
+	case GameState::Start:
+		break;
+	case GameState::Play:
+		if (enemyManager) enemyManager->Render(hBackBufferDC);
+		if (rocket) rocket->Render(hBackBufferDC);
+		ItemManager::GetInstance()->Render(hBackBufferDC);
+		EffectManager::GetInstance()->Render(hBackBufferDC);
+		break;
+	case GameState::Gameover:
+		break;
+	case GameState::Clear:
+		break;
+	default:
+		break;
 	}
-	if (enemyManager) enemyManager->Render(hBackBufferDC);
-	if (rocket) rocket->Render(hBackBufferDC);
-	ItemManager::GetInstance()->Render(hBackBufferDC);
-	EffectManager::GetInstance()->Render(hBackBufferDC);
 
-	wsprintf(szText, TEXT("Mouse X : %d, Y : %d"), mousePosX, mousePosY);
-	TextOut(hBackBufferDC, 20, 60, szText, wcslen(szText));
+	//wsprintf(szText, TEXT("Mouse X : %d, Y : %d"), mousePosX, mousePosY);
+	//TextOut(hBackBufferDC, 20, 60, szText, wcslen(szText));
 
-	TimeManager::GetInstance()->Render(hBackBufferDC);
+	//TimeManager::GetInstance()->Render(hBackBufferDC);
 	// 백버퍼에 있는 내용을 메인 hdc에 복사
 	backBuffer->Render(hdc);
 }
