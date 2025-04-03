@@ -31,6 +31,7 @@ void Enemy::Init(float posX, float posY)
 	//image = ImageManager::GetInstance()->AddImage(L"ufo", TEXT("Image\\ufo.bmp"), 540, 32, 10, 1, true, true, RGB(255, 0, 255));
 
 	missileManager = new NormalMissileManager();
+	missileManager->SetCollisionGroup(CollisionGroup::Enemy);
 	missileManager->Init();
 
 	Collider* collider = new Collider(this, pos);

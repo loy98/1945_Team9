@@ -78,6 +78,22 @@ void NormalMissileManager::Launch(FPOINT pos)
 	}
 }
 
+void NormalMissileManager::AngleLaunch(FPOINT pos, float angle)
+{
+	if (!vecMissileList.empty())
+	{
+		for (iter = vecMissileList.begin(); iter != vecMissileList.end(); iter++)
+		{
+			if (!(*iter)->GetIsActived())
+			{
+				(*iter)->SetAngle(angle);
+				(*iter)->ReLoad(pos);
+				break;
+			}
+		}
+	}
+}
+
 void NormalMissileManager::AddMissile()
 {
 	vecMissileList.push_back(missileFactory->AddMissile(collisionGroup));

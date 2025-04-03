@@ -76,8 +76,6 @@ void DiagonalEnemy::Move()
 
 void DiagonalEnemy::Fire()
 {
-	//float angle = ::GetAngle(pos, target->GetPos());
-	//Missile* missile = missileManager->CreateMissile(MissileType::Normal, pos, angle, moveSpeed);
-	//missile->AddCollider(missile, CollisionGroup::Enemy);
-	//missileManager->AddMissile(missile);
+	float angle = ::GetAngle(pos, target->GetPos());
+	missileManager->AngleLaunch(pos, angle);
 }
