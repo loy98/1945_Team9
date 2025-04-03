@@ -146,6 +146,15 @@
     <ClInclude Include="EffectManager.h">
       <Filter>MainGame\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="HorizontalEnemy.h">
+      <Filter>MainGame\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyMissile.h">
+      <Filter>MainGame\Missile</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyMissileManager.h">
+      <Filter>MainGame\Missile\MissileManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Image.cpp">
@@ -252,6 +261,15 @@
     </ClCompile>
     <ClCompile Include="EffectManager.cpp">
       <Filter>MainGame\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="HorizontalEnemy.cpp">
+      <Filter>MainGame\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyMissile.cpp">
+      <Filter>MainGame\Missile</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyMissileManager.cpp">
+      <Filter>MainGame\Missile\MissileManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

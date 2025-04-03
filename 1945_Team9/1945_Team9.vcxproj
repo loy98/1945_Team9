@@ -144,6 +144,7 @@
     <ClInclude Include="HomingItem.h" />
     <ClInclude Include="HomingMissile.h" />
     <ClInclude Include="HomingMissileManager.h" />
+    <ClInclude Include="HorizontalEnemy.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="Item.h" />
@@ -184,6 +185,7 @@
     <ClCompile Include="HomingItem.cpp" />
     <ClCompile Include="HomingMissile.cpp" />
     <ClCompile Include="HomingMissileManager.cpp" />
+    <ClCompile Include="HorizontalEnemy.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="Item.cpp" />
