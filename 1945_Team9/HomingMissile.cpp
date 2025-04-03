@@ -24,11 +24,6 @@ void HomingMissile::Init()
 	controller = new HomingController();
 	
 	currentAnimation = idle;
-	//idle;
-	//animationFrame;
-	//left;
-	//right;
-	//currPos;
 	prevPos = {300, 600};
 
 	elapsedTime = 0.0f;
@@ -48,21 +43,23 @@ void HomingMissile::Update()
 	Super::Update();
 	currPos = pos;
 	
-	UpdateImage();
+	//UpdateImage();
 	UpdateRectAtCenter(rc, pos);		// 충돌 업데이트!
 
 	if (isCollision)
 		isActived = false;
-	//if(elapsedTime >= 0.5f )
-	//{
-	//	currentFrame++;
-	//	if (currentFrame > maxFrame)
-	//	{
-	//		currentFrame = 0;
-	//	}
+	if(elapsedTime >= 0.5f )
+	{
+		UpdateImage();
 
-	//	elapsedTime = 0.0f;
-	//}
+		currentFrame++;
+		if (currentFrame > maxFrame)
+		{
+			currentFrame = 0;
+		}
+
+		elapsedTime = 0.0f;
+	}
 }
 
 void HomingMissile::Render(HDC hdc, bool isFlip)
@@ -87,7 +84,7 @@ void HomingMissile::UpdateImage()
 	// 위로 가는데 오른쪽으로 향하면 right 이미지
 	// 두 상태를 오갈땐 idle을 거친다.
 	//
-	float deg = RAD_TO_DEG(::GetAngle(prevPos, currPos));
+	float deg = (float)RAD_TO_DEG(::GetAngle(prevPos, currPos));
 	
 	if (deg > 105.0f)		// 왼쪽 15도 이상 회전
 	{

@@ -154,15 +154,7 @@ void HomingMissileManager::Release()
 	}
 	vecvecMissileList.clear();
 
-	//for (targetIter = targetList.begin(); targetIter != targetList.end(); iter++)
-	//{
-	//	(*targetIter)->Release();
-	//	delete (*targetIter);
-	//	(*targetIter) = nullptr;
-	//}
 	targetList.clear();
-
-
 }
 
 void HomingMissileManager::Update()
@@ -193,7 +185,6 @@ void HomingMissileManager::Render(HDC hdc, bool isFlip)
 		{
 			for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
 			{
-				//if ((*iter)->GetIsCollision()) continue;
 				(*iter)->Render(hdc, isFlip);
 			}
 		}
