@@ -48,7 +48,7 @@ enum class MissileType
 	Laser,
 	Straight,
 	Homing,
-	MissileTypeLength
+	MissileTypeLength,
 };
 enum class CollisionGroup
 {

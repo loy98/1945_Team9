@@ -25,16 +25,6 @@ private:
 
 };
 
-class SinMissileFactory : public MissileFactory
-{
-public:
-	SinMissileFactory() {}
-	virtual ~SinMissileFactory();
-
-private:
-	virtual Missile* CreateMissile() override;
-};
-
 class LaserMissileFactory : public MissileFactory
 {
 public:
@@ -60,6 +50,16 @@ class HomingMissileFactory : public MissileFactory
 public:
 	HomingMissileFactory() {}
 	virtual ~HomingMissileFactory();
+
+private:
+	virtual Missile* CreateMissile() override;
+};
+
+class EnemyMissileFactory : public MissileFactory
+{
+public:
+	EnemyMissileFactory() {}
+	virtual ~EnemyMissileFactory();
 
 private:
 	virtual Missile* CreateMissile() override;
