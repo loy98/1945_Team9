@@ -15,6 +15,8 @@ public:
 	void AddEnemy(int size);
 
 	void DiagonalAppear();
+
+	void HorizontalAppear();
 private:
 	vector<Enemy*> vecEnemys[(int)EnemyType::EnemyTypeLength];
 	GameObject* target;
@@ -25,5 +27,13 @@ private:
 	float diagonalElapsedCoolTime;
 	int diagonalAppearCount;
 	int diagonalMaxAppearCount;
+
+	//
+	float horizontalElpasedTime;
+	float horizontalMaxAppearTime;
+	float horizontalAppearCoolTime;
+	float horizontalElapsedCoolTime;
+	int horizontalAppearCount;
+	int horizontalMaxAppearCount;
 };
 
