@@ -109,3 +109,28 @@ void HomingController::Move(Missile* missile)
 	// 현재 상태 포인터로 계속 바꿔줌(prevpos와 currpos받아서 계산) 그렇게 바꾼걸 여기선 움직이기만 한다.
 	// 적 위치. 적한테 가다가 적이 죽으면? 적위치 새로 갱신해야 함.
 }
+
+EnemyController::EnemyController()
+{
+}
+
+EnemyController::~EnemyController()
+{
+}
+
+void EnemyController::Move(Missile* missile)
+{
+	float time = TimeManager::GetInstance()->GetDeltaTime();
+	FPOINT pos = missile->GetPos();
+	float moveSpeed = missile->GetMoveSpeed();
+	float angle = missile->GetAngle();
+
+	pos.x += moveSpeed * time * cosf(angle);
+	pos.y -= moveSpeed * time * sinf(angle);
+
+	// enemyMissile test 때문에 radian 배고 실험
+	//pos.x += moveSpeed * time * cosf(DEG_TO_RAD(angle));
+	//pos.y -= moveSpeed * time * sinf(DEG_TO_RAD(angle));
+
+	missile->SetPos(pos);
+}

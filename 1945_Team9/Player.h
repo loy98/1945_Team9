@@ -49,6 +49,7 @@ public:
 	void AddMissile(GameObject* owner, MissileType type, FPOINT pos, float angle, float speed);
 	void Dead();
 	int GetLife() { return life; }
+	PlayerState GetPlayerState() { return state; }
 
 	Player();
 	~Player();

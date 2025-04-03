@@ -1,6 +1,7 @@
 #include "EnemyMissile.h"
 #include "CommonFunction.h"
 #include "Image.h"
+#include "MissileController.h"
 
 void EnemyMissile::Init()
 {
@@ -16,7 +17,8 @@ void EnemyMissile::Init()
 	animationFrame = 0;
 	// missileType = MissileType::Normal;
 
-	image = ImageManager::GetInstance()->AddImage(L"1945bullet", TEXT("Image\\1945bulletTest.bmp"), 33, 33, 1, 1, false, true, RGB(248, 0, 248));
+	image = ImageManager::GetInstance()->AddImage(L"EnemyBullet", TEXT("Image\\bullet.bmp"), 21, 21, 1, 1, false, true, RGB(255, 0, 255));
+	controller = new EnemyController();
 }
 
 void EnemyMissile::Release()

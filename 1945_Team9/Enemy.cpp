@@ -9,6 +9,7 @@
 #include "NormalMissileManager.h"
 #include "ItemManager.h"
 #include "EffectManager.h"
+#include "EnemyMissileManager.h"
 
 void Enemy::Init(float posX, float posY)
 {
@@ -30,7 +31,7 @@ void Enemy::Init(float posX, float posY)
 
 	//image = ImageManager::GetInstance()->AddImage(L"ufo", TEXT("Image\\ufo.bmp"), 540, 32, 10, 1, true, true, RGB(255, 0, 255));
 
-	missileManager = new NormalMissileManager();
+	missileManager = new EnemyMissileManager();
 	missileManager->SetCollisionGroup(CollisionGroup::Enemy);
 	missileManager->Init();
 
@@ -64,6 +65,10 @@ void Enemy::Update()
 		/*--------------------------------------------------*/
 		isEffect = true;
 	}
+	if (missileManager)
+	{
+		missileManager->Update();
+	}
 	if (!isAlive) return;
 
 	elapsedTime += TimeManager::GetInstance()->GetDeltaTime();
@@ -75,10 +80,6 @@ void Enemy::Update()
 		elapsedTime = 0.0f;
 		animationFrame++;
 		if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = 0;
-	}
-	if (missileManager)
-	{
-		missileManager->Update();
 	}
 	Move();
 

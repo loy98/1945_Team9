@@ -25,24 +25,25 @@ void Missile::Release()
 
 void Missile::Update()
 {
-	if(isActived)
+	for (auto& collider : colliderList)
 	{
-		Move();
+		if (collider)
+			collider->Update();
 	}
+	Move();
+	//if(isActived)
+	//{
+	//}
 
 	if (isActived && IsOutofScreen())
 	{
 		isActived = false;
+		isCollision = true;
 	}
 	// collider 확인용
-	if (isActived)
-	{
-		for (auto& collider : colliderList)
-		{
-			if (collider)
-				collider->Update();
-		}
-	}
+	//if (isActived)
+	//{
+	//}
 
 	// collider 업데이트, 무브, isActive 상태 업데이트(isoutofscreen)
 	// active일 경우에만. move, isActived 상태. 유도미사일의 경우 target pos까지.-기존거에 추가하는 방향으로.

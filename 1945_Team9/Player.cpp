@@ -27,7 +27,7 @@ void Player::Init()
 	isAlive = true;
 	spawnCurrTime = 0.0f;
 	spawnCurrFrame = 0;
-	life = 2;
+	life = 4;
 	// ����
 	//barrelSize = 30;
 	//barrelEnd.x = pos.x;
@@ -124,21 +124,21 @@ void Player::Update()
 		}
 		if (idleCurrFrame >= 2)idleCurrFrame = 0;
 
-	if (KeyManager::GetInstance()->IsOnceKeyDown(VK_SPACE))
-		Fire(MissileType::Normal);
-	if (KeyManager::GetInstance()->IsOnceKeyDown('E'))
-		Fire(MissileType::Laser);
-	if (KeyManager::GetInstance()->IsOnceKeyDown('Q'))
-		Fire(MissileType::Straight);
-	if (KeyManager::GetInstance()->IsOnceKeyDown('R'))
-		Fire(MissileType::Homing);
+		if (KeyManager::GetInstance()->IsOnceKeyDown(VK_SPACE))
+			Fire(MissileType::Normal);
+		if (KeyManager::GetInstance()->IsOnceKeyDown('E'))
+			Fire(MissileType::Laser);
+		if (KeyManager::GetInstance()->IsOnceKeyDown('Q'))
+			Fire(MissileType::Straight);
+		if (KeyManager::GetInstance()->IsOnceKeyDown('R'))
+			Fire(MissileType::Homing);
 
+
+		Move();
+	}
 	for (iter = vecMissileManager.begin(); iter != vecMissileManager.end(); iter++)
 	{
 		(*iter)->Update();
-	}
-
-		Move();
 	}
 	UpdateRectAtCenter(rc, pos);
 

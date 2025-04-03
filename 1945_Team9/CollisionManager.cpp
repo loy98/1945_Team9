@@ -15,9 +15,14 @@ void CollisionManager::Update()
 		{
 			Collider* src = playerColliders[i];
 			Collider* dest = enemyColliders[j];
+			if (!src || !dest) continue;
 
 			if (src->GetOwner()->GetIsCollision() || dest->GetOwner()->GetIsCollision())
 				continue;
+
+			if (src->GetOwner()->GetObjectType() == ObjectType::Player)
+				if(dynamic_cast<Player*>(src->GetOwner())->GetPlayerState() == PlayerState::Spawn)
+					continue;
 
 			if (src->CheckCollision(dest))
 			{
