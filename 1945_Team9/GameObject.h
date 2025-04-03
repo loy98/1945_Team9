@@ -18,8 +18,12 @@ public:
 	virtual RECT GetRect() { return rc; }
 	Size GetSize() { return size; }
 	
+	//
 	void SetTarget(GameObject* target) { this->target = target; }
 	FPOINT GetTargetPos() { return target->GetPos(); }
+
+	bool GetTargetIsCollision() { return target->GetIsCollision(); }
+
 
 	GameObject();
 	~GameObject();
@@ -31,5 +35,6 @@ protected:
 	RECT rc;
 	Size size;
 
+	//
 	GameObject* target;
 };

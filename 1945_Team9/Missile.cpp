@@ -70,7 +70,7 @@ void Missile::AddCollider(Missile* missile, CollisionGroup group)
 
 void Missile::Move()
 {
-	if(isActived)
+	//if (isActived && !(isCollision))
 	{
 		controller->Move(this);
 	}

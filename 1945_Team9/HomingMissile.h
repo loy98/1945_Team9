@@ -7,8 +7,10 @@ class HomingMissile: public Missile
 {
 private:
 	Image* idle;
-	vector<Image*> left;
-	vector<Image*> right;
+	Image* left;
+	Image* right;
+	vector<Image*>::iterator iter;
+
 	Image* currentAnimation;
 
 	FPOINT currPos;
@@ -17,8 +19,12 @@ private:
 	int currentFrame;
 	int maxFrame;
 
+	float elapsedTime;
+
 	void UpdateImage();
 
+	void MoveToTheRight();
+	void MoveToTherLeft();
 
 public:
 	using Super = Missile;

@@ -14,7 +14,9 @@ private:
 
 	bool isActivedPack(int num);
 	void LaunchPack(int num, FPOINT pos);
-	void UpdateTarget();
+	void UpdateTargetList();
+	GameObject * UpdateTarget(int num);
+
 	void SortTargetList();
 public:
 	HomingMissileManager();

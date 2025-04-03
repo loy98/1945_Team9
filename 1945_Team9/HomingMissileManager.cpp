@@ -30,16 +30,14 @@ void HomingMissileManager::LaunchPack(int num, FPOINT pos)
 		}
 }
 
-void HomingMissileManager::UpdateTarget()
+void HomingMissileManager::UpdateTargetList()
 {
 
 	//// 적의 충돌 위치 받아오고, 그 중 하나를 타겟으로 한다. 만약 타겟이 죽으면 타겟 갱신, 부딪혔으면 끝
-
 	//// 타겟 리스트 정리-적만 남게
-
-
-
 	//// 적의 충돌 위치 받아오고, 그 중 하나를 타겟으로 한다. 만약 타겟이 죽으면 타겟 갱신, 부딪혔으면 끝
+	
+
 
 	bool isNewTarget = true;
 
@@ -64,7 +62,6 @@ void HomingMissileManager::UpdateTarget()
 		}
 
 	}
-
 	// 비활성 타겟 정리-정리하니까 렉 걸리는듯
 
 	//for (int i = 0; i < targetList.size(); i++)
@@ -84,6 +81,25 @@ void HomingMissileManager::UpdateTarget()
 	//}
 
 	SortTargetList();
+}
+
+GameObject * HomingMissileManager::UpdateTarget(int num)
+{
+	int count = 0;
+
+	for (int i = 0; i < targetList.size(); i++)
+	{
+		if (!targetList[i]->GetIsCollision())
+		{
+			if (count == num)
+			{
+				return targetList[i]->GetOwner();
+			}
+			count++;
+		}
+	}
+
+	return nullptr;
 }
 
 void HomingMissileManager::SortTargetList()
@@ -151,7 +167,7 @@ void HomingMissileManager::Release()
 
 void HomingMissileManager::Update()
 {
-	UpdateTarget();
+	UpdateTargetList();
 
 	for(int i = 0; i< vecvecMissileList.size(); i++)
 	{
@@ -159,6 +175,10 @@ void HomingMissileManager::Update()
 		{
 			for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
 			{
+				if ((*iter)->GetTargetIsCollision())
+				{
+					(*iter)->SetTarget(UpdateTarget(0));
+				}
 				(*iter)->Update();
 			}
 		}
@@ -173,6 +193,7 @@ void HomingMissileManager::Render(HDC hdc, bool isFlip)
 		{
 			for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
 			{
+				//if ((*iter)->GetIsCollision()) continue;
 				(*iter)->Render(hdc, isFlip);
 			}
 		}
@@ -189,16 +210,17 @@ void HomingMissileManager::Launch(FPOINT pos)
 	//		break;
 	//	}
 	//}
-	UpdateTarget();
+	//UpdateTarget();
 	for (int i = 0; i < vecvecMissileList.size(); i++)
 	{
 		if (!isActivedPack(i))
 		{
 			//LaunchPack(i);
+			UpdateTargetList();
 			for (int j = 0; j < vecvecMissileList[i].size(); j++)
 			{
 				vecvecMissileList[i][j]->SetTarget(targetList[j]->GetOwner());
-				vecvecMissileList[i][j]->ReLoad({ pos.x - (25 * vecvecMissileList[i].size() / 2) + (25 * j), pos.y + 30 });
+				vecvecMissileList[i][j]->ReLoad({ pos.x - (25 * vecvecMissileList[i].size() / 2) + (25 * j), pos.y + 30 }); 
 			}
 			break;
 		}
