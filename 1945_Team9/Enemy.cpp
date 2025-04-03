@@ -10,6 +10,11 @@
 #include "ItemManager.h"
 #include "EffectManager.h"
 
+#include "EnemyMissileManager.h"
+
+//test
+#include "EnemyController.h"
+
 void Enemy::Init(float posX, float posY)
 {
 	pos = { posX, posY };
@@ -30,7 +35,7 @@ void Enemy::Init(float posX, float posY)
 
 	//image = ImageManager::GetInstance()->AddImage(L"ufo", TEXT("Image\\ufo.bmp"), 540, 32, 10, 1, true, true, RGB(255, 0, 255));
 
-	missileManager = new NormalMissileManager();
+	missileManager = new EnemyMissileManager();
 	missileManager->SetCollisionGroup(CollisionGroup::Enemy);
 	missileManager->Init();
 
@@ -46,6 +51,13 @@ void Enemy::Release()
 		missileManager->Release();
 		delete missileManager;
 		missileManager = nullptr;
+	}
+
+	//test
+	if (controller)
+	{
+		delete controller;
+		controller = nullptr;
 	}
 }
 
@@ -110,6 +122,9 @@ void Enemy::Render(HDC hdc)
 void Enemy::Move()
 {
 	pos.x += moveSpeed * dir.x * TimeManager::GetInstance()->GetDeltaTime();
+
+	//test
+	controller->Move(this);
 }
 
 void Enemy::Fire()
