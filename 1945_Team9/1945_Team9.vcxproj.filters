@@ -134,6 +134,12 @@
     <ClInclude Include="HomingItem.h">
       <Filter>MainGame\Item</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyMissile.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyMissileManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionManager.cpp">
@@ -234,6 +240,12 @@
     </ClCompile>
     <ClCompile Include="HomingItem.cpp">
       <Filter>MainGame\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyMissile.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyMissileManager.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
