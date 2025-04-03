@@ -25,6 +25,7 @@ private:
 	FPOINT barrelEnd;
 	int barrelSize;
 	float fireAngle;	
+	int life;
 
 	// πÃªÁ¿œ
 	float missileSpeed;
@@ -47,6 +48,7 @@ public:
 	void Fire(MissileType type);
 	void AddMissile(GameObject* owner, MissileType type, FPOINT pos, float angle, float speed);
 	void Dead();
+	int GetLife() { return life; }
 
 	Player();
 	~Player();

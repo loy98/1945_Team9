@@ -33,6 +33,22 @@ void CollisionManager::Update()
 	}
 }
 
+void CollisionManager::Release()
+{
+	for (int i = 0; i < (int)CollisionGroup::GroupLength; ++i)
+	{
+		for (auto collider : colliderList[i])
+		{
+			if (collider)
+			{
+				collider->Release();
+				delete collider;
+			}
+		}
+		colliderList[i].clear();
+	}
+}
+
 void CollisionManager::CheckPlayerItemCollision()
 {
 	const vector<Collider*>& playerColliders = colliderList[(int)CollisionGroup::Player];

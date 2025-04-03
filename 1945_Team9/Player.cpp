@@ -27,6 +27,7 @@ void Player::Init()
 	isAlive = true;
 	spawnCurrTime = 0.0f;
 	spawnCurrFrame = 0;
+	life = 2;
 	// ����
 	//barrelSize = 30;
 	//barrelEnd.x = pos.x;
@@ -83,10 +84,12 @@ void Player::Update()
 	// 맞으면 리스폰
 	if (isCollision)
 	{
+		life--;
 		state = PlayerState::Spawn;
 		isSpawned = true;
 		isCollision = false;
 	}
+	if (life <= 0) return;
 	//스폰 로직 -> 태어나면서 무적 추가해야함
 	if (state == PlayerState::Spawn)
 	{
