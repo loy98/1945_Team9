@@ -8,22 +8,18 @@ class MissileManager;
 class Player : public GameObject
 {
 private:
-	enum PlayerState
-	{
-		Idle,
-		MoveLeft,
-		MoveRight,
-		PlayerStateLength
-	};
+	
 	FPOINT dir{ 1, 1 };
 	float damage;
 	float moveSpeed;
 
 	int idleCurrFrame;
 	int moveCurrFrame;
+	int spawnCurrFrame;
 	float animIdleCurrTime;
 	float animMoveCurrTime;
-	vector<Image*> imageList{ PlayerStateLength, nullptr};
+	float spawnCurrTime;
+	vector<Image*> imageList{ (int)PlayerState::PlayerStateLength, nullptr};
 
 	// 포신
 	FPOINT barrelEnd;
@@ -33,6 +29,7 @@ private:
 	// 미사일
 	float missileSpeed;
 	bool LaserLaunched = false;
+	bool isSpawned = true;
 
 	vector<MissileManager*> vecMissileManager;
 	vector<MissileManager*>::iterator iter;

@@ -76,6 +76,8 @@ void Missile::ReLoad(FPOINT pos)		// 발사한다면 세팅.
 	isActived = true;
 	isCollision = false;
 	isAlive = true;
+	animationFrame = 0;
+	//elapsedTime = 0;
 }
 
 bool Missile::IsOutofScreen()

@@ -23,8 +23,10 @@ void Player::Init()
 	moveSpeed = 0.5f;
 	group = CollisionGroup::Player;
 	type = ObjectType::Player;
-	state = PlayerState::Idle;
+	state = PlayerState::Spawn;
 	isAlive = true;
+	spawnCurrTime = 0.0f;
+	spawnCurrFrame = 0;
 	// ����
 	//barrelSize = 30;
 	//barrelEnd.x = pos.x;
@@ -32,13 +34,14 @@ void Player::Init()
 	//fireAngle = 90.0f;
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
 
-	imageList[Idle] = ImageManager::GetInstance()->AddImage(
+	imageList[(int)PlayerState::Idle] = ImageManager::GetInstance()->AddImage(
 		L"player", TEXT("Image/playeridle.bmp"), 46, 32, 2, 1, false, true, RGB(255, 0, 255));
-	imageList[MoveLeft] = ImageManager::GetInstance()->AddImage(
+	imageList[(int)PlayerState::MoveLeft] = ImageManager::GetInstance()->AddImage(
 		L"PlayerMoveLeft", TEXT("Image/PlayerMoveLeft.bmp"), 161, 32, 7, 1, false, true, RGB(255, 0, 255));
-	imageList[MoveRight] = ImageManager::GetInstance()->AddImage(
+	imageList[(int)PlayerState::MoveRight] = ImageManager::GetInstance()->AddImage(
 		L"PlayerMoveRight", TEXT("Image/PlayerMoveRight.bmp"), 161, 32, 7, 1, false, true, RGB(255, 0, 255));
-
+	imageList[(int)PlayerState::Spawn] = ImageManager::GetInstance()->AddImage(
+		L"PlayerSpawn", TEXT("Image/PlayerSpawn.bmp"), 341, 128, 11, 1, false, true, RGB(0, 255, 0));
 	// �̻���
 	missileSpeed = 150.0f;
 
@@ -77,31 +80,61 @@ void Player::Release()
 
 void Player::Update()
 {
-	//barrelEnd.x = pos.x + barrelSize * cosf(DEG_TO_RAD(fireAngle));
-	//barrelEnd.y = pos.y - barrelSize * sinf(DEG_TO_RAD(fireAngle));
-	animIdleCurrTime += TimeManager::GetInstance()->GetDeltaTime();
-	if (animIdleCurrTime > 0.2f)
+	// 맞으면 리스폰
+	if (isCollision)
 	{
-		idleCurrFrame++;
-		animIdleCurrTime = 0;
+		state = PlayerState::Spawn;
+		isSpawned = true;
+		isCollision = false;
 	}
-	if (idleCurrFrame >= 2)idleCurrFrame = 0;
-	
-	if (KeyManager::GetInstance()->IsOnceKeyDown(VK_SPACE))
-		Fire(MissileType::Normal);
-	if (KeyManager::GetInstance()->IsOnceKeyDown('E'))
-		Fire(MissileType::Laser);
-	if (KeyManager::GetInstance()->IsOnceKeyDown('Q'))
-		Fire(MissileType::Straight);
-
-	for (iter = vecMissileManager.begin(); iter != vecMissileManager.end(); iter++)
+	//스폰 로직 -> 태어나면서 무적 추가해야함
+	if (state == PlayerState::Spawn)
 	{
-		(*iter)->Update();
+		if (isSpawned)
+		{
+			pos = { WINSIZE_X / 2, WINSIZE_Y - size.y};
+			isSpawned = false;
+		}
+		//isCollision = true;
+		spawnCurrTime += TimeManager::GetInstance()->GetDeltaTime();
+		
+		pos.y -= 100 * TimeManager::GetInstance()->GetDeltaTime();
+		if (spawnCurrTime > 0.2f)
+		{
+			spawnCurrFrame++;
+			spawnCurrTime = 0;
+			if (spawnCurrFrame >= 11)
+			{
+				spawnCurrFrame = 0;
+				state = PlayerState::Idle;
+				isCollision = false;
+			}
+		}
 	}
+	else
+	{
+		animIdleCurrTime += TimeManager::GetInstance()->GetDeltaTime();
+		if (animIdleCurrTime > 0.2f)
+		{
+			idleCurrFrame++;
+			animIdleCurrTime = 0;
+		}
+		if (idleCurrFrame >= 2)idleCurrFrame = 0;
 
-	
-	Move();
+		if (KeyManager::GetInstance()->IsOnceKeyDown(VK_SPACE))
+			Fire(MissileType::Normal);
+		if (KeyManager::GetInstance()->IsOnceKeyDown('E'))
+			Fire(MissileType::Laser);
+		if (KeyManager::GetInstance()->IsOnceKeyDown('Q'))
+			Fire(MissileType::Straight);
 
+		for (iter = vecMissileManager.begin(); iter != vecMissileManager.end(); iter++)
+		{
+			(*iter)->Update();
+		}
+
+		Move();
+	}
 	UpdateRectAtCenter(rc, pos);
 
 	for (auto& collider : colliderList)
@@ -116,16 +149,21 @@ void Player::Render(HDC hdc)
 	switch (state)
 	{
 	case PlayerState::Idle:
-		imageList[Idle]->TestFrameRender(
+		imageList[(int)PlayerState::Idle]->TestFrameRender(
 			hdc, rc.left, rc.top, rc.right, size.y, idleCurrFrame, 0, false);
 		break;
 	case PlayerState::MoveLeft:
-		imageList[MoveLeft]->TestFrameRender(
+		imageList[(int)PlayerState::MoveLeft]->TestFrameRender(
 			hdc, rc.left, rc.top, rc.right, size.y, moveCurrFrame, 0, false);
 		break;
 	case PlayerState::MoveRight:
-		imageList[MoveRight]->TestFrameRender(
+		imageList[(int)PlayerState::MoveRight]->TestFrameRender(
 			hdc, rc.left, rc.top, rc.right, size.y, moveCurrFrame, 0, false);
+		break;
+	case PlayerState::Spawn:
+		//하드코딩이 아니라 이미지에서 데이터 가져오는식으로 바꿔야함
+		imageList[(int)PlayerState::Spawn]->TestFrameRender(
+			hdc, rc.left - 5, rc.top - 10 , rc.right + 5, 180, spawnCurrFrame, 0, false);
 		break;
 	}
 
