@@ -76,6 +76,7 @@ enum class ItemType
 enum class EnemyType
 {
 	Diagonal,
+	Horizontal,
 	EnemyTypeLength
 };
 enum class PlayerState
