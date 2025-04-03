@@ -82,6 +82,9 @@ void Enemy::Update()
 	}
 	Move();
 
+	// 화면 밖일때 isAlive = false;
+	if (IsOutofScreen()) isAlive = false;
+
 	UpdateRectAtCenter(rc, pos);
 	for (auto& collider : colliderList)
 	{
