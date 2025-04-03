@@ -4,6 +4,8 @@
 class Player;
 class Image;
 class MissileManager;
+//test
+class EnemyController;
 class Enemy : public GameObject	// is-a
 {
 public:
@@ -32,6 +34,9 @@ public:
 	float GetMoveSpeed() { return moveSpeed; }
 	MissileManager* GetMissileManager() { return missileManager; }
 
+	//test
+
+
 protected:
 	FPOINT dir{ 1, 0 };
 	float moveSpeed;
@@ -53,5 +58,8 @@ protected:
 
 	Image* image;
 	MissileManager* missileManager;
+
+	//test
+	EnemyController* controller;
 };
 
