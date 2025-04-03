@@ -22,7 +22,7 @@ public:
 	bool IsOutofScreen();
 
 	bool GetIsLeft() { return isLeft; }
-
+	void AddEffects();
 
 	//inline void SetTarget(Player* target) { this->target = target; }
 	inline void SetTarget(GameObject* target) { this->target = target; }
@@ -43,7 +43,6 @@ protected:
 	float elapsedMoveTime;
 	float maxMoveTime;
 	float elapsedApperTime;
-
 	//Player* target;
 	GameObject* target;
 	bool isLeft;

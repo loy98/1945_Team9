@@ -27,6 +27,7 @@ void CollisionManager::Update()
 				src->GetOwner()->SetIsAlive(false);
 				dest->GetOwner()->SetIsCollision(true);
 				dest->GetOwner()->SetIsAlive(false);
+				//dest->SetPos({ -100, -200 });
 			}
 		}
 	}

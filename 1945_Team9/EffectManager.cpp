@@ -61,6 +61,6 @@ void EffectManager::AddEffect(Effect* effect)
 
 void EffectManager::DeleteEffect(Effect* effect)
 {
-	auto it = find(vecEffect.begin(), vecEffect.end(), effect);
-	vecEffect.erase(it);
+	auto it = remove(vecEffect.begin(), vecEffect.end(), effect);
+	vecEffect.erase(it, vecEffect.end());
 }

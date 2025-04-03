@@ -84,14 +84,14 @@ void MainGame::Update()
 {
 	//InvalidateRect(g_hWnd, NULL, false);
 
-	if (enemyManager) enemyManager->Update();
 	if (rocket) rocket->Update();
+	if (enemyManager) enemyManager->Update();
 
 	backGround->Update();
 
+	EffectManager::GetInstance()->Update();
 	CollisionManager::GetInstance()->Update();
 	ItemManager::GetInstance()->Update();
-	EffectManager::GetInstance()->Update();
 }
 
 void MainGame::Render()

@@ -19,6 +19,7 @@ public:
 	Size GetSize() { return size; }
 	inline void SetIsAlive(bool isAlive) { this->isAlive = isAlive; }
 	inline bool GetIsAlive() { return isAlive; }
+	void SetPos(FPOINT pos) { this->pos = pos; }
 
 	GameObject();
 	~GameObject();

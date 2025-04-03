@@ -87,18 +87,18 @@ void Player::Update()
 	}
 	if (idleCurrFrame >= 2)idleCurrFrame = 0;
 	
-
-	for (iter = vecMissileManager.begin(); iter != vecMissileManager.end(); iter++)
-	{
-		(*iter)->Update();
-	}
-
 	if (KeyManager::GetInstance()->IsOnceKeyDown(VK_SPACE))
 		Fire(MissileType::Normal);
 	if (KeyManager::GetInstance()->IsOnceKeyDown('E'))
 		Fire(MissileType::Laser);
 	if (KeyManager::GetInstance()->IsOnceKeyDown('Q'))
 		Fire(MissileType::Straight);
+
+	for (iter = vecMissileManager.begin(); iter != vecMissileManager.end(); iter++)
+	{
+		(*iter)->Update();
+	}
+
 	
 	Move();
 

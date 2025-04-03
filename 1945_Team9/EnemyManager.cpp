@@ -45,20 +45,6 @@ void EnemyManager::Release()
 
 void EnemyManager::Update()
 {
-	for (int i = 0; i < (int)EnemyType::EnemyTypeLength; ++i)
-	{
-		for (int j = 0; j < vecEnemys[i].size(); ++j)
-		{
-			if (vecEnemys[i][j])
-			{
-				vecEnemys[i][j]->Update();
-				if (vecEnemys[i][j]->IsOutofScreen())
-				{
-					vecEnemys[i][j]->SetIsAlive(false);
-				}
-			}
-		}
-	}
 	/* -------------- 재훈 사선 enemy 코드 ---------------*/
 	if (diagonalAppearCount >= diagonalMaxAppearCount)
 	{
@@ -74,6 +60,20 @@ void EnemyManager::Update()
 	if (diagonalAppearCount < diagonalMaxAppearCount)
 		DiagonalAppear();
 	/* -------------- --------------------- ---------------*/
+	for (int i = 0; i < (int)EnemyType::EnemyTypeLength; ++i)
+	{
+		for (int j = 0; j < vecEnemys[i].size(); ++j)
+		{
+			if (vecEnemys[i][j])
+			{
+				vecEnemys[i][j]->Update();
+				if (vecEnemys[i][j]->IsOutofScreen())
+				{
+					vecEnemys[i][j]->SetIsAlive(false);
+				}
+			}
+		}
+	}
 }
 
 void EnemyManager::Render(HDC hdc)

@@ -51,10 +51,7 @@ void Enemy::Update()
 {
 	if (isCollision && !isEffect)
 	{
-		Effect* effect = new Effect();
-		effect->Init(L"EnemyDie", pos, size, 30, 30);
-		EffectManager::GetInstance()->AddEffect(effect);
-		//isCollision = false;
+		AddEffects();
 		isEffect = true;
 	}
 	if (!isAlive) return;
@@ -129,6 +126,21 @@ bool Enemy::IsOutofScreen()
 		return true;
 
 	return false;
+}
+
+void Enemy::AddEffects()
+{
+	Effect* effect1 = new Effect();
+	effect1->Init(L"EnemyDie", { pos.x + 10, pos.y - 10 }, size, 30, 20);
+	EffectManager::GetInstance()->AddEffect(effect1);
+
+	Effect* effect2 = new Effect();
+	effect2->Init(L"EnemyDie", { pos.x - 10, pos.y + 10 }, size, 30, 20);
+	EffectManager::GetInstance()->AddEffect(effect2);
+
+	Effect* effect3 = new Effect();
+	effect3->Init(L"EnemyDie", { pos.x + 30, pos.y + 20 }, size, 30, 20);
+	EffectManager::GetInstance()->AddEffect(effect3);
 }
 
 Enemy::Enemy()
