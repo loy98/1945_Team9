@@ -21,10 +21,8 @@ public:
 	void ChangeApperSide();
 	bool IsOutofScreen();
 
-	inline void SetIsAlive(bool isAlive) { this->isAlive = isAlive; }
-	inline bool GetIsAlive() { return isAlive; }
 	bool GetIsLeft() { return isLeft; }
-
+	void AddEffects();
 
 	//inline void SetTarget(Player* target) { this->target = target; }
 	inline void SetTarget(GameObject* target) { this->target = target; }
@@ -38,16 +36,17 @@ protected:
 	FPOINT dir{ 1, 0 };
 	float moveSpeed;
 	float angle;
-	bool isAlive;
+	
 	int animationFrame;
 	int elapsedFrame;
 	float elapsedTime;
 	float elapsedMoveTime;
 	float maxMoveTime;
-
+	float elapsedApperTime;
 	//Player* target;
 	GameObject* target;
 	bool isLeft;
+	bool isEffect;
 
 	float offsetX;
 	float offsetY;

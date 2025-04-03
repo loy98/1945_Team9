@@ -2,6 +2,7 @@
 
 LaserItem::LaserItem()
 {
+	itemType = ItemType::Laser;
 }
 
 LaserItem::~LaserItem()

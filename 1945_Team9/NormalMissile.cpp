@@ -29,12 +29,12 @@ void NormalMissile::Release()
 
 void NormalMissile::Update()
 {
-	Super::Update();		// 미사일 이동 후 pos도 업데이트해줌, isactived,collison 
 	//controller->Move(this);
 	UpdateRectAtCenter(rc, pos);
+	Super::Update();		// 미사일 이동 후 pos도 업데이트해줌, isactived,collison 
 
 	//if (IsOutofScreen())
-	//{
+	//{ 
 	//	isActived = false;
 	//}
 

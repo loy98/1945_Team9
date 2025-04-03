@@ -14,6 +14,7 @@ private:
 	int mousePosX = 0, mousePosY = 0;
 	FPOINT mousePos;
 	wchar_t szText[128];
+	bool GameOver = false;
 
 	Image* backBuffer;
 	Player* rocket;

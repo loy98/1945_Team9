@@ -27,6 +27,12 @@
     <Filter Include="MainGame\Item">
       <UniqueIdentifier>{dcff6e2d-75bf-48fd-b3f8-45cd137e47f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MainGame\Collision">
+      <UniqueIdentifier>{e727b7b8-e532-4161-a203-621ffdb91d75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Effect">
+      <UniqueIdentifier>{a17978ee-82f9-47b2-a0c4-3ece5054d098}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonFunction.h">
@@ -34,9 +40,6 @@
     </ClInclude>
     <ClInclude Include="config.h">
       <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionManager.h">
-      <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="Image.h">
       <Filter>Manager</Filter>
@@ -81,9 +84,6 @@
       <Filter>MainGame</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>MainGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider.h">
       <Filter>MainGame</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
@@ -134,17 +134,20 @@
     <ClInclude Include="HomingItem.h">
       <Filter>MainGame\Item</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyMissile.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="Collider.h">
+      <Filter>MainGame\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyMissileManager.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>MainGame\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>MainGame\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>MainGame\Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CollisionManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Image.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -193,9 +196,6 @@
     <ClCompile Include="EnemyManager.cpp">
       <Filter>MainGame\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>MainGame</Filter>
-    </ClCompile>
     <ClCompile Include="HomingMissile.cpp">
       <Filter>MainGame\Missile</Filter>
     </ClCompile>
@@ -241,11 +241,17 @@
     <ClCompile Include="HomingItem.cpp">
       <Filter>MainGame\Item</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyMissile.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="Collider.cpp">
+      <Filter>MainGame\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyMissileManager.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>MainGame\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>MainGame\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>MainGame\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

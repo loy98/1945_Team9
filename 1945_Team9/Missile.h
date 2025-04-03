@@ -8,7 +8,7 @@ class Image;
 class Missile : public GameObject
 {
 public:
-	Missile() {};
+	Missile();
 	virtual ~Missile();
 
 	virtual void Init() =0;		// 각 init에서 포지션, isactived, moveSpeed, angle, 이미지,  addCollider

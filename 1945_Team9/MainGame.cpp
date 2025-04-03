@@ -8,6 +8,7 @@
 #include "Timer.h"
 #include "BackGround.h"
 #include "ItemManager.h"
+#include "EffectManager.h"
 
 /*
 	실습1. 이오리 집에 보내기
@@ -18,6 +19,7 @@ void MainGame::Init()
 {
 	KeyManager::GetInstance()->Init();
 	ImageManager::GetInstance()->Init();
+	EffectManager::GetInstance()->Init();
 
 	hdc = GetDC(g_hWnd);
 
@@ -38,7 +40,13 @@ void MainGame::Init()
 	backGround = new BackGround();
 	backGround->Init();
 
-	ItemManager::GetInstance()->AddItem(ItemType::Normal, { 300, 500 }, {60, 60});
+	//gameover 확인용
+	ImageManager::GetInstance()->AddImage(
+		L"GameOver", L"Image\\GameOver.bmp", 136, 16, 1, 1, false, true, RGB(255, 0, 255));
+
+	//아이템 확인용
+	ItemManager::GetInstance()->AddItem(ItemType::Laser, { 300, 500 }, { 20, 20 });
+	
 }
 
 void MainGame::Release()
@@ -72,19 +80,37 @@ void MainGame::Release()
 
 	KeyManager::GetInstance()->Release();
 	ImageManager::GetInstance()->Release();
+	EffectManager::GetInstance()->Release();
+	CollisionManager::GetInstance()->Release();
 
 	ReleaseDC(g_hWnd, hdc);
 }
 
 void MainGame::Update()
 {
+	backGround->Update();
+	if (GameOver)
+	{
+		if (KeyManager::GetInstance()->IsOnceKeyDown(VK_SPACE))
+		{
+			Release();
+			Init();
+			GameOver = false;
+		}
+		else
+			return;
+	}
 	//InvalidateRect(g_hWnd, NULL, false);
+	if (rocket) rocket->Update();
+	if (rocket->GetLife() <= 0)
+	{
+		GameOver = true;
+	}
 
 	if (enemyManager) enemyManager->Update();
-	if (rocket) rocket->Update();
 
-	backGround->Update();
 
+	EffectManager::GetInstance()->Update();
 	CollisionManager::GetInstance()->Update();
 	ItemManager::GetInstance()->Update();
 }
@@ -94,10 +120,20 @@ void MainGame::Render()
 	// 백버퍼에 먼저 복사
 	HDC hBackBufferDC = backBuffer->GetMemDC();
 
+
 	backGround->Render(hBackBufferDC);
+	if (GameOver)
+	{
+		ImageManager::GetInstance()->FindImage(L"GameOver")
+			->TestFrameRender(hBackBufferDC,
+				100, 300, 500, 100, 0, 0, false);
+		backBuffer->Render(hdc);
+		return;
+	}
 	if (enemyManager) enemyManager->Render(hBackBufferDC);
 	if (rocket) rocket->Render(hBackBufferDC);
 	ItemManager::GetInstance()->Render(hBackBufferDC);
+	EffectManager::GetInstance()->Render(hBackBufferDC);
 
 	wsprintf(szText, TEXT("Mouse X : %d, Y : %d"), mousePosX, mousePosY);
 	TextOut(hBackBufferDC, 20, 60, szText, wcslen(szText));

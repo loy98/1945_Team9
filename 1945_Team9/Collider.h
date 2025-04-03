@@ -1,7 +1,7 @@
 #pragma once
 #include "config.h"
-class GameObject;
-class Collider
+#include "GameObject.h"
+class Collider : public GameObject
 {
 public:
 	Collider(GameObject* owner, FPOINT pos);
@@ -23,7 +23,7 @@ private:
 	GameObject* owner;
 	FPOINT pos;
 	bool isCollision;
-	bool showDebug = true;
+	bool showDebug = false;
 	HPEN myPen{};
 	HPEN oldPen{};
 	RECT rc;

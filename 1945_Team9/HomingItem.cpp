@@ -2,6 +2,7 @@
 
 HomingItem::HomingItem()
 {
+	itemType = ItemType::Homing;
 }
 
 HomingItem::~HomingItem()

@@ -14,11 +14,14 @@ public:
 	virtual void Update() override;
 	virtual void Render(HDC hdc, bool isFlip) override;
 
+	void LevelUp();
+
 	void SetOwner(GameObject* owner) { this->owner = owner; };
 
 private:
 	float elapsedlaunchTime;
 	float launchTime;
+	float coolTime;
 	bool isLaunch;
 	GameObject* owner;
 };

@@ -19,6 +19,7 @@ void DiagonalEnemy::Init(float posX, float posY)
 	//angle = 330.0f;
 	dir = { 3, 1 };
 	maxFireTime = 1.0f;
+	//moveSpeed = 300.f;
 
 	offsetX = 30;
 	offsetY = 10;
@@ -62,6 +63,8 @@ void DiagonalEnemy::Reset(FPOINT pos)
 	this->pos = pos;
 	isCollision = false;
 	elapsedFireTime = 0;
+	isEffect = false; 
+	elapsedApperTime = 0;
 }
 
 void DiagonalEnemy::Move()
@@ -74,7 +77,5 @@ void DiagonalEnemy::Move()
 void DiagonalEnemy::Fire()
 {
 	float angle = ::GetAngle(pos, target->GetPos());
-	Missile* missile = missileManager->CreateMissile(MissileType::Normal, pos, angle, moveSpeed);
-	missile->AddCollider(missile, CollisionGroup::Enemy);
-	missileManager->AddMissile(missile);
+	missileManager->AngleLaunch(pos, angle);
 }

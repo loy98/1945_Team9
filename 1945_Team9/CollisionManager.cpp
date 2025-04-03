@@ -1,6 +1,9 @@
 #include "CollisionManager.h"
 #include "Collider.h"
 #include "GameObject.h"
+#include "Player.h"
+#include "Item.h"
+
 void CollisionManager::Update()
 {
 	const vector<Collider*>& playerColliders = colliderList[(int)CollisionGroup::Player];
@@ -21,9 +24,28 @@ void CollisionManager::Update()
 				if (src->GetOwner()->GetObjectType() == dest->GetOwner()->GetObjectType())
 					continue;
 				src->GetOwner()->SetIsCollision(true);
+				src->GetOwner()->SetIsAlive(false);
 				dest->GetOwner()->SetIsCollision(true);
+				dest->GetOwner()->SetIsAlive(false);
+				//dest->SetPos({ -100, -200 });
 			}
 		}
+	}
+}
+
+void CollisionManager::Release()
+{
+	for (int i = 0; i < (int)CollisionGroup::GroupLength; ++i)
+	{
+		for (auto collider : colliderList[i])
+		{
+			if (collider)
+			{
+				collider->Release();
+				delete collider;
+			}
+		}
+		colliderList[i].clear();
 	}
 }
 
@@ -48,6 +70,7 @@ void CollisionManager::CheckPlayerItemCollision()
 					continue;
 				//src->GetOwner()->SetIsCollision(true);
 				dest->GetOwner()->SetIsCollision(true);
+				dynamic_cast<Player*>(src->GetOwner())->LevelUp(dynamic_cast<Item*>(dest->GetOwner())->GetItemType());
 			}
 		}
 	}

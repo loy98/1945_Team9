@@ -78,6 +78,14 @@ enum class EnemyType
 	Diagonal,
 	EnemyTypeLength
 };
+enum class PlayerState
+{
+	Idle,
+	MoveLeft,
+	MoveRight,
+	Spawn,
+	PlayerStateLength
+};
 struct Size
 {
 	float x;

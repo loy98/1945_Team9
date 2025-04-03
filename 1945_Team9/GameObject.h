@@ -21,20 +21,24 @@ public:
 	//
 	void SetTarget(GameObject* target) { this->target = target; }
 	FPOINT GetTargetPos() { return target->GetPos(); }
-
 	bool GetTargetIsCollision() { return target->GetIsCollision(); }
-
+	inline void SetIsAlive(bool isAlive) { this->isAlive = isAlive; }
+	inline bool GetIsAlive() { return isAlive; }
+	void SetPos(FPOINT pos) { this->pos = pos; }
 
 	GameObject();
 	~GameObject();
 protected:
 	FPOINT pos;
 	vector<Collider*> colliderList;
-	bool isCollision;
 	ObjectType type;
 	RECT rc;
 	Size size;
 
 	//
 	GameObject* target;
+
+	bool isCollision;
+	bool isAlive;
+
 };
