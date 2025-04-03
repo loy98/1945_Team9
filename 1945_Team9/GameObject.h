@@ -26,6 +26,8 @@ public:
 	inline bool GetIsAlive() { return isAlive; }
 	void SetPos(FPOINT pos) { this->pos = pos; }
 
+	bool GetHasTarget() { if (target)return true; else return false; }
+
 	GameObject();
 	~GameObject();
 protected:
