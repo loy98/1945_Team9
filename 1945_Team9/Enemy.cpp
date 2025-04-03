@@ -28,6 +28,7 @@ void Enemy::Init(float posX, float posY)
 
 
 	missileManager = new EnemyMissileManager();
+	missileManager->SetCollisionGroup(CollisionGroup::Enemy);
 	missileManager->Init();
 
 	Collider* collider = new Collider(this, pos);
@@ -75,10 +76,10 @@ void Enemy::Update()
 
 void Enemy::Render(HDC hdc)
 {
-	if (isAlive)
+	/*if (isAlive)
 	{
 		///image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0);
-	}
+	}*/
 	if (missileManager)
 	{
 		missileManager->Render(hdc,true);

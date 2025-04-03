@@ -56,12 +56,3 @@ public:
 
 	void Move(Missile* missile) override;
 };
-
-class BossMissileController : public MissileController
-{
-public:
-	BossMissileController();
-	virtual ~BossMissileController();
-
-	void Move(Missile* missile) override;
-};

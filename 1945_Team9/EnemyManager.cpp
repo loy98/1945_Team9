@@ -111,8 +111,8 @@ void EnemyManager::Update()
 	StraightAppear();
 		
 	bossSpawnTime += TimeManager::GetInstance()->GetDeltaTime();
-
-	if (!isBossSpawned && bossSpawnTime >= 10.0f)
+	//if (!isBossSpawned && bossSpawnTime >= 10.0f)
+	if (!isBossSpawned && bossSpawnTime >= 0.1f)
 	{
 		isBossSpawned = true;
 		BossAppear();

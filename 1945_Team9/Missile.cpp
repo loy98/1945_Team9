@@ -15,6 +15,12 @@ void Missile::Release()
 			collider = nullptr;
 		}
 	}
+
+	if (controller)
+	{
+		delete controller;
+		controller = nullptr;
+	}
 }
 
 void Missile::Update()
@@ -64,10 +70,7 @@ void Missile::AddCollider(Missile* missile, CollisionGroup group)
 
 void Missile::Move()
 {
-	if(isActived)
-	{
-		controller->Move(this);
-	}
+	controller->Move(this);
 }
 
 //void Missile::ReLoad(FPOINT pos, float angle)		// 발사한다면 세팅.
@@ -80,9 +83,11 @@ void Missile::Move()
 
 void Missile::ReLoad(FPOINT pos)
 {
-	this->pos = pos;
 	isActived = true;
+	this->pos = pos;
 	isCollision = false;
+	isAlive = true;
+	animationFrame = 0;
 }
 
 bool Missile::IsOutofScreen()
@@ -98,7 +103,11 @@ bool Missile::IsOutofScreen()
 
 	return false;
 }
-
+Missile::Missile()
+{
+	type = ObjectType::Missile;
+	isAlive = true;
+}
 Missile::~Missile()
 {
 }

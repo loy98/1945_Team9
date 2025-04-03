@@ -17,9 +17,11 @@ void BossMissile::Init()
 	elapsedTime = 0.0f;
 	elapsedMoveTime = 0.0f;
 	maxMoveTime = 3.0f;
-	missileType = MissileType::Enemy;
+	missileType = MissileType::Normal;
 
 	image = ImageManager::GetInstance()->AddImage(L"EnemyMissile", TEXT("Image\\bullet.bmp"), 21, 21, 1, 1, false, true, RGB(255, 0, 255));
+
+	controller = new BossMissileController();
 }
 
 void BossMissile::Release()
@@ -28,11 +30,16 @@ void BossMissile::Release()
 
 void BossMissile::Update()
 {
+	Super::Update();
+
 	elapsedTime += TimeManager::GetInstance()->GetDeltaTime();
 	elapsedMoveTime += TimeManager::GetInstance()->GetDeltaTime();
 
 	if (isActived)
 	{
+		//pos.y += moveSpeed * TimeManager::GetInstance()->GetDeltaTime(); // 직접 이동
+	
+
 		if (elapsedTime > 0.1f)
 		{
 			elapsedTime = 0.0f;
@@ -40,9 +47,7 @@ void BossMissile::Update()
 			if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = image->GetMaxFrameX() - 1;
 		}
 	}
-
-	Super::Update();
-
+		
 	if (IsOutofScreen() == true)
 	{
 		isActived = false;
@@ -53,10 +58,9 @@ void BossMissile::Update()
 
 void BossMissile::Render(HDC hdc, bool isFlip)
 {
-	Super::Render(hdc, isFlip);
-
 	if (isActived)
 	{
+		Super::Render(hdc, isFlip);
 		image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0, isFlip);
 	}
 }

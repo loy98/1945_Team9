@@ -21,5 +21,7 @@ public:
 private:
 	float fireTime;
 	float maxFireTime;
+
+	//MissileManager* missileManager;
 };
 

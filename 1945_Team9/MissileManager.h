@@ -16,6 +16,7 @@ public:
 	virtual void Update() = 0;
 	virtual void Render(HDC hdc, bool isFlip) = 0;
 	virtual void Launch(FPOINT pos) = 0;
+	virtual void AngleLaunch(FPOINT pos, float angle);
 
 	virtual void AddMissile() = 0;		// ÆÑÅä¸®¿¡¼­ addMissile ºÒ·¯¿È.
 	//const int GetMissileListSize() { return vecMissileList.size(); }

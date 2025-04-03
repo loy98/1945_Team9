@@ -130,8 +130,6 @@
   <ItemGroup>
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Boss.h" />
-    <ClInclude Include="BossMissile.h" />
-    <ClInclude Include="BossMissileManager.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="CommonFunction.h" />
@@ -174,8 +172,6 @@
     <ClCompile Include="1945_Team9.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Boss.cpp" />
-    <ClCompile Include="BossMissile.cpp" />
-    <ClCompile Include="BossMissileManager.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="DiagonalEnemy.cpp" />

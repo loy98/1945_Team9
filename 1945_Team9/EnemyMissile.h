@@ -12,18 +12,18 @@ public :
 	virtual void Update() override;
 	virtual void Render(HDC hdc, bool isFlip) override;
 
-	void SetOwner(GameObject* owner) { this->owner = owner; };
+	/*void SetOwner(GameObject* owner) { this->owner = owner; };
 
 	EnemyMissile();
-	~EnemyMissile();
+	~EnemyMissile();*/
 
 private:
-	Image* image;
+	/*Image* image;
 	int animationFrame;
 	int elapsedFrame;
 	float elapsedTime;
 	float elapsedMoveTime;
 	float maxMoveTime;
-	GameObject* owner;
+	GameObject* owner;*/
 };
 

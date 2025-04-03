@@ -128,26 +128,3 @@ void EnemyMissileController::Move(Missile* missile)
 	missile->SetPos(pos);		// 이동한만큼 pos 반환
 
 }
-
-BossMissileController::BossMissileController()
-{
-}
-
-BossMissileController::~BossMissileController()
-{
-}
-
-void BossMissileController::Move(Missile* missile)
-{
-	// 미사일 구현
-
-	float time = TimeManager::GetInstance()->GetDeltaTime();
-	FPOINT pos = missile->GetPos();
-	float moveSpeed = missile->GetMoveSpeed();
-	float angle = missile->GetAngle();
-
-	pos.x += moveSpeed * time * cosf(DEG_TO_RAD(missile->GetAngle()));
-	pos.y -= moveSpeed * time * sinf(DEG_TO_RAD(missile->GetAngle()));
-
-	missile->SetPos(pos);
-}

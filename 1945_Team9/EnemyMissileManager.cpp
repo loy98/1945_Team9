@@ -1,9 +1,9 @@
 #include "EnemyMissileManager.h"
 #include "MissileFactory.h"
 #include "Missile.h"
-#include "Collider.h"
-#include "CollisionManager.h"
-#include "CommonFunction.h"
+//#include "Collider.h"
+//#include "CollisionManager.h"
+//#include "CommonFunction.h"
 
 EnemyMissileManager::EnemyMissileManager()
 {
@@ -15,7 +15,7 @@ EnemyMissileManager::~EnemyMissileManager()
 
 void EnemyMissileManager::Init()
 {
-	vecMissileList.resize(3);
+	vecMissileList.resize(40);
 	missileFactory = new EnemyMissileFactory;
 
 	for(iter = vecMissileList.begin(); iter != vecMissileList.end(); iter++)
@@ -45,14 +45,9 @@ void EnemyMissileManager::Release()
 
 void EnemyMissileManager::Update()
 {
-	for (auto& missile : vecMissileList)
+	for (iter = vecMissileList.begin(); iter != vecMissileList.end(); iter++)
 	{
-		if (missile && missile->GetIsActived())
-		{
-			//missile->SetPos(owner->GetPos());
-			//missile->Move();
-			missile->Update();
-		}
+		(*iter)->Update();
 	}
 }
 
@@ -68,21 +63,35 @@ void EnemyMissileManager::Render(HDC hdc, bool isFlip)
 void EnemyMissileManager::Launch(FPOINT pos)
 {
 
-	for (auto missile : vecMissileList)
+	if (!vecMissileList.empty())
 	{
-		if (missile && !missile->GetIsActived())
+		for (iter = vecMissileList.begin(); iter != vecMissileList.end(); iter++)
 		{
-
-			//angle 
-			missile->SetOwner(owner);
-			missile->SetAngle(GetAngle(pos, owner->GetPos()));
-			missile->ReLoad(pos);
-			break;
+			if (!(*iter)->GetIsActived())
+			{
+				(*iter)->ReLoad(pos);
+				break;
+			}
 		}
 	}
 
 }
 
+void EnemyMissileManager::AngleLaunch(FPOINT pos, float angle)
+{
+	if (!vecMissileList.empty())
+	{
+		for (iter = vecMissileList.begin(); iter != vecMissileList.end(); iter++)
+		{
+			if (!(*iter)->GetIsActived())
+			{
+				(*iter)->SetAngle(angle);
+				(*iter)->ReLoad(pos);
+				break;
+			}
+		}
+	}
+}
 //void EnemyMissileManager::Launch(FPOINT pos, float angle)
 //{
 //	FPOINT playerPos;

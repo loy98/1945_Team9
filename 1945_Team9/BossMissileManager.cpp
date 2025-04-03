@@ -12,7 +12,7 @@ BossMissileManager::~BossMissileManager()
 
 void BossMissileManager::Init()
 {
-	vecMissileList.resize(5);
+	vecMissileList.resize(20);
 	missileFactory = new BossMissileFactory;
 
 	for (iter = vecMissileList.begin(); iter != vecMissileList.end(); iter++)
@@ -65,6 +65,23 @@ void BossMissileManager::Launch(FPOINT pos)
 		{
 			if (!(*iter)->GetIsActived())
 			{
+				(*iter)->ReLoad(pos);
+				break;
+			}
+		}
+	}
+}
+
+void BossMissileManager::AngleLaunch(FPOINT pos, float angle)
+{
+
+	if (!vecMissileList.empty())
+	{
+		for (iter = vecMissileList.begin(); iter != vecMissileList.end(); iter++)
+		{
+			if (!(*iter)->GetIsActived())
+			{
+				(*iter)->SetAngle(angle);
 				(*iter)->ReLoad(pos);
 				break;
 			}

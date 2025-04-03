@@ -20,6 +20,7 @@ public:
 	virtual void Update() override;
 	virtual void Render(HDC hdc, bool isFlip) override;
 	virtual void Launch(FPOINT pos) override;
+	virtual void AngleLaunch(FPOINT pos, float angle) override;
 	//virtual void Launch(FPOINT pos, float angle) ;
 
 	virtual void AddMissile() override;

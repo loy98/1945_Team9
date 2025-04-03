@@ -27,4 +27,8 @@ protected:
 	ObjectType type;
 	RECT rc;
 	Size size;
+
+	GameObject* target;
+
+	bool isAlive;
 };
