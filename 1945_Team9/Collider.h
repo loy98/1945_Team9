@@ -22,7 +22,7 @@ private:
 	GameObject* owner;
 	FPOINT pos;
 	bool isCollision;
-	bool showDebug = true;
+	bool showDebug = false;
 	HPEN myPen{};
 	HPEN oldPen{};
 	RECT rc;

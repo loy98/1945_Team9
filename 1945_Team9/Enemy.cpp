@@ -7,6 +7,7 @@
 #include "CollisionManager.h"
 #include "Collider.h"
 #include "NormalMissileManager.h"
+#include "ItemManager.h"
 #include "EffectManager.h"
 
 void Enemy::Init(float posX, float posY)
@@ -52,6 +53,14 @@ void Enemy::Update()
 	if (isCollision && !isEffect)
 	{
 		AddEffects();
+		/*-----------적 죽으면 랜덤 아이템 생성------------*/
+		int num = rand() % 200;
+		int typeNum = rand() % (int)ItemType::ItemTypeLength;
+		if (num < 2)
+		{
+			ItemManager::GetInstance()->AddItem((ItemType)typeNum, pos, { 20, 20 });
+		}
+		/*--------------------------------------------------*/
 		isEffect = true;
 	}
 	if (!isAlive) return;

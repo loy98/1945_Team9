@@ -40,8 +40,9 @@ void MainGame::Init()
 	backGround = new BackGround();
 	backGround->Init();
 
-	ItemManager::GetInstance()->AddItem(ItemType::Laser, { 300, 500 }, {60, 30});
-	ItemManager::GetInstance()->AddItem(ItemType::Laser, { 100, 300 }, {60, 30});
+	//아이템 확인용
+	ItemManager::GetInstance()->AddItem(ItemType::Laser, { 300, 500 }, { 20, 20 });
+	
 }
 
 void MainGame::Release()
