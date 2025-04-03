@@ -3,6 +3,7 @@
 
 class HorizontalEnemy: public Enemy
 {
+public:
 	using Super = Enemy;
 	HorizontalEnemy();
 	~HorizontalEnemy();
@@ -15,6 +16,9 @@ class HorizontalEnemy: public Enemy
 	void Reset(FPOINT pos);
 	void Move() override;
 	void Fire() override;
+
+	int GetFrameNum() { return animationFrame; }
+	int GetMaxFrame();
 
 protected:
 	float elapsedFireTime;

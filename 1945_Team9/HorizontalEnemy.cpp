@@ -1,5 +1,5 @@
 #include "HorizontalEnemy.h"
-//#include "TimeManager.h"
+#include "TimeManager.h"
 #include "MissileManager.h"
 #include "CommonFunction.h"
 #include "missile.h"
@@ -16,15 +16,22 @@ HorizontalEnemy::~HorizontalEnemy()
 void HorizontalEnemy::Init(float posX, float posY)
 {
 	Super::Init(posX, posY);
-	//angle = 330.0f;
-	dir = { 3, 1 };
+	dir = { 3, 0.1 };
 	maxFireTime = 1.0f;
-	//moveSpeed = 300.f;
+	moveSpeed = 300.f;
 
 	offsetX = 30;
 	offsetY = 10;
-	image = ImageManager::GetInstance()->AddImage(L"Enemy_MJ", TEXT("Image/Enemy_MJ.bmp"), 1248, 37, 26, 1, true, true, RGB(0, 128, 128));
+	image = ImageManager::GetInstance()->AddImage(L"Enemy_MJ", TEXT("Image/Enemy_MJ.bmp"), 1248, 37, 26, 1, true, true, RGB(255, 0, 255));
 
+	animationFrame = 0;
+	elapsedFrame;
+	elapsedTime;
+	elapsedMoveTime;
+	maxMoveTime;
+	elapsedApperTime;
+
+	isLeft = false;
 }
 
 void HorizontalEnemy::Release()
@@ -34,17 +41,27 @@ void HorizontalEnemy::Release()
 
 void HorizontalEnemy::Update()
 {
+	int animate = animationFrame;
 	Super::Update();
+
+
+	//if (pos.x >= ((13.0f * animationFrame) / (WINSIZE_X / 2.0f))*300)
+	//	animationFrame++;
+	//if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = 0;
+
+
+
 	if (!isAlive)	return;
 
-	if (isLeft)	dir = { 3,1 };
-	else		dir = { -3,1 };
-	if (elapsedFireTime < maxFireTime)
-		elapsedFireTime += TimeManager::GetInstance()->GetDeltaTime();
-	if (elapsedFireTime > maxFireTime)
+	if (isLeft)	dir = { 3,0.1 };
+	else		dir = { -3,0.1 };
+
+	if ((pos.x >= 25) && (animationFrame <= image->GetMaxFrameX() / 2))
+		Fire();	// test
+
+	if (animationFrame > image->GetMaxFrameX() / 2)
 	{
-		elapsedFireTime = maxFireTime;
-		//Fire();	// test
+		dir.x *= -1.0f;
 	}
 
 	// 화면 나가면 isAlive = false;
@@ -55,7 +72,14 @@ void HorizontalEnemy::Render(HDC hdc)
 	Super::Render(hdc);
 	if (isAlive)
 	{
-		image->TestFrameRender(hdc, rc.left - offsetX, rc.top - offsetY, rc.right + offsetX, size.y + 2 * offsetY, animationFrame, 0, false);
+		if(isLeft)
+		{
+			image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0, false);
+		}
+		if (!isLeft)
+		{
+			image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0, true);
+		}
 	}
 }
 
@@ -80,4 +104,9 @@ void HorizontalEnemy::Fire()
 {
 	float angle = ::GetAngle(pos, target->GetPos());
 	missileManager->AngleLaunch(pos, angle);
+}
+
+int HorizontalEnemy::GetMaxFrame()
+{
+	return image->GetMaxFrameX();
 }
