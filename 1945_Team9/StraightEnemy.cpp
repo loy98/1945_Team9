@@ -24,6 +24,7 @@ void StraightEnemy::Init(float posX, float posY)
 	maxFireTime = 3.0f;
 
 	missileManager = new EnemyMissileManager;
+	missileManager->SetOwner(this);
 	image = ImageManager::GetInstance()->AddImage(L"StraightEnemy", TEXT("Image\\StraightEnemyPlane.bmp"), 31, 48, 1, 1, false, true, RGB(248, 0, 248));
 }
 

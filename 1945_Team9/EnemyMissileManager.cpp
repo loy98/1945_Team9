@@ -51,6 +51,7 @@ void EnemyMissileManager::Update()
 		if (missile && missile->GetIsActived())
 		{
 			missile->SetPos(owner->GetPos());
+			missile->Move();
 			missile->Update();
 		}
 	}
@@ -75,8 +76,9 @@ void EnemyMissileManager::Launch(FPOINT pos)
 		{
 			playerPos = playerTarget->GetPos();
 
+			//angle 
 			missile->SetOwner(owner);
-			missile->ReLoad(playerPos);
+			missile->ReLoad(pos);
 			break;
 		}
 	}
