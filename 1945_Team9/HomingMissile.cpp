@@ -37,7 +37,7 @@ void HomingMissile::Init()
 
 void HomingMissile::Release()
 {
-	Super::Release();
+	//Super::Release();
 }
 
 void HomingMissile::Update()

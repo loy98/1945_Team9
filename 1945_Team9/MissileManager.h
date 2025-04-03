@@ -24,8 +24,6 @@ public:
 
 	inline void SetOwner(GameObject * owner){ this->owner = owner; }
 	inline void SetCollisionGroup(CollisionGroup group) { this->collisionGroup = group; }
-
-	virtual void LevelUp() = 0;
 protected:
 	MissileFactory* missileFactory;
 	vector<Missile*>::iterator iter;

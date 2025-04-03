@@ -20,7 +20,5 @@ public:
 	void LevelUp() override;
 
 	virtual void AddMissile() override;
-
-	virtual void LevelUp() override;
 };
 

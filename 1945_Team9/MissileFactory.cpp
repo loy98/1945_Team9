@@ -5,6 +5,7 @@
 #include "StraightMissile.h"
 #include "HomingMissile.h"
 #include "Collider.h"
+#include "EnemyMissile.h"
 
 MissileFactory::~MissileFactory()
 {
@@ -69,4 +70,13 @@ HomingMissileFactory::~HomingMissileFactory()
 Missile* HomingMissileFactory::CreateMissile()
 {
 	return new HomingMissile();
+}
+
+EnemyMissileFactory::~EnemyMissileFactory()
+{
+}
+
+Missile* EnemyMissileFactory::CreateMissile()
+{
+	return new EnemyMissile;
 }

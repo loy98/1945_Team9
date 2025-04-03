@@ -112,6 +112,3 @@ void LaserMissileManager::AddMissile()
 	vecMissileList.back()->SetOwner(owner);
 }
 
-void LaserMissileManager::LevelUp()
-{
-}

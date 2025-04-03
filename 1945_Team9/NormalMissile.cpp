@@ -24,7 +24,7 @@ void NormalMissile::Init()
 
 void NormalMissile::Release()
 {
-	Super::Release();
+	//Super::Release();
 }
 
 void NormalMissile::Update()

@@ -37,7 +37,7 @@ void StraightMissile::Init()
 
 void StraightMissile::Release()
 {
-	Super::Release();
+	//Super::Release();
 }
 
 void StraightMissile::Update()

@@ -21,7 +21,7 @@ void EnemyMissile::Init()
 
 void EnemyMissile::Release()
 {
-	Super::Release();
+	//Super::Release();
 }
 
 void EnemyMissile::Update()
