@@ -15,7 +15,6 @@ EnemyMissileManager::~EnemyMissileManager()
 
 void EnemyMissileManager::Init()
 {
-
 	vecMissileList.resize(3);
 	missileFactory = new EnemyMissileFactory;
 
@@ -50,8 +49,8 @@ void EnemyMissileManager::Update()
 	{
 		if (missile && missile->GetIsActived())
 		{
-			missile->SetPos(owner->GetPos());
-			missile->Move();
+			//missile->SetPos(owner->GetPos());
+			//missile->Move();
 			missile->Update();
 		}
 	}
@@ -68,16 +67,15 @@ void EnemyMissileManager::Render(HDC hdc, bool isFlip)
 
 void EnemyMissileManager::Launch(FPOINT pos)
 {
-	FPOINT playerPos;
 
 	for (auto missile : vecMissileList)
 	{
 		if (missile && !missile->GetIsActived())
 		{
-			playerPos = playerTarget->GetPos();
 
 			//angle 
 			missile->SetOwner(owner);
+			missile->SetAngle(GetAngle(pos, owner->GetPos()));
 			missile->ReLoad(pos);
 			break;
 		}

@@ -48,6 +48,7 @@ void StraightEnemy::Update()
 		fireTime = 0;
 	}
 	
+	missileManager->Update();
 }
 
 void StraightEnemy::Render(HDC hdc)
@@ -58,6 +59,8 @@ void StraightEnemy::Render(HDC hdc)
 		image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0);
 		
 	}
+
+	missileManager->Render(hdc, false);
 }
 
 void StraightEnemy::Reset(FPOINT pos)
@@ -77,7 +80,7 @@ void StraightEnemy::Move()
 void StraightEnemy::Fire()
 {
 	FPOINT playerPos = target->GetPos();
-	missileManager->Launch(playerPos);
+	missileManager->Launch(pos);
 	/*float angle = ::GetAngle(pos, target->GetPos());
 	Missile* missile = missileManager->CreateMissile(MissileType::Normal, pos, angle, moveSpeed);
 	missile->AddCollider(CollisionGroup::Enemy);
