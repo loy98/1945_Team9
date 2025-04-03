@@ -134,6 +134,18 @@
     <ClInclude Include="HomingItem.h">
       <Filter>MainGame\Item</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyMissile.h">
+      <Filter>MainGame\Missile</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyMissileManager.h">
+      <Filter>MainGame\Missile\MissileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="StraightEnemy.h">
+      <Filter>MainGame\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>MainGame\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionManager.cpp">
@@ -234,6 +246,18 @@
     </ClCompile>
     <ClCompile Include="HomingItem.cpp">
       <Filter>MainGame\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyMissile.cpp">
+      <Filter>MainGame\Missile</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyMissileManager.cpp">
+      <Filter>MainGame\Missile\MissileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>MainGame\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="StraightEnemy.cpp">
+      <Filter>MainGame\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

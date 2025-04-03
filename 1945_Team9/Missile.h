@@ -17,7 +17,8 @@ public:
 	virtual void Render(HDC hdc, bool isFlip);		// active일 경우 렌더.
 	
 	void AddCollider(Missile* missile, CollisionGroup group);
-	void ReLoad(FPOINT pos);		// 발사할 경우 세팅. 플레이어의 위치를 받는다.
+	//void ReLoad(FPOINT pos, float angle);	
+	void ReLoad(FPOINT pos);	// 발사할 경우 세팅. 플레이어의 위치를 받는다.
 	void Move();
 	bool IsOutofScreen();
 

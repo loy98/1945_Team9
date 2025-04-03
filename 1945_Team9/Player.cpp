@@ -9,6 +9,7 @@
 #include "StraightMissileManager.h"
 #include "HomingMissileManager.h"
 #include "LaserMissileManager.h"
+#include "EnemyMissileManager.h"
 
 #include "Collider.h"
 #include "CollisionManager.h"
@@ -44,7 +45,7 @@ void Player::Init()
 	vecMissileManager.at((int)MissileType::Laser) = (new LaserMissileManager);
 	vecMissileManager.at((int)MissileType::Straight) = (new StraightMissileManager);
 	vecMissileManager.at((int)MissileType::Homing) = (new HomingMissileManager);
-
+	vecMissileManager.at((int)MissileType::Enemy) = (new EnemyMissileManager);
 
 
 	for (iter = vecMissileManager.begin(); iter != vecMissileManager.end(); iter++)

@@ -137,6 +137,8 @@
     <ClInclude Include="DiagonalEnemy.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="EnemyMissile.h" />
+    <ClInclude Include="EnemyMissileManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="HomingItem.h" />
     <ClInclude Include="HomingMissile.h" />
@@ -175,6 +177,8 @@
     <ClCompile Include="DiagonalEnemy.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="EnemyMissile.cpp" />
+    <ClCompile Include="EnemyMissileManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="HomingItem.cpp" />
     <ClCompile Include="HomingMissile.cpp" />

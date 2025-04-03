@@ -5,6 +5,8 @@
 #include "Missile.h"
 #include "Image.h"
 
+#include "EnemyMissileManager.h"
+
 StraightEnemy::StraightEnemy()
 {
 }
@@ -19,7 +21,9 @@ void StraightEnemy::Init(float posX, float posY)
 
 	offsetX = 30;
 	offsetY = 30;
-	maxFireTime = 5.0f;
+	maxFireTime = 3.0f;
+
+	missileManager = new EnemyMissileManager;
 	image = ImageManager::GetInstance()->AddImage(L"StraightEnemy", TEXT("Image\\StraightEnemyPlane.bmp"), 31, 48, 1, 1, false, true, RGB(248, 0, 248));
 }
 
@@ -71,6 +75,8 @@ void StraightEnemy::Move()
 
 void StraightEnemy::Fire()
 {
+	FPOINT playerPos = target->GetPos();
+	missileManager->Launch(pos);
 	/*float angle = ::GetAngle(pos, target->GetPos());
 	Missile* missile = missileManager->CreateMissile(MissileType::Normal, pos, angle, moveSpeed);
 	missile->AddCollider(CollisionGroup::Enemy);

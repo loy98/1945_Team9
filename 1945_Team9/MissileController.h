@@ -47,3 +47,12 @@ public:
 
 	void Move(Missile* missile) override;
 };
+
+class EnemyMissileController : public MissileController
+{
+public:
+	EnemyMissileController();
+	virtual ~EnemyMissileController();
+
+	void Move(Missile* missile) override;
+};

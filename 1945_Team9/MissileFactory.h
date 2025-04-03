@@ -64,3 +64,13 @@ public:
 private:
 	virtual Missile* CreateMissile() override;
 };
+
+class EnemyMissileFactory : public MissileFactory
+{
+public:
+	EnemyMissileFactory() {}
+	virtual ~EnemyMissileFactory();
+
+private:
+	virtual Missile* CreateMissile() override;
+};

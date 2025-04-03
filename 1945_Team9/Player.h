@@ -12,6 +12,7 @@ private:
 	float damage;
 	float moveSpeed;
 	Image* image;
+	GameObject* target;
 
 	// Æ÷½Å
 	FPOINT barrelEnd;
@@ -36,6 +37,8 @@ public:
 	void Fire(MissileType type);
 	void AddMissile(GameObject* owner, MissileType type, FPOINT pos, float angle, float speed);
 	void Dead();
+
+	inline void SetTarget(GameObject* target) { this->target = target; }
 
 	Player();
 	~Player();

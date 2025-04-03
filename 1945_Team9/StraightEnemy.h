@@ -2,6 +2,7 @@
 #include "Enemy.h"
 
 class Image;
+class MissileManager;
 class StraightEnemy : public Enemy
 {
 public:
@@ -21,4 +22,6 @@ public:
 private:
 	float fireTime;
 	float maxFireTime;
+
+	MissileManager* missileManager;
 };
