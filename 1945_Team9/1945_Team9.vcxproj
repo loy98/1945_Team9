@@ -137,6 +137,7 @@
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyController.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="EnemyMissile.h" />
     <ClInclude Include="EnemyMissileManager.h" />
@@ -178,6 +179,7 @@
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyController.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="EnemyMissile.cpp" />
     <ClCompile Include="EnemyMissileManager.cpp" />
