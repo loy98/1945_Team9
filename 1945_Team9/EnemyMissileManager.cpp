@@ -15,7 +15,7 @@ EnemyMissileManager::~EnemyMissileManager()
 
 void EnemyMissileManager::Init()
 {
-	vecMissileList.resize(40);
+	vecMissileList.resize(200);
 	missileFactory = new EnemyMissileFactory;
 
 	for(iter = vecMissileList.begin(); iter != vecMissileList.end(); iter++)

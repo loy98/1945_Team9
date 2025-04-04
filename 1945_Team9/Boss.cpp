@@ -19,7 +19,7 @@ void Boss::Init(float posX, float posY)
 	Super::Init(posX, posY);
 
 	moveSpeed = 50.0f;
-	maxFireTime = 3.0f;
+	maxFireTime = 1.0f;
 	/*missileManager = new BossMissileManager;
 	missileManager->SetCollisionGroup(CollisionGroup::Enemy);
 	missileManager->Init();*/
