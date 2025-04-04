@@ -9,14 +9,14 @@ void EnemyMissile::Init()
 	pos = { 0, 0 };
 	isActived = false;
 	moveSpeed = 150.0f;
-	angle = DEG_TO_RAD(-90.0f); //enemyMissile 실험 끝나면 DEG_TO 뺴기 + controller도 확인
+	angle = DEG_TO_RAD(90.0f); //enemyMissile 실험 끝나면 DEG_TO 뺴기 + controller도 확인
 
 	size = { 20,20 };
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);		// collision
 
 	moveSpeed = 150.0f;
 	animationFrame = 0;
-	// missileType = MissileType::Normal;
+	missileType = MissileType::Normal;
 
 	image = ImageManager::GetInstance()->AddImage(L"EnemyBullet", TEXT("Image\\EnemyMissile.bmp"), 11, 11, 1, 1, false, true, RGB(255, 255, 255));
 	controller = new EnemyController();

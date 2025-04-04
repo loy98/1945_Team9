@@ -82,4 +82,3 @@ Missile* EnemyMissileFactory::CreateMissile()
 	return new EnemyMissile();
 }
 
-

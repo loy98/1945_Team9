@@ -11,5 +11,9 @@ public :
 	virtual void Release() override;
 	virtual void Update() override;
 	virtual void Render(HDC hdc, bool isFlip) override;
+
+
+private:
+
 };
 
