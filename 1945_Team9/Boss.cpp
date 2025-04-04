@@ -26,7 +26,6 @@ void Boss::Init(float posX, float posY)
 	//missileManager->SetOwner(this);
 
 	image = ImageManager::GetInstance()->AddImage(L"BossEnemy", TEXT("Image\\BOSS.bmp"), 2832, 136, 16, 1, false, true, RGB(255, 0, 255));
-	
 }
 
 void Boss::Release()

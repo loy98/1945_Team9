@@ -171,7 +171,7 @@ void Player::Render(HDC hdc)
 	case PlayerState::Spawn:
 		//하드코딩이 아니라 이미지에서 데이터 가져오는식으로 바꿔야함
 		imageList[(int)PlayerState::Spawn]->TestFrameRender(
-			hdc, rc.left - 5, rc.top - 10 , rc.right + 5, 180, spawnCurrFrame, 0, false);
+			hdc, rc.left - 18, rc.top - 10 , rc.right + 18, 190, spawnCurrFrame, 0, false);
 		break;
 	}
 

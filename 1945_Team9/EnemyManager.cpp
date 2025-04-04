@@ -53,12 +53,12 @@ void EnemyManager::Init()
 	for (int i = 0; i < straigntSize; i++)
 	{
 		vecEnemys[(int)EnemyType::Straight][i] = new StraightEnemy();
-		vecEnemys[(int)EnemyType::Straight][i]->Init(20, -20);
+		vecEnemys[(int)EnemyType::Straight][i]->Init(-200, -200);
 		vecEnemys[(int)EnemyType::Straight][i]->SetTarget(target);
 	}
 
 	boss = new Boss;
-	boss->Init(0, 0);
+	boss->Init(-200, -200);
 	boss->SetTarget(target);
 	bossSpawnTime = 0.0f;
 	isBossSpawned = false;
@@ -136,7 +136,7 @@ void EnemyManager::Update()
 	if (boss)
 	{
 		boss->Update();
-
+	
 		if (boss->IsOutofScreen())
 		{
 			boss->SetIsAlive(false);
@@ -147,7 +147,7 @@ void EnemyManager::Update()
 	StraightAppear();
 		
 	bossSpawnTime += TimeManager::GetInstance()->GetDeltaTime();
-	//if (!isBossSpawned && bossSpawnTime >= 10.0f)
+	if (!isBossSpawned && bossSpawnTime >= 10.0f)
 	if (!isBossSpawned && bossSpawnTime >= 0.1f)
 	{
 		isBossSpawned = true;
