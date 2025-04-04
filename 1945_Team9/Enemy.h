@@ -5,7 +5,7 @@ class Player;
 class Image;
 class MissileManager;
 //test
-class EnemyController;
+//class EnemyController;
 class Enemy : public GameObject	// is-a
 {
 public:
@@ -60,6 +60,6 @@ protected:
 	MissileManager* missileManager;
 
 	//test
-	EnemyController* controller;
+	//EnemyController* controller;
 };
 

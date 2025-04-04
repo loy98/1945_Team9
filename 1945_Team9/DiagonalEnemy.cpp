@@ -6,7 +6,7 @@
 #include "Image.h"
 
 //test
-#include "EnemyController.h"
+//#include "EnemyController.h"
 DiagonalEnemy::DiagonalEnemy()
 {
 }
@@ -28,7 +28,7 @@ void DiagonalEnemy::Init(float posX, float posY)
 	image = ImageManager::GetInstance()->AddImage(L"Enemy_JH", TEXT("Image\\Monster_JH.bmp"), 440, 40, 11, 1, true, true, RGB(0, 128, 128));
 		
 	//test
-	controller = new DiagonalEnemyController;
+	//controller = new DiagonalEnemyController;
 }
 
 void DiagonalEnemy::Release()
@@ -48,7 +48,7 @@ void DiagonalEnemy::Update()
 	if (elapsedFireTime > maxFireTime)
 	{
 		elapsedFireTime = maxFireTime;
-		//Fire();	// test
+		Fire();	// test
 	}
 }
 

@@ -13,7 +13,7 @@ void EnemyMissile::Init()
 	size = { 20,20 };
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);		// collision
 
-	moveSpeed = 500.0f;
+	moveSpeed = 150.0f;
 	animationFrame = 0;
 	// missileType = MissileType::Normal;
 

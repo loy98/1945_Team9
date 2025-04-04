@@ -14,7 +14,7 @@
 #include "EnemyMissileManager.h"
 
 //test
-#include "EnemyController.h"
+//#include "EnemyController.h"
 
 void Enemy::Init(float posX, float posY)
 {
@@ -55,11 +55,11 @@ void Enemy::Release()
 	}
 
 	//test
-	if (controller)
-	{
-		delete controller;
-		controller = nullptr;
-	}
+	//if (controller)
+	//{
+	//	delete controller;
+	//	controller = nullptr;
+	//}
 }
 
 void Enemy::Update()
@@ -100,10 +100,10 @@ void Enemy::Update()
 	//	if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = 0;
 	//}
 
-	if (missileManager)
-	{
-		missileManager->Update();
-	}
+	//if (missileManager)
+	//{
+	//	missileManager->Update();
+	//}
 	Move();
 
 	// 화면 밖일때 isAlive = false;
@@ -136,7 +136,7 @@ void Enemy::Move()
 	pos.x += moveSpeed * dir.x * TimeManager::GetInstance()->GetDeltaTime();
 
 	//test
-	controller->Move(this);
+	//controller->Move(this);
 }
 
 void Enemy::Fire()

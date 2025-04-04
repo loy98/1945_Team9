@@ -1,32 +1,32 @@
-#include "EnemyController.h"
-
-EnemyController::~EnemyController()
-{
-}
-
+//#include "EnemyController.h"
 //
-DiagonalEnemyController::~DiagonalEnemyController()
-{
-}
-
-void DiagonalEnemyController::Move(Enemy* enemy)
-{
-}
-
+//EnemyController::~EnemyController()
+//{
+//}
 //
-StraightEnemyController::~StraightEnemyController()
-{
-}
-
-void StraightEnemyController::Move(Enemy* enemy)
-{
-}
-
+////
+//DiagonalEnemyController::~DiagonalEnemyController()
+//{
+//}
 //
-HorizontalEnemyController::~HorizontalEnemyController()
-{
-}
-
-void HorizontalEnemyController::Move(Enemy* enemy)
-{
-}
+//void DiagonalEnemyController::Move(Enemy* enemy)
+//{
+//}
+//
+////
+//StraightEnemyController::~StraightEnemyController()
+//{
+//}
+//
+//void StraightEnemyController::Move(Enemy* enemy)
+//{
+//}
+//
+////
+//HorizontalEnemyController::~HorizontalEnemyController()
+//{
+//}
+//
+//void HorizontalEnemyController::Move(Enemy* enemy)
+//{
+//}
