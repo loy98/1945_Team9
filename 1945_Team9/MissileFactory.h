@@ -74,3 +74,14 @@ public:
 private:
 	virtual Missile* CreateMissile() override;
 };
+
+//class BossMissileFactory : public MissileFactory
+//{
+//public:
+//	BossMissileFactory() {}
+//	virtual ~BossMissileFactory();
+//
+//private:
+//	virtual Missile* CreateMissile() override;
+//
+//};

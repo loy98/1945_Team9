@@ -15,8 +15,7 @@ public:
 	StraightMissile();
 	~StraightMissile();
 
-private:
-	vector<Missile*> vecMissiles;
+private:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 	Image* image;
 	int animationFrame;
 	int elapsedFrame;

@@ -1,5 +1,6 @@
 #include "EnemyMissile.h"
 #include "CommonFunction.h"
+
 #include "Image.h"
 #include "MissileController.h"
 
@@ -43,3 +44,4 @@ void EnemyMissile::Render(HDC hdc, bool isFlip)
 		//RenderEllipseAtCenter(hdc, pos.x, pos.y, size, size);
 	}
 }
+

@@ -3,6 +3,7 @@
 
 class MissileFactory;
 class Missile;
+
 class EnemyMissileManager : public MissileManager
 {
 private:
@@ -20,3 +21,4 @@ public:
 
     virtual void AddMissile() override;
 };
+

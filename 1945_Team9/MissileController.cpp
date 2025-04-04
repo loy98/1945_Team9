@@ -140,3 +140,29 @@ void EnemyController::Move(Missile* missile)
 
 	missile->SetPos(pos);
 }
+
+EnemyMissileController::EnemyMissileController()
+{
+}
+
+EnemyMissileController::~EnemyMissileController()
+{
+}
+
+void EnemyMissileController::Move(Missile* missile)
+{
+	float time = TimeManager::GetInstance()->GetDeltaTime();
+	FPOINT pos = missile->GetPos();
+	float moveSpeed = missile->GetMoveSpeed();
+	float angle = missile->GetAngle();
+
+	pos.x += moveSpeed * time * cosf(angle);
+	pos.y -= moveSpeed * time * sinf(angle);
+
+	// enemyMissile test 때문에 radian 배고 실험
+	//pos.x += moveSpeed * time * cosf(DEG_TO_RAD(angle));
+	//pos.y -= moveSpeed * time * sinf(DEG_TO_RAD(angle));
+
+	missile->SetPos(pos);		// 이동한만큼 pos 반환
+
+}

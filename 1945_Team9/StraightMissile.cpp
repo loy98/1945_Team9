@@ -60,6 +60,7 @@ void StraightMissile::Update()
 	//		vecMissiles[i]->SetIsActived(false);
 	//	}
 	//}
+
 	
 	Super::Update();
 
@@ -88,6 +89,7 @@ void StraightMissile::Update()
 void StraightMissile::Render(HDC hdc, bool isFlip)
 {
 	Super::Render(hdc, isFlip);
+
 
 	//for (int i = 0; i < vecMissiles.size(); i++)
 	//{

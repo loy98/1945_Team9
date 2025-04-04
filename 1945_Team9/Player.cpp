@@ -9,6 +9,7 @@
 #include "StraightMissileManager.h"
 #include "HomingMissileManager.h"
 #include "LaserMissileManager.h"
+#include "EnemyMissileManager.h"
 
 #include "Collider.h"
 #include "CollisionManager.h"
@@ -33,6 +34,7 @@ void Player::Init()
 	//barrelEnd.x = pos.x;
 	//barrelEnd.y = pos.y - barrelSize;
 	//fireAngle = 90.0f;
+
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
 
 	imageList[(int)PlayerState::Idle] = ImageManager::GetInstance()->AddImage(
@@ -54,7 +56,7 @@ void Player::Init()
 	vecMissileManager.at((int)MissileType::Laser) = (new LaserMissileManager);
 	vecMissileManager.at((int)MissileType::Straight) = (new StraightMissileManager);
 	vecMissileManager.at((int)MissileType::Homing) = (new HomingMissileManager);
-
+	//vecMissileManager.at((int)MissileType::Enemy) = (new EnemyMissileManager);
 
 
 	for (iter = vecMissileManager.begin(); iter != vecMissileManager.end(); iter++)
@@ -151,6 +153,7 @@ void Player::Update()
 
 void Player::Render(HDC hdc)
 {
+
 	switch (state)
 	{
 	case PlayerState::Idle:
@@ -178,11 +181,13 @@ void Player::Render(HDC hdc)
 		if (collider)
 			collider->Render(hdc);
 	}
+
 	/*if (!vecMissileManager.empty()) missileManager->Render(hdc, false);*/
 	for (iter = vecMissileManager.begin(); iter != vecMissileManager.end(); iter++)
 	{
 		(*iter)->Render(hdc, false);
 	}
+
 }
 
 void Player::LevelUp(ItemType type)
@@ -261,6 +266,7 @@ void Player::Move()
 
 void Player::Fire(MissileType type)
 {
+
 	switch (type)
 	{
 	case MissileType::Normal:
@@ -290,6 +296,7 @@ void Player::AddMissile(GameObject* owner, MissileType type, FPOINT pos, float a
 	//missile->AddCollider(group);
 	//missile->SetOwner(this);
 	//missileManager->AddMissile(missile);
+
 }
 
 void Player::Dead()

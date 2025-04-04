@@ -51,6 +51,8 @@ public:
 	int GetLife() { return life; }
 	PlayerState GetPlayerState() { return state; }
 
+	inline void SetTarget(GameObject* target) { this->target = target; }
+
 	Player();
 	~Player();
 };

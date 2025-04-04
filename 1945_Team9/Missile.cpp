@@ -77,13 +77,22 @@ void Missile::Move()
 	}
 }
 
-void Missile::ReLoad(FPOINT pos)		// 발사한다면 세팅.
+//void Missile::ReLoad(FPOINT pos, float angle)		// 발사한다면 세팅.
+//{
+//	this->pos = pos;
+//	this->angle = angle;
+//	isActived = true;
+//	isCollision = false;
+//}
+
+void Missile::ReLoad(FPOINT pos)
 {
-	this->pos = pos;
 	isActived = true;
+	this->pos = pos;
 	isCollision = false;
 	isAlive = true;
 	animationFrame = 0;
+
 	//test
 	target = nullptr;
 	//elapsedTime = 0;

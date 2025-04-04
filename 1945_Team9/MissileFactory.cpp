@@ -4,6 +4,7 @@
 #include "LaserMissile.h"
 #include "StraightMissile.h"
 #include "HomingMissile.h"
+#include "EnemyMissile.h"
 #include "Collider.h"
 #include "EnemyMissile.h"
 
@@ -78,5 +79,7 @@ EnemyMissileFactory::~EnemyMissileFactory()
 
 Missile* EnemyMissileFactory::CreateMissile()
 {
-	return new EnemyMissile;
+	return new EnemyMissile();
 }
+
+

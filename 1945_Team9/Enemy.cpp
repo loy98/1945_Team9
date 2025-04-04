@@ -6,11 +6,10 @@
 #include "MissileManager.h"
 #include "CollisionManager.h"
 #include "Collider.h"
+
 #include "NormalMissileManager.h"
 #include "ItemManager.h"
 #include "EffectManager.h"
-#include "EnemyMissileManager.h"
-
 #include "EnemyMissileManager.h"
 
 //test
@@ -120,6 +119,11 @@ void Enemy::Update()
 
 void Enemy::Render(HDC hdc)
 {
+	/*if (isAlive)
+	{
+		///image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0);
+	}*/
+
 	if (missileManager)
 	{
 		missileManager->Render(hdc,true);
@@ -141,6 +145,7 @@ void Enemy::Move()
 
 void Enemy::Fire()
 {
+
 }
 
 void Enemy::Reset(FPOINT pos)

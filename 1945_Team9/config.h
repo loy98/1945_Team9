@@ -42,6 +42,13 @@ typedef struct tagFPOINT
 extern HWND g_hWnd;
 extern HINSTANCE g_hInstance;
 
+//enum class EnemyType
+//{
+//	Diagonal,
+//	Straight,
+//	Boss,
+//	EnemyTypeLength
+//};
 enum class MissileType
 {
 	Normal,
@@ -78,6 +85,7 @@ enum class EnemyType
 	Diagonal,
 	Straight,
 	Horizontal,
+	Boss,
 	EnemyTypeLength
 };
 enum class PlayerState

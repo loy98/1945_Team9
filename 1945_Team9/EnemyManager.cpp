@@ -3,8 +3,12 @@
 #include "Enemy.h"
 #include "Missile.h"
 #include "DiagonalEnemy.h"
+
 //test
 #include "HorizontalEnemy.h"
+#include "StraightEnemy.h"
+#include "Boss.h"
+
 
 EnemyManager::EnemyManager(GameObject* target) : target(target)
 {
@@ -43,6 +47,21 @@ void EnemyManager::Init()
 	horizontalMaxAppearCount = 30;
 	horizontalAppearCount = 30;
 	horizontalElapsedCoolTime = 0.0f;
+
+	vecEnemys[(int)EnemyType::Straight].resize(3);
+	int straigntSize = vecEnemys[(int)EnemyType::Straight].size();
+	for (int i = 0; i < straigntSize; i++)
+	{
+		vecEnemys[(int)EnemyType::Straight][i] = new StraightEnemy();
+		vecEnemys[(int)EnemyType::Straight][i]->Init(20, -20);
+		vecEnemys[(int)EnemyType::Straight][i]->SetTarget(target);
+	}
+
+	boss = new Boss;
+	boss->Init(0, 0);
+	boss->SetTarget(target);
+	bossSpawnTime = 0.0f;
+	isBossSpawned = false;
 }
 
 void EnemyManager::Release()
@@ -57,6 +76,8 @@ void EnemyManager::Release()
 		}
 		vecEnemys[i].clear();
 	}
+	if(boss)
+		boss->Release();
 }
 
 void EnemyManager::Update()
@@ -107,6 +128,27 @@ void EnemyManager::Update()
 			}
 		}
 	}
+
+	if (boss)
+	{
+		boss->Update();
+
+		if (boss->IsOutofScreen())
+		{
+			boss->SetIsAlive(false);
+		}
+		
+	}
+
+	StraightAppear();
+		
+	bossSpawnTime += TimeManager::GetInstance()->GetDeltaTime();
+	//if (!isBossSpawned && bossSpawnTime >= 10.0f)
+	if (!isBossSpawned && bossSpawnTime >= 0.1f)
+	{
+		isBossSpawned = true;
+		BossAppear();
+	}
 }
 
 void EnemyManager::Render(HDC hdc)
@@ -122,6 +164,11 @@ void EnemyManager::Render(HDC hdc)
 		}
 	}
 
+	if (boss && boss->GetIsAlive())
+	{
+		boss->Render(hdc);
+	}
+	
 }
 
 void EnemyManager::AddEnemy(int size)
@@ -187,5 +234,49 @@ void EnemyManager::HorizontalAppear()
 			vecEnemys[(int)EnemyType::Horizontal][i]->Reset({ (float)appearX + dX, float(100 + dY) });
 			diagonalAppearCount++;
 		}
+	}
+}
+
+void EnemyManager::StraightAppear()
+{
+	static int num = 0;
+	static FPOINT pos = { 0,0};
+	if (num == 0)
+	{
+		pos = { (float)(rand() % (WINSIZE_X - 100))  , -20.f };
+	}
+
+	int straightSize = vecEnemys[(int)EnemyType::Straight].size();
+	for (int i = 0; i < straightSize; i++)
+	{
+		if (!vecEnemys[(int)EnemyType::Straight][i]->GetIsAlive())
+		{
+			float posX = pos.x;
+			float posY = pos.y;
+			if (num == 0)
+			{
+				posY += 50.0f;
+			}
+			else if (num == 1)
+			{
+				posX -= 50.0f;
+			}
+			else if (num == 2)
+			{
+				posX += 50.0f;
+			}
+
+			vecEnemys[(int)EnemyType::Straight][i]->Reset({ posX,posY});
+			num = (num+1) % straightSize;
+		} 
+		
+	}
+}
+
+void EnemyManager::BossAppear()
+{
+	if (!boss->GetIsAlive())
+	{
+		boss->Reset({ WINSIZE_X/2 ,-10 });
 	}
 }

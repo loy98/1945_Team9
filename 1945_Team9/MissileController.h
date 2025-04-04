@@ -19,7 +19,7 @@ public:
 
 	void Move(Missile* missile) override;
 };
-
+                   
 class LaserController : public MissileController
 {
 public:
@@ -48,11 +48,18 @@ public:
 	void Move(Missile* missile) override;
 };
 
-class EnemyController : public MissileController
+
+//class EnemyController : public MissileController
+//{
+//public:
+//	EnemyController();
+//	virtual ~EnemyController();
+
+class EnemyMissileController : public MissileController
 {
 public:
-	EnemyController();
-	virtual ~EnemyController();
+	EnemyMissileController();
+	virtual ~EnemyMissileController();
 
 	void Move(Missile* missile) override;
 };

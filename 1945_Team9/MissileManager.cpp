@@ -15,7 +15,7 @@ void MissileManager::AngleLaunch(FPOINT pos, float angle)
 {
 }
 
-
 void MissileManager::LevelUp()
 {
 }
+

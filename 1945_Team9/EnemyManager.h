@@ -15,10 +15,13 @@ public:
 	void AddEnemy(int size);
 
 	void DiagonalAppear();
-
 	void HorizontalAppear();
+	void StraightAppear();
+	void BossAppear();
+
 private:
 	vector<Enemy*> vecEnemys[(int)EnemyType::EnemyTypeLength];
+	Enemy* boss;
 	GameObject* target;
 
 	float diagonalElpasedTime;
@@ -35,5 +38,10 @@ private:
 	float horizontalElapsedCoolTime;
 	int horizontalAppearCount;
 	int horizontalMaxAppearCount;
+
+	float bossSpawnTime;
+	bool isBossSpawned;
+
+
 };
 
