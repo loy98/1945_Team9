@@ -33,15 +33,16 @@ void EnemyMissile::Update()
 	UpdateRectAtCenter(rc, pos);
 	if (isCollision)
 		isActived = false;
+	//isAlive = owner->GetIsAlive();
 }
 
 void EnemyMissile::Render(HDC hdc, bool isFlip)
 {
 	if (isActived)
 	{
+		//RenderEllipseAtCenter(hdc, pos.x, pos.y, size, size);
 		Super::Render(hdc, isFlip);		// collider
 		image->FrameRender(hdc, pos.x, pos.y, animationFrame, 0, isFlip);
-		//RenderEllipseAtCenter(hdc, pos.x, pos.y, size, size);
 	}
 }
 

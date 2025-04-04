@@ -23,6 +23,7 @@ void EnemyMissileManager::Init()
 	for(iter = vecMissileList.begin(); iter != vecMissileList.end(); iter++)
 	{
 		(*iter) = missileFactory->AddMissile(collisionGroup);
+		(*iter)->SetOwner(owner);
 	}
 }
 

@@ -20,42 +20,42 @@ EnemyManager::~EnemyManager()
 
 void EnemyManager::Init()
 {
-	vecEnemys[(int)EnemyType::Diagonal].resize(10);
-	int diagonalSize = vecEnemys[(int)EnemyType::Diagonal].size();
-	for (int i = 0; i < diagonalSize; i++)
-	{
-		vecEnemys[(int)EnemyType::Diagonal][i] = new DiagonalEnemy();
-		vecEnemys[(int)EnemyType::Diagonal][i]->Init(-200, -200);
-		vecEnemys[(int)EnemyType::Diagonal][i]->SetTarget(target);
-	}
-	diagonalAppearCoolTime = 10.0f;
-	diagonalMaxAppearTime = 5.0f;
-	diagonalMaxAppearCount = 40;
-	diagonalAppearCount = 40;
-	diagonalElapsedCoolTime = 0.0f;
+	//vecEnemys[(int)EnemyType::Diagonal].resize(10);
+	//int diagonalSize = vecEnemys[(int)EnemyType::Diagonal].size();
+	//for (int i = 0; i < diagonalSize; i++)
+	//{
+	//	vecEnemys[(int)EnemyType::Diagonal][i] = new DiagonalEnemy();
+	//	vecEnemys[(int)EnemyType::Diagonal][i]->Init(-200, -200);
+	//	vecEnemys[(int)EnemyType::Diagonal][i]->SetTarget(target);
+	//}
+	//diagonalAppearCoolTime = 10.0f;
+	//diagonalMaxAppearTime = 5.0f;
+	//diagonalMaxAppearCount = 40;
+	//diagonalAppearCount = 40;
+	//diagonalElapsedCoolTime = 0.0f;
 
-	//
-	vecEnemys[(int)EnemyType::Horizontal].resize(5);
-	for (int i = 0; i < vecEnemys[(int)EnemyType::Horizontal].size(); i++)
-	{
-		vecEnemys[(int)EnemyType::Horizontal][i] = new HorizontalEnemy();
-		vecEnemys[(int)EnemyType::Horizontal][i]->Init(-200, -200);
-		vecEnemys[(int)EnemyType::Horizontal][i]->SetTarget(target);
-	}
-	horizontalAppearCoolTime = 13.0f;
-	horizontalMaxAppearTime = 7.0f;
-	horizontalMaxAppearCount = 30;
-	horizontalAppearCount = 30;
-	horizontalElapsedCoolTime = 0.0f;
+	////
+	//vecEnemys[(int)EnemyType::Horizontal].resize(5);
+	//for (int i = 0; i < vecEnemys[(int)EnemyType::Horizontal].size(); i++)
+	//{
+	//	vecEnemys[(int)EnemyType::Horizontal][i] = new HorizontalEnemy();
+	//	vecEnemys[(int)EnemyType::Horizontal][i]->Init(-200, -200);
+	//	vecEnemys[(int)EnemyType::Horizontal][i]->SetTarget(target);
+	//}
+	//horizontalAppearCoolTime = 13.0f;
+	//horizontalMaxAppearTime = 7.0f;
+	//horizontalMaxAppearCount = 30;
+	//horizontalAppearCount = 30;
+	//horizontalElapsedCoolTime = 0.0f;
 
-	vecEnemys[(int)EnemyType::Straight].resize(3);
-	int straigntSize = vecEnemys[(int)EnemyType::Straight].size();
-	for (int i = 0; i < straigntSize; i++)
-	{
-		vecEnemys[(int)EnemyType::Straight][i] = new StraightEnemy();
-		vecEnemys[(int)EnemyType::Straight][i]->Init(-200, -200);
-		vecEnemys[(int)EnemyType::Straight][i]->SetTarget(target);
-	}
+	//vecEnemys[(int)EnemyType::Straight].resize(3);
+	//int straigntSize = vecEnemys[(int)EnemyType::Straight].size();
+	//for (int i = 0; i < straigntSize; i++)
+	//{
+	//	vecEnemys[(int)EnemyType::Straight][i] = new StraightEnemy();
+	//	vecEnemys[(int)EnemyType::Straight][i]->Init(-200, -200);
+	//	vecEnemys[(int)EnemyType::Straight][i]->SetTarget(target);
+	//}
 
 	boss = new Boss;
 	boss->Init(-200, -200);
@@ -86,36 +86,36 @@ void EnemyManager::Release()
 
 void EnemyManager::Update()
 {
-	/* -------------- 재훈 사선 enemy 코드 ---------------*/
-	if (diagonalAppearCount >= diagonalMaxAppearCount)
-	{
-		diagonalElapsedCoolTime += TimeManager::GetInstance()->GetDeltaTime();
-	}
+	///* -------------- 재훈 사선 enemy 코드 ---------------*/
+	//if (diagonalAppearCount >= diagonalMaxAppearCount)
+	//{
+	//	diagonalElapsedCoolTime += TimeManager::GetInstance()->GetDeltaTime();
+	//}
 
-	if (diagonalElapsedCoolTime > diagonalAppearCoolTime)
-	{
-		diagonalElapsedCoolTime = 0;
-		diagonalAppearCount = 0;
-	}
+	//if (diagonalElapsedCoolTime > diagonalAppearCoolTime)
+	//{
+	//	diagonalElapsedCoolTime = 0;
+	//	diagonalAppearCount = 0;
+	//}
 
-	if (diagonalAppearCount < diagonalMaxAppearCount)
-		DiagonalAppear();
-	/* -------------- --------------------- ---------------*/
+	//if (diagonalAppearCount < diagonalMaxAppearCount)
+	//	DiagonalAppear();
+	///* -------------- --------------------- ---------------*/
 
-	//test
-	if (horizontalAppearCount >= horizontalMaxAppearCount)
-	{
-		horizontalElapsedCoolTime += TimeManager::GetInstance()->GetDeltaTime();
-	}
+	////test
+	//if (horizontalAppearCount >= horizontalMaxAppearCount)
+	//{
+	//	horizontalElapsedCoolTime += TimeManager::GetInstance()->GetDeltaTime();
+	//}
 
-	if (horizontalElapsedCoolTime > horizontalAppearCoolTime)
-	{
-		horizontalElapsedCoolTime = 0;
-		horizontalAppearCount = 0;
-	}
+	//if (horizontalElapsedCoolTime > horizontalAppearCoolTime)
+	//{
+	//	horizontalElapsedCoolTime = 0;
+	//	horizontalAppearCount = 0;
+	//}
 
-	if (horizontalAppearCount < horizontalMaxAppearCount)
-		HorizontalAppear();
+	//if (horizontalAppearCount < horizontalMaxAppearCount)
+	//	HorizontalAppear();
 	//
 
 	for (int i = 0; i < (int)EnemyType::EnemyTypeLength; ++i)
@@ -144,7 +144,7 @@ void EnemyManager::Update()
 		
 	}
 
-	StraightAppear();
+	//StraightAppear();
 		
 	bossSpawnTime += TimeManager::GetInstance()->GetDeltaTime();
 	if (!isBossSpawned && bossSpawnTime >= 10.0f)
@@ -168,7 +168,7 @@ void EnemyManager::Render(HDC hdc)
 		}
 	}
 
-	if (boss && boss->GetIsAlive())
+	if (boss)
 	{
 		boss->Render(hdc);
 	}

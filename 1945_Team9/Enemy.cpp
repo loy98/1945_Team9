@@ -37,6 +37,7 @@ void Enemy::Init(float posX, float posY)
 
 	missileManager = new EnemyMissileManager();
 	missileManager->SetCollisionGroup(CollisionGroup::Enemy);
+	missileManager->SetOwner(this);
 	missileManager->Init();
 
 	Collider* collider = new Collider(this, pos);

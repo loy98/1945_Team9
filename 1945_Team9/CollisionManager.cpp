@@ -17,7 +17,8 @@ void CollisionManager::Update()
 			Collider* dest = enemyColliders[j];
 			if (!src || !dest) continue;
 
-			if (src->GetOwner()->GetIsCollision() || dest->GetOwner()->GetIsCollision())
+			if (src->GetOwner()->GetIsCollision() || dest->GetOwner()->GetIsCollision()
+				|| !dest->GetOwner()->GetIsAlive())
 				continue;
 
 			if (src->GetOwner()->GetObjectType() == ObjectType::Player)
