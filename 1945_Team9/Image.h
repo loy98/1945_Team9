@@ -73,7 +73,7 @@ public:
 	// 화면에 출력
 	void Render(HDC hdc, int destX = 0, int destY = 0);
 	void Render(HDC hdc, int destX, int destY, int frameIndex, bool isFlip = false);
-	void FrameRender(HDC hdc, int destX, int destY, int frameX, int frameY, bool isFlip = false);
+	void FrameRender(HDC hdc, float destX, float destY, int frameX, int frameY, bool isFlip = false);
 
 	// Test
 	void TestFrameRender(HDC hdc, float startX, float startY, float destX, float destY, int frameX, int frameY, bool isFlip);

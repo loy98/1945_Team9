@@ -32,6 +32,10 @@ void CollisionManager::Update()
 				src->GetOwner()->SetIsAlive(false);
 				dest->GetOwner()->SetIsCollision(true);
 				dest->GetOwner()->SetIsAlive(false);
+
+				// 타겟 해제 테스트
+				if (src->GetOwner()->GetHasTarget()) src->GetOwner()->SetTarget(nullptr);
+				if (dest->GetOwner()->GetHasTarget()) src->GetOwner()->SetTarget(nullptr);
 				//dest->SetPos({ -100, -200 });
 			}
 		}

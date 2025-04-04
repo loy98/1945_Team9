@@ -18,27 +18,30 @@ bool HomingMissileManager::isActivedPack(int num)
 
 void HomingMissileManager::LaunchPack(int num, FPOINT pos)
 {
-		//for (iter = vecvecMissileList[num].begin(); iter != vecvecMissileList[num].end(); iter++)
-		//{
-		//	(*iter)->SetTarget(targetList[0]->GetOwner());
-		//	(*iter)->ReLoad(pos);
-		//}
-		for (int i = 0; i < vecvecMissileList[num].size(); i++)
+	if (CheckIsTarget())
+	{
+		UpdateTargetList();
+		for (int j = 0; j < vecvecMissileList[num].size(); j++)
 		{
-			vecvecMissileList[num][i]->SetTarget(targetList[i]->GetOwner());
-			vecvecMissileList[num][i]->ReLoad({pos.x-(25* vecvecMissileList[num].size()/2)+(50*i), pos.y+30});
+			vecvecMissileList[num][j]->ReLoad({ pos.x - (25 * vecvecMissileList[num].size() / 2) + (50 * j), pos.y + 30 });
+			vecvecMissileList[num][j]->SetTarget(UpdateTarget(j));
 		}
+	}
+	else
+	{
+		for (int j = 0; j < vecvecMissileList[num].size(); j++)
+		{
+			vecvecMissileList[num][j]->ReLoad({ pos.x - (25 * vecvecMissileList[num].size() / 2) + (50 * j), pos.y + 30 });
+			vecvecMissileList[num][j]->SetAngle(DEG_TO_RAD(90.0f));
+		}
+	}
 }
 
 void HomingMissileManager::UpdateTargetList()
 {
-
-	//// 적의 충돌 위치 받아오고, 그 중 하나를 타겟으로 한다. 만약 타겟이 죽으면 타겟 갱신, 부딪혔으면 끝
 	//// 타겟 리스트 정리-적만 남게
-	//// 적의 충돌 위치 받아오고, 그 중 하나를 타겟으로 한다. 만약 타겟이 죽으면 타겟 갱신, 부딪혔으면 끝
+	//// 적을 받아옴-충돌 여부 상관없이 받아온다.(어차피 재사용하므로)
 	
-
-
 	bool isNewTarget = true;
 
 	for (int i = 0; i < CollisionManager::GetInstance()->GetColliderList(CollisionGroup::Enemy).size(); i++)
@@ -47,7 +50,7 @@ void HomingMissileManager::UpdateTargetList()
 		{
 			for (int j  = 0; j < targetList.size(); j++)
 			{
-				if (targetList[j] == CollisionManager::GetInstance()->GetColliderList(CollisionGroup::Enemy).at(i))
+				if (targetList[j] == CollisionManager::GetInstance()->GetColliderList(CollisionGroup::Enemy).at(i)->GetOwner())
 				{
 					isNewTarget = false;
 					break;
@@ -55,8 +58,9 @@ void HomingMissileManager::UpdateTargetList()
 			}
 			if (isNewTarget)
 			{
-				if (!CollisionManager::GetInstance()->GetColliderList(CollisionGroup::Enemy).at(i)->GetIsCollision())	// 충돌 아니면
-					targetList.push_back(CollisionManager::GetInstance()->GetColliderList(CollisionGroup::Enemy).at(i));	// 적 collision만 push_back
+				//if (CollisionManager::GetInstance()->GetColliderList(CollisionGroup::Enemy).at(i)->GetIsCollision())	// 충돌 아니면-렉
+					targetList.push_back(CollisionManager::GetInstance()->GetColliderList(CollisionGroup::Enemy).at(i)->GetOwner());
+					// 적을 push_back
 			}
 
 		}
@@ -79,21 +83,21 @@ void HomingMissileManager::UpdateTargetList()
 	//		targetList.erase(targetIter);
 	//	}
 	//}
-
-	SortTargetList();
 }
 
 GameObject * HomingMissileManager::UpdateTarget(int num)
 {
+	SortTargetList();
+
 	int count = 0;
 
 	for (int i = 0; i < targetList.size(); i++)
 	{
-		if (!targetList[i]->GetIsCollision())
+		if (!targetList[i]->GetIsCollision()&& targetList[i]->GetIsAlive())
 		{
 			if (count == num)
 			{
-				return targetList[i]->GetOwner();
+				return targetList[i];
 			}
 			count++;
 		}
@@ -119,6 +123,29 @@ void HomingMissileManager::SortTargetList()
 	}
 }
 
+bool HomingMissileManager::CheckIsTarget()
+{
+	for (int i = 0; i < CollisionManager::GetInstance()->GetColliderList(CollisionGroup::Enemy).size(); i++)
+	{
+		if (CollisionManager::GetInstance()->GetColliderList(CollisionGroup::Enemy).at(i)->GetOwner()->GetObjectType() == ObjectType::Enemy)
+		{
+			if (!(CollisionManager::GetInstance()->GetColliderList(CollisionGroup::Enemy).at(i)->GetOwner()->GetIsCollision())
+					&&CollisionManager::GetInstance()->GetColliderList(CollisionGroup::Enemy).at(i)->GetOwner()->GetIsAlive())
+				{
+					return true;
+				}
+
+		}
+
+	}
+	return false;
+}
+
+void HomingMissileManager::ResetMissile(int num)
+{
+	vecvecMissileList[num].push_back(missileFactory->AddMissile(collisionGroup));
+}
+
 HomingMissileManager::HomingMissileManager()
 {
 }
@@ -129,6 +156,8 @@ HomingMissileManager::~HomingMissileManager()
 
 void HomingMissileManager::Init()
 {
+	missile = 2;
+
 	vecvecMissileList.reserve(5);
 	missileFactory = new HomingMissileFactory;
 	for (int i = 0; i < vecvecMissileList.capacity(); i++)
@@ -136,8 +165,7 @@ void HomingMissileManager::Init()
 		AddMissile();
 	}
 
-
-	float a = 4;
+	targetList.reserve(CollisionManager::GetInstance()->GetColliderList(CollisionGroup::Enemy).size());
 }
 
 void HomingMissileManager::Release()
@@ -154,32 +182,29 @@ void HomingMissileManager::Release()
 	}
 	vecvecMissileList.clear();
 
-	//for (targetIter = targetList.begin(); targetIter != targetList.end(); iter++)
-	//{
-	//	(*targetIter)->Release();
-	//	delete (*targetIter);
-	//	(*targetIter) = nullptr;
-	//}
 	targetList.clear();
-
-
 }
 
 void HomingMissileManager::Update()
 {
-	UpdateTargetList();
-
 	for(int i = 0; i< vecvecMissileList.size(); i++)
 	{
 		if(isActivedPack(i))
 		{
 			for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
 			{
-				if ((*iter)->GetTargetIsCollision())
+				if((*iter)->GetIsActived())
 				{
-					(*iter)->SetTarget(UpdateTarget(0));
+					//if (!((*iter)->GetHasTarget()) && CheckIsTarget())	// 발사하고 나온 적도 타겟으로 설정
+					//{
+					//	UpdateTargetList();
+					//	(*iter)->SetTarget(UpdateTarget(0));
+					//}
+					//else
+					{
+						(*iter)->Update();
+					}
 				}
-				(*iter)->Update();
 			}
 		}
 	}
@@ -193,8 +218,10 @@ void HomingMissileManager::Render(HDC hdc, bool isFlip)
 		{
 			for (iter = vecvecMissileList[i].begin(); iter != vecvecMissileList[i].end(); iter++)
 			{
-				//if ((*iter)->GetIsCollision()) continue;
-				(*iter)->Render(hdc, isFlip);
+				if((*iter)->GetIsActived())
+				{
+					(*iter)->Render(hdc, isFlip);
+				}
 			}
 		}
 	}
@@ -202,26 +229,15 @@ void HomingMissileManager::Render(HDC hdc, bool isFlip)
 
 void HomingMissileManager::Launch(FPOINT pos)
 {
-	//for (int i = 0; i < vecvecMissileList.size(); i++)
-	//{
-	//	if(isActivedPack(i))
-	//	{
-	//		LaunchPack(i, pos);
-	//		break;
-	//	}
-	//}
-	//UpdateTarget();
 	for (int i = 0; i < vecvecMissileList.size(); i++)
 	{
 		if (!isActivedPack(i))
 		{
-			//LaunchPack(i);
-			UpdateTargetList();
-			for (int j = 0; j < vecvecMissileList[i].size(); j++)
+			if (vecvecMissileList[i].size() < missile)
 			{
-				vecvecMissileList[i][j]->SetTarget(targetList[j]->GetOwner());
-				vecvecMissileList[i][j]->ReLoad({ pos.x - (25 * vecvecMissileList[i].size() / 2) + (25 * j), pos.y + 30 }); 
+				ResetMissile(i);
 			}
+			LaunchPack(i, pos);
 			break;
 		}
 	}
@@ -230,12 +246,11 @@ void HomingMissileManager::Launch(FPOINT pos)
 void HomingMissileManager::AddMissile()
 {
 	vector<Missile*> pack;
-	pack.resize(2);
+	pack.resize(missile);
 
 	for (int i = 0; i < pack.size(); i++)
 	{
 		pack.at(i) = missileFactory->AddMissile(collisionGroup);
-		//pack.back()->SetOwner(owner);
 	}
 
 	vecvecMissileList.push_back(pack);
@@ -243,4 +258,5 @@ void HomingMissileManager::AddMissile()
 
 void HomingMissileManager::LevelUp()
 {
+	missile++;
 }

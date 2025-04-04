@@ -84,6 +84,8 @@ void Missile::ReLoad(FPOINT pos)		// 발사한다면 세팅.
 	isCollision = false;
 	isAlive = true;
 	animationFrame = 0;
+	//test
+	target = nullptr;
 	//elapsedTime = 0;
 }
 

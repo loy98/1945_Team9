@@ -7,7 +7,7 @@ void HomingMissile::Init()
 {
 	pos = { 0, 0 };
 	isActived = false;
-	angle = 90.0f;
+	angle = DEG_TO_RAD(90.0f);
 
 	size = { 20,20 };
 	rc = GetRectAtCenter(pos.x, pos.y, size.x, size.y);
@@ -24,14 +24,12 @@ void HomingMissile::Init()
 	controller = new HomingController();
 	
 	currentAnimation = idle;
-	//idle;
-	//animationFrame;
-	//left;
-	//right;
-	//currPos;
-	prevPos = {300, 600};
 
+	prevAngle = DEG_TO_RAD(90.0f);
+	
 	elapsedTime = 0.0f;
+
+	target = nullptr;
 
 }
 
@@ -46,23 +44,27 @@ void HomingMissile::Update()
 	// currpos 업데이트
 	// 애니메이션프레임 업데이트
 	Super::Update();
-	currPos = pos;
 	
-	UpdateImage();
 	UpdateRectAtCenter(rc, pos);		// 충돌 업데이트!
 
-	if (isCollision)
-		isActived = false;
-	//if(elapsedTime >= 0.5f )
-	//{
-	//	currentFrame++;
-	//	if (currentFrame > maxFrame)
-	//	{
-	//		currentFrame = 0;
-	//	}
+	if (!isActived) target = nullptr;
 
-	//	elapsedTime = 0.0f;
-	//}
+	if (isCollision)
+		isActived = false;	// 이거 collision manager에서 함
+
+	if(elapsedTime >= 0.5f )
+	{
+		currentFrame++;
+		if (currentFrame > maxFrame)
+		{
+			currentFrame = maxFrame-1;
+		}
+		currAngle = angle;
+
+		UpdateImage();
+
+		elapsedTime = 0.0f;
+	}
 }
 
 void HomingMissile::Render(HDC hdc, bool isFlip)
@@ -82,26 +84,25 @@ void HomingMissile::Render(HDC hdc, bool isFlip)
 
 void HomingMissile::UpdateImage()
 {
-	// 예전 위치와 현재 위치 비교
+	// 예전 위치와 현재 위치 비교->각도 비교
 	// 위로 가는데 왼쪽으로 향하면 left 이미지
 	// 위로 가는데 오른쪽으로 향하면 right 이미지
-	// 두 상태를 오갈땐 idle을 거친다.
 	//
-	float deg = RAD_TO_DEG(::GetAngle(prevPos, currPos));
-	
-	if (deg > 105.0f)		// 왼쪽 15도 이상 회전
+	float move = prevAngle - currAngle;
+
+	if (move <= -0.5f)		// 왼쪽 회전
 	{
 		MoveToTherLeft();
 	}
-	else if (deg < 75.0f)		// 오른쪽 15도 이상 회전
+	else if (move >= 0.5f)	// 오른쪽 회전
 	{
 		MoveToTheRight();
 	}
-	else	// 그대로
+	else
 	{
-	}
 
-	prevPos = currPos;
+	}
+	prevAngle = currAngle;
 }
 
 void HomingMissile::MoveToTheRight()
@@ -120,7 +121,7 @@ void HomingMissile::MoveToTheRight()
 		}
 		else
 		{
-			currentFrame -= 2;
+			currentFrame = maxFrame -2;
 		}
 	}
 	else // 오른쪽 프레임
@@ -132,7 +133,7 @@ void HomingMissile::MoveToTheRight()
 		}
 		else
 		{
-			currentFrame += 2;
+			currentFrame = maxFrame+1;
 		}
 	}
 	maxFrame = currentFrame + 1;
@@ -154,7 +155,7 @@ void HomingMissile::MoveToTherLeft()
 		}
 		else
 		{
-			currentFrame -= 2;
+			currentFrame = maxFrame -2;
 		}
 	}
 	else // 왼쪽 프레임
@@ -166,7 +167,7 @@ void HomingMissile::MoveToTherLeft()
 		}
 		else
 		{
-			currentFrame += 2;
+			currentFrame = maxFrame+1;
 		}
 	}
 	maxFrame = currentFrame + 1;

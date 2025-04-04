@@ -13,8 +13,8 @@ private:
 
 	Image* currentAnimation;
 
-	FPOINT currPos;
-	FPOINT prevPos;
+	float currAngle;
+	float prevAngle;
 
 	int currentFrame;
 	int maxFrame;

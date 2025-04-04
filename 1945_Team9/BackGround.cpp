@@ -57,8 +57,8 @@ void BackGround::Release()
 void BackGround::Update()
 {
 	time = TimeManager::GetInstance()->GetDeltaTime();
-	groundCameraY += groundMoveSpeed * time;
-	underGroundCameraY += underGroundMoveSpeed * time;
+	//groundCameraY += groundMoveSpeed * time;
+	//underGroundCameraY += underGroundMoveSpeed * time;	// test
 	// ½º¿Ò
 	float a = (WINSIZE_X / 310.f);
 	Image* g = ImageManager::GetInstance()->FindImage(L"ground");

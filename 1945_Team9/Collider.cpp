@@ -2,7 +2,9 @@
 
 Collider::Collider(GameObject* owner, FPOINT pos) : owner(owner), pos(pos)
 {
-	isAlive = true;
+	/*isAlive = true;*/
+	//test
+	isAlive = owner->GetIsAlive();
 	rc = owner->GetRect();
 	isCollision = owner->GetIsCollision();
 }
@@ -23,7 +25,7 @@ void Collider::Render(HDC hdc)
 {
 	//collider는 개발단계에서만 render할것!
 	//if (!isAlive) return;
-	if (!showDebug) return;
+	//if (!showDebug) return;
 	HBRUSH myBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
 	HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, myBrush);
 	if (owner->GetIsCollision())

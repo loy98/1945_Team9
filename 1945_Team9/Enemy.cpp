@@ -11,6 +11,11 @@
 #include "EffectManager.h"
 #include "EnemyMissileManager.h"
 
+#include "EnemyMissileManager.h"
+
+//test
+#include "EnemyController.h"
+
 void Enemy::Init(float posX, float posY)
 {
 	pos = { posX, posY };
@@ -48,6 +53,13 @@ void Enemy::Release()
 		delete missileManager;
 		missileManager = nullptr;
 	}
+
+	//test
+	if (controller)
+	{
+		delete controller;
+		controller = nullptr;
+	}
 }
 
 void Enemy::Update()
@@ -81,7 +93,21 @@ void Enemy::Update()
 		animationFrame++;
 		if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = 0;
 	}
+	//if (elapsedTime > 0.1f)
+	//{
+	//	elapsedTime = 0.0f;
+	//	animationFrame++;
+	//	if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = 0;
+	//}
+
+	if (missileManager)
+	{
+		missileManager->Update();
+	}
 	Move();
+
+	// 화면 밖일때 isAlive = false;
+	if (IsOutofScreen()) isAlive = false;
 
 	UpdateRectAtCenter(rc, pos);
 	for (auto& collider : colliderList)
@@ -108,6 +134,9 @@ void Enemy::Render(HDC hdc)
 void Enemy::Move()
 {
 	pos.x += moveSpeed * dir.x * TimeManager::GetInstance()->GetDeltaTime();
+
+	//test
+	controller->Move(this);
 }
 
 void Enemy::Fire()

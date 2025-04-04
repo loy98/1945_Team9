@@ -3,6 +3,8 @@
 #include "Enemy.h"
 #include "Missile.h"
 #include "DiagonalEnemy.h"
+//test
+#include "HorizontalEnemy.h"
 
 EnemyManager::EnemyManager(GameObject* target) : target(target)
 {
@@ -27,6 +29,20 @@ void EnemyManager::Init()
 	diagonalMaxAppearCount = 40;
 	diagonalAppearCount = 40;
 	diagonalElapsedCoolTime = 0.0f;
+
+	//
+	vecEnemys[(int)EnemyType::Horizontal].resize(5);
+	for (int i = 0; i < vecEnemys[(int)EnemyType::Horizontal].size(); i++)
+	{
+		vecEnemys[(int)EnemyType::Horizontal][i] = new HorizontalEnemy();
+		vecEnemys[(int)EnemyType::Horizontal][i]->Init(-200, -200);
+		vecEnemys[(int)EnemyType::Horizontal][i]->SetTarget(target);
+	}
+	horizontalAppearCoolTime = 13.0f;
+	horizontalMaxAppearTime = 7.0f;
+	horizontalMaxAppearCount = 30;
+	horizontalAppearCount = 30;
+	horizontalElapsedCoolTime = 0.0f;
 }
 
 void EnemyManager::Release()
@@ -60,6 +76,23 @@ void EnemyManager::Update()
 	if (diagonalAppearCount < diagonalMaxAppearCount)
 		DiagonalAppear();
 	/* -------------- --------------------- ---------------*/
+
+	//test
+	if (horizontalAppearCount >= horizontalMaxAppearCount)
+	{
+		horizontalElapsedCoolTime += TimeManager::GetInstance()->GetDeltaTime();
+	}
+
+	if (horizontalElapsedCoolTime > horizontalAppearCoolTime)
+	{
+		horizontalElapsedCoolTime = 0;
+		horizontalAppearCount = 0;
+	}
+
+	if (horizontalAppearCount < horizontalMaxAppearCount)
+		HorizontalAppear();
+	//
+
 	for (int i = 0; i < (int)EnemyType::EnemyTypeLength; ++i)
 	{
 		for (int j = 0; j < vecEnemys[i].size(); ++j)
@@ -103,6 +136,7 @@ void EnemyManager::AddEnemy(int size)
 
 void EnemyManager::DiagonalAppear()
 {
+	int alive = 0;
 	diagonalElpasedTime += TimeManager::GetInstance()->GetDeltaTime();
 	static int dy = 1;
 	int diagonalSize = vecEnemys[(int)EnemyType::Diagonal].size();
@@ -115,7 +149,7 @@ void EnemyManager::DiagonalAppear()
 			if (vecEnemys[(int)EnemyType::Diagonal][i]->GetIsAlive())
 				continue;
 
-			vecEnemys[(int)EnemyType::Diagonal][i]->ChangeApperSide();
+			//vecEnemys[(int)EnemyType::Diagonal][i]->ChangeApperSide();
 
 			int appearX = vecEnemys[(int)EnemyType::Diagonal][i]->GetIsLeft() ? 20 : WINSIZE_X - 20;
 			int dX = vecEnemys[(int)EnemyType::Diagonal][i]->GetIsLeft() ? -(i * 30) : i * 30;
@@ -129,4 +163,29 @@ void EnemyManager::DiagonalAppear()
 
 	
 	
+}
+
+void EnemyManager::HorizontalAppear()
+{
+	horizontalElpasedTime += TimeManager::GetInstance()->GetDeltaTime();
+	int horizontalSize = vecEnemys[(int)EnemyType::Horizontal].size();
+
+	if (horizontalElpasedTime >= 5.0f)
+	{
+		horizontalElpasedTime = 0;
+		for (int i = 0; i < horizontalSize; ++i)
+		{
+			if (vecEnemys[(int)EnemyType::Horizontal][i]->GetIsAlive())
+				continue;
+
+			vecEnemys[(int)EnemyType::Horizontal][i]->ChangeApperSide();
+
+			int appearX = vecEnemys[(int)EnemyType::Horizontal][i]->GetIsLeft() ? -50 : WINSIZE_X +50;
+			int dX = vecEnemys[(int)EnemyType::Horizontal][i]->GetIsLeft() ? -(i * 50) : i * 50;
+			int dY =  30-(i*20);
+
+			vecEnemys[(int)EnemyType::Horizontal][i]->Reset({ (float)appearX + dX, float(100 + dY) });
+			diagonalAppearCount++;
+		}
+	}
 }

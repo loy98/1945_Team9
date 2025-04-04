@@ -9,15 +9,20 @@ private:
 	vector<vector<Missile*>> vecvecMissileList;
 	vector<Missile*>::iterator iter;
 	
-	vector<Collider*> targetList;
-	vector<Collider*>::iterator targetIter;
+	vector<GameObject*> targetList;
+	vector<GameObject*>::iterator targetIter;
+
 
 	bool isActivedPack(int num);
 	void LaunchPack(int num, FPOINT pos);
 	void UpdateTargetList();
 	GameObject * UpdateTarget(int num);
-
 	void SortTargetList();
+	bool CheckIsTarget();
+	void ResetMissile(int num);
+
+	int missile;
+
 public:
 	HomingMissileManager();
 	virtual ~HomingMissileManager();

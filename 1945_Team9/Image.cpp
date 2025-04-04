@@ -191,7 +191,7 @@ void Image::Render(HDC hdc, int destX, int destY, int frameIndex, bool isFlip)
     }
 }
 
-void Image::FrameRender(HDC hdc, int destX, int destY, int frameX, int frameY, bool isFlip)
+void Image::FrameRender(HDC hdc, float destX, float destY, int frameX, int frameY, bool isFlip)
 {
     imageInfo->currFrameX = frameX;
     imageInfo->currFrameY = frameY;
