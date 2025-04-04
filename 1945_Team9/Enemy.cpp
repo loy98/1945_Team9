@@ -82,12 +82,12 @@ void Enemy::Update()
 	elapsedMoveTime += TimeManager::GetInstance()->GetDeltaTime();
 	elapsedApperTime += TimeManager::GetInstance()->GetDeltaTime();
 
-	if (elapsedTime > 0.1f)
-	{
-		elapsedTime = 0.0f;
-		animationFrame++;
-		if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = 0;
-	}
+	//if (elapsedTime > 0.1f)
+	//{
+	//	elapsedTime = 0.0f;
+	//	animationFrame++;
+	//	if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = 0;
+	//}
 	if (missileManager)
 	{
 		missileManager->Update();

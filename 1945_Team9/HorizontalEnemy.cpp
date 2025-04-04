@@ -48,7 +48,13 @@ void HorizontalEnemy::Update()
 	//if (pos.x >= ((13.0f * animationFrame) / (WINSIZE_X / 2.0f))*300)
 	//	animationFrame++;
 	//if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = 0;
-
+	
+	if (elapsedTime > 0.1f)
+	{
+		elapsedTime = 0.0f;
+		animationFrame++;
+		if (animationFrame > image->GetMaxFrameX() - 1)	animationFrame = image->GetMaxFrameX() - 1;
+	}
 
 
 	if (!isAlive)	return;
