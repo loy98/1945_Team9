@@ -76,8 +76,12 @@ void EnemyManager::Release()
 		}
 		vecEnemys[i].clear();
 	}
-	if(boss)
+	if (boss)
+	{
 		boss->Release();
+		delete boss;
+		boss = nullptr;
+	}
 }
 
 void EnemyManager::Update()

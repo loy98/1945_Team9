@@ -19,9 +19,9 @@ void Player::Init()
 {
 	pos.x = WINSIZE_X / 2;
 	pos.y = WINSIZE_Y - 200;
-	size = {40, 40};
+	size = {20, 30};
 	damage = 10;
-	moveSpeed = 0.5f;
+	moveSpeed = 2.0f;
 	group = CollisionGroup::Player;
 	type = ObjectType::Player;
 	state = PlayerState::Spawn;
@@ -158,15 +158,15 @@ void Player::Render(HDC hdc)
 	{
 	case PlayerState::Idle:
 		imageList[(int)PlayerState::Idle]->TestFrameRender(
-			hdc, rc.left, rc.top, rc.right, size.y, idleCurrFrame, 0, false);
+			hdc, rc.left-10, rc.top, rc.right + 10, size.y + 10, idleCurrFrame, 0, false);
 		break;
 	case PlayerState::MoveLeft:
 		imageList[(int)PlayerState::MoveLeft]->TestFrameRender(
-			hdc, rc.left, rc.top, rc.right, size.y, moveCurrFrame, 0, false);
+			hdc, rc.left - 10, rc.top, rc.right + 10, size.y + 10, moveCurrFrame, 0, false);
 		break;
 	case PlayerState::MoveRight:
 		imageList[(int)PlayerState::MoveRight]->TestFrameRender(
-			hdc, rc.left, rc.top, rc.right, size.y, moveCurrFrame, 0, false);
+			hdc, rc.left - 10, rc.top, rc.right + 10, size.y + 10, moveCurrFrame, 0, false);
 		break;
 	case PlayerState::Spawn:
 		//하드코딩이 아니라 이미지에서 데이터 가져오는식으로 바꿔야함

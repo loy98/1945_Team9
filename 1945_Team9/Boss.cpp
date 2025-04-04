@@ -31,7 +31,7 @@ void Boss::Init(float posX, float posY)
 
 void Boss::Release()
 {
-	Super::Release();
+	//Super::Release();
 }
 
 void Boss::Update()

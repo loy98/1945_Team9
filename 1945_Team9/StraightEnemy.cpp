@@ -80,8 +80,9 @@ void StraightEnemy::Move()
 void StraightEnemy::Fire()
 {
 	FPOINT playerPos = target->GetPos();
-	missileManager->Launch(pos);
-	/*float angle = ::GetAngle(pos, target->GetPos());
+	float angle = ::GetAngle(pos, target->GetPos());
+	missileManager->AngleLaunch(pos, angle);
+	/*
 	Missile* missile = missileManager->CreateMissile(MissileType::Normal, pos, angle, moveSpeed);
 	missile->AddCollider(CollisionGroup::Enemy);
 	missileManager->AddMissile(missile);*/
