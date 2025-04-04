@@ -67,6 +67,7 @@ void StraightEnemy::Reset(FPOINT pos)
 	this->pos = pos;
 	isCollision = false;
 	fireTime = 0;
+	//isEffect = false;
 }
 
 void StraightEnemy::Move()
